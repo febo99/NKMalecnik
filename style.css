@@ -1,0 +1,96 @@
+#container{
+  background-color:rgb(60, 68, 77);
+  height: 100%;
+}
+body{
+  background-color:rgb(60, 68, 77);
+}
+html{
+  background-color:rgb(60, 68, 77);
+}
+.sub-link{
+  padding: 5px;
+  margin-left: 2em;
+}
+
+.glava{
+  height: 18%;
+  width: 100%;
+  background-color: #0069db;
+  border-bottom: 0.1em gray solid;
+  margin-left: 0.01%;
+}
+.kavarna{
+  background-color: rgb(60, 68, 77);
+  width:100%
+}
+
+.glava h1{
+  padding: 1vh;
+  font-size: 7vh;
+}
+.glava h2{
+  padding-left: 1vh;
+  margin-top: 1vh;
+  padding-bottom: 1vh;
+  font-size: 1vh;
+}
+.colGlava{
+  width: 100%;
+}
+.colKavarna{
+  width: 100%;
+}
+.btn-block{
+	margin-top:1vh;
+}
+.novIgralec{
+    margin-left: 5vh;
+}
+#novIgralec input{
+  width: 1em;
+}
+.input-group-text {
+  width : 20vh; /*adjust as needed*/
+}
+textarea {
+  resize: none;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.gumbNov{
+  width:15vh;
+}
+.divNovGumb{
+}
+@media (max-width: 575.98px) {
+  .gumbNov{
+    width:10vh;
+    font-size:1.7vh;
+    padding: 0;
+  }
+}
+.btnForma{
+  margin:1vh;
+  margin-top:5vh;
+}
+.form-control::-webkit-input-placeholder { color: #C0C0C0; }  /* WebKit, Blink, Edge */
+.form-control:-moz-placeholder { color: #C0C0C0; }  /* Mozilla Firefox 4 to 18 */
+.form-control::-moz-placeholder { color: #C0C0C0; }  /* Mozilla Firefox 19+ */
+.form-control:-ms-input-placeholder { color: #C0C0C0; }  /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder { color: #C0C0C0; }  /* Microsoft Edge */
+.table-responsive{
+  margin-top:2vh;
+  margin-left: 1vh;
+}
+
+#calendar{
+  margin: 1vh 0 0 1vh;
+}
+.modal-dialog{
+  max-width: 50%;
+  margin: auto;
+}
