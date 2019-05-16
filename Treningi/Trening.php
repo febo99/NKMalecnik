@@ -18,6 +18,24 @@
   $getNo = mysqli_query($db,$sqlNeprisotni);
   $prisotni = $stvseh - mysqli_num_rows($getNo);
   $procent = ($prisotni*100)/$stvseh;
+
+  while($row = mysqli_fetch_assoc($getPrisotni)){
+    $idIgralca = $row['igralecID'];
+    $sqlImeI = "SELECT * FROM igralci WHERE `ID` = '$idIgralca'";
+    $getImeI = mysqli_query($db,$sqlImeI);
+    $imepriimek = mysqli_fetch_assoc($getImeI);
+    $imepriimekText = $imepriimek['ime']. " ".$imepriimek["priimek"];
+    if($row['prisotnost'] == 1){
+      $prisotnost = "Prisoten";
+    }
+    else if($row['prisotnost'] == 0){
+      $prisotnost = "Neopravicen";
+    }
+    else if($row['prisotnost'] == 2){
+      $prisotnost = "Opravicen";
+    }
+    $table .= "<tr><td>".$imepriimekText."</td><td>".$prisotnost."</td></tr>";
+  }
  ?>
 
 <html>
@@ -59,7 +77,7 @@
       <div class="col colKavarna">
         <div class="row" style="margin-top:0.5vh;margin-left:1vh;">
           <div class="col-9">
-            <input type="text" id="iskanje" class="form-control" onkeyup="isciE()" placeholder="Iskanje po naslovu..">
+            <input type="text" id="iskanje" class="form-control" onkeyup="isciE()" placeholder="Iskanje po igralcu..">
           </div>
           <div class="col-1">
             <form name="exportExcel" action="../Export/excelM.php" method="post">
@@ -71,8 +89,8 @@
           <table id="tabela" class="table table-bordered">
             <thead>
                <tr>
-                 <th scope="col">Ime</th>
-                 <th scope="col">Prisotnost</th>
+                 <th scope="col-3">Igralec</th>
+                 <th scope="col-7">Prisotnost</th>
                </tr>
            </thead>
            <tbody>
