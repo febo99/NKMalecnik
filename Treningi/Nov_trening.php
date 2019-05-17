@@ -48,7 +48,7 @@ while($rowL = mysqli_fetch_assoc($getL)){
     </div>
     <div class="row kavarna"><!--KAVARNA-->
         <div class="col-11 col-sm-11 order-sm-1  colKavarna novIgralec">
-    		<form id="novTrening" action="Dodaj_trening.php" method="post" disabled>
+    		<form id="novTrening" action="Dodaj_trening.php" method="post" enctype="multipart/form-data">
           <div class="row">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
@@ -104,6 +104,18 @@ while($rowL = mysqli_fetch_assoc($getL)){
               <span class="input-group-text" id="inputGroup-sizing-sm">Naslov *</span>
             </div>
             <input type="text" class="form-control"  name="naslovTrening" placeholder="Kratek naslov treninga">
+          </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Priponka</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                  aria-describedby="inputGroupFileAddon01" name="priponka">
+                <label class="custom-file-label" for="inputGroupFile01">Izberi datoteko</label>
+              </div>
           </div>
           </div>
         <button type="submit" class="btn btn-primary btnForma">Dodaj</button>

@@ -14,11 +14,15 @@ session_start();
      $izracun->add(new DateInterval('PT' . $trajanje . 'M'));
      $konec = $izracun->format('Y-m-d\\TH:i:s');
      $id = $_SESSION['id'];
-     $sql = "INSERT INTO treningi(naslov,datum,ekipaID,lokacijaID,ustvaril,zacetek,konec) VALUES ('$naslov','$datum','$ekipa','$lokacija','$id','$zacetek','$konec')";
+
+     //FILE UPLOAD
+     $shraniDir = "priponke/";
+     $dir = $shraniDir . basename($_FILES["inputGroupFileAddon01"]["name"]);
+
+
+     //SHRANI TRENING
+     $sql = "INSERT INTO treningi(naslov,datum,ekipaID,lokacijaID,ustvaril,zacetek,konec,priponka) VALUES ('$naslov','$datum','$ekipa','$lokacija','$id','$zacetek','$konec','$dir')";
      $result = mysqli_query($db,$sql);
-
-
-
      //PRISOTNOST
      $vsiIgralci = "SELECT * FROM igralci WHERE `ekipaID` = '$ekipa'";
      $get = mysqli_query($db,$vsiIgralci);
