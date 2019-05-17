@@ -19,19 +19,23 @@
   $prisotni = $stvseh - mysqli_num_rows($getNo);
   $procent = ($prisotni*100)/$stvseh;
 
-  while($row = mysqli_fetch_assoc($getPrisotni)){
-    $idIgralca = $row['igralecID'];
+  $uDel = $row['uvod'];
+  $zDel = $row['zakljucek'];
+  $gDel = $row['glavni'];
+
+  while($rowD = mysqli_fetch_assoc($getPrisotni)){
+    $idIgralca = $rowD['igralecID'];
     $sqlImeI = "SELECT * FROM igralci WHERE `ID` = '$idIgralca'";
     $getImeI = mysqli_query($db,$sqlImeI);
     $imepriimek = mysqli_fetch_assoc($getImeI);
     $imepriimekText = $imepriimek['ime']. " ".$imepriimek["priimek"];
-    if($row['prisotnost'] == 1){
+    if($rowD['prisotnost'] == 1){
       $prisotnost = "Prisoten";
     }
-    else if($row['prisotnost'] == 0){
+    else if($rowD['prisotnost'] == 0){
       $prisotnost = "Neopravicen";
     }
-    else if($row['prisotnost'] == 2){
+    else if($rowD['prisotnost'] == 2){
       $prisotnost = "Opravicen";
     }
     $table .= "<tr><td>".$imepriimekText."</td><td>".$prisotnost."</td></tr>";
@@ -69,14 +73,12 @@
        <h5>Prisotnost:<?php echo $prisotni."/".$stvseh;?></h5>
        <h5><?php echo $imeEkipe;?>
 	  </div>
-	<div class="col-2 colGlava divNovGumb">
-			<button type="button"  class="btn btn-primary btn-md btn-block gumbNov" onclick="location.href='Nov_trening.php'">Nov trening</button>
-	</div>
     </div>
     <div class="row kavarna"><!--KAVARNA-->
       <div class="col colKavarna">
         <div class="row" style="margin-top:0.5vh;margin-left:1vh;">
           <div class="col-9">
+            <h2>Prisotnost</h2>
             <input type="text" id="iskanje" class="form-control" onkeyup="isciE()" placeholder="Iskanje po igralcu..">
           </div>
           <div class="col-1">
@@ -85,6 +87,7 @@
             </form>
           </div>
         </div>
+        <div class="col-8">
         <div class="table-responsive">
           <table id="tabela" class="table table-bordered">
             <thead>
@@ -99,10 +102,38 @@
               ?>
             </tbody>
           </table>
-
       </div>
     </div>
+      <div class="col-9 planTreninga">
+        <div class="col plan naslov">
+          <h2>Plan</h2>
+        </div>
+      <div class="row" style="margin-top:0.5vh;margin-left:1vh;">
+        <div class="col-5 plan vsebina">
+          <h4>Uvodni del</h4>
+          <p><?php echo $uDel;?></p>
+        </div>
+      </div>
+      <div class="row" style="margin-top:0.5vh;margin-left:1vh;">
+        <div class="col-5 plan vsebina">
+          <h4>Glavni del</h4>
+          <p><?php echo $gDel;?></p>
+        </div>
+      </div>
+      <div class="row" style="margin-top:0.5vh;margin-left:1vh;">
+        <div class="col-5 plan vsebina">
+          <h4>Zaključni del</h4>
+          <p><?php echo $zDel;?></p>
+        </div>
+      </div>
+      <div class="row" style="margin-top:0.5vh;margin-left:1vh;">
+        <div class="col-5 plan vsebina">
+          <h4>Poročilo</h4>
+        </div>
+      </div>
+    </div>
+    </div>
 	</div>
-
+</div>
 </body>
 </html>
