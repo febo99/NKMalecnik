@@ -16,13 +16,19 @@ session_start();
      $id = $_SESSION['id'];
 
      //FILE UPLOAD
-     $shraniDir = "priponke/";
-     $dir = $shraniDir . basename($_FILES["inputGroupFileAddon01"]["name"]);
+     if($_FILES['priponka']['name'] != "") {
+       $shraniDir = "priponke/";
+       $dir = $shraniDir .  basename($_FILES["priponka"]["name"]);
+       move_uploaded_file($_FILES["priponka"]["tmp_name"], $dir);
+       //SHRANI TRENING
+       $sql = "INSERT INTO treningi(naslov,datum,ekipaID,lokacijaID,ustvaril,zacetek,konec,priponka) VALUES ('$naslov','$datum','$ekipa','$lokacija','$id','$zacetek','$konec','$dir')";
+       $result = mysqli_query($db,$sql);
+    }
+    else{
+      $sql = "INSERT INTO treningi(naslov,datum,ekipaID,lokacijaID,ustvaril,zacetek,konec) VALUES ('$naslov','$datum','$ekipa','$lokacija','$id','$zacetek','$konec')";
+      $result = mysqli_query($db,$sql);
+    }
 
-
-     //SHRANI TRENING
-     $sql = "INSERT INTO treningi(naslov,datum,ekipaID,lokacijaID,ustvaril,zacetek,konec,priponka) VALUES ('$naslov','$datum','$ekipa','$lokacija','$id','$zacetek','$konec','$dir')";
-     $result = mysqli_query($db,$sql);
      //PRISOTNOST
      $vsiIgralci = "SELECT * FROM igralci WHERE `ekipaID` = '$ekipa'";
      $get = mysqli_query($db,$vsiIgralci);

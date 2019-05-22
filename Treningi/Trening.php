@@ -22,6 +22,7 @@
   $uDel = $row['uvod'];
   $zDel = $row['zakljucek'];
   $gDel = $row['glavni'];
+  $priponka = $row['priponka'];
 
   while($rowD = mysqli_fetch_assoc($getPrisotni)){
     $idIgralca = $rowD['igralecID'];
@@ -131,6 +132,11 @@
           <h4>Poročilo</h4>
         </div>
       </div>
+    </div>
+    <div class="row" style="margin-top:0.5vh;margin-left:1vh;">
+    <div class="col-9">
+      <h2>Priponka</h2>
+      <a href=<?php echo "./".$priponka;?> download>Test</a>
     </div>
     </div>
 	</div>

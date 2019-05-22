@@ -108,15 +108,8 @@ while($rowL = mysqli_fetch_assoc($getL)){
           </div>
           <div class="row">
             <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupFileAddon01">Priponka</span>
-              </div>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01"
-                  aria-describedby="inputGroupFileAddon01" name="priponka">
-                <label class="custom-file-label" for="inputGroupFile01">Izberi datoteko</label>
-              </div>
-          </div>
+              <input type="file" class="form-control-file" name=priponka id="priponka" accept=".doc,.docx,.pdf,.png,.jpg" >
+            </div>
           </div>
         <button type="submit" class="btn btn-primary btnForma">Dodaj</button>
         <button type="reset" class="btn btn-danger btnForma">Prekliči</button>
