@@ -89,7 +89,7 @@ header('Content-Type: text/html; charset=UTF-8');
 			</li>
       <div class="dropdown-divider"></div>
 			<li class="nav-item">
-                <a class="nav-link"href="">Poročilo prisotnosti</a>
+                <a class="nav-link"href="Porocilo_prisotnosti/Porocilo_prisotnosti.php">Poročilo prisotnosti</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"href="">Testiranja</a>
