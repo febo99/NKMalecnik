@@ -18,7 +18,7 @@ session_start();
      //FILE UPLOAD
      if($_FILES['priponka']['name'] != "") {
        $shraniDir = "priponke/";
-       $dir = $shraniDir .  basename($_FILES["priponka"]["name"]);
+       $dir = $shraniDir .  basename(str_replace(" ","_",$_FILES["priponka"]["name"]));
        move_uploaded_file($_FILES["priponka"]["tmp_name"], $dir);
        //SHRANI TRENING
        $sql = "INSERT INTO treningi(naslov,datum,ekipaID,lokacijaID,ustvaril,zacetek,konec,priponka) VALUES ('$naslov','$datum','$ekipa','$lokacija','$id','$zacetek','$konec','$dir')";
