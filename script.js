@@ -85,3 +85,22 @@ $(document).ready(function() {
 
   });
 });
+function getJson(){
+  $("#tabela th").not(".def").remove()
+  $.getJSON("./Prisotnost.php", function(data) {
+    var d = document.getElementsByName('datum')[0].value;
+    var e = document.getElementsByName('ekipa')[0].value;
+    for(var i = 0; i < data.length; i++){
+      var s = data[i].datum;
+      var s1 = data[i].ekipa;
+      if(s.indexOf(d) >= 0 && s1 == e){
+        var tr = document.getElementById('tabela').tHead.children[0],
+        th = document.createElement('th');
+        console.log(d + " " + s);
+        console.log(s1 + " " + e);
+          th.innerHTML = s.slice(-2);
+          tr.appendChild(th);
+        }
+    }
+  });
+  }

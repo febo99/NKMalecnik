@@ -32,7 +32,7 @@ while($row = mysqli_fetch_assoc($get)){
 <script src="/Web2Cal/Web2Cal.templates.js" type="text/javascript"></script>
 
 </head>
-<body onload="setDate()">
+<body>
   <div id="nav-placeholder">
     <script>
   $(function(){
@@ -48,12 +48,13 @@ while($row = mysqli_fetch_assoc($get)){
     </div>
     <div class="row kavarna"><!--KAVARNA-->
       <div class="col colKavarna">
-        <div class="col-9">
-          <select required class="form-control" name="ekipa" placeholder="Izberi ekipo">
-            <option value="" disabled selected>Izberi ekipo!</option>
-            <?php echo $option; ?>
-          </select>
-          <input value="<?=date('Y-m')?>" type="month">
+        <div class="col-2">
+            <select id="ekipa" required class="form-control" name="ekipa" placeholder="Izberi ekipo">
+              <option value="" disabled selected>Izberi ekipo!</option>
+              <?php echo $option; ?>
+            </select>
+              <input id="datumTrening" name="datum" value="<?=date('Y-m')?>" type="month">
+              <button type="submit" onclick="getJson()">🔎</button>
 			  </div>
         </div>
 
@@ -61,10 +62,10 @@ while($row = mysqli_fetch_assoc($get)){
           <table id="tabela" class="table table-bordered">
             <thead>
                <tr>
-                 <th scope="col">Igralec</th>
-                 <th scope="col">Vsi</th>
-                 <th scope="col">✔️</th>
-                 <th scope="col">❌</th>
+                 <th class="def" scope="col">Igralec</th>
+                 <th class="def" scope="col">Vsi</th>
+                 <th class="def" scope="col">✔️</th>
+                 <th class="def" scope="col">❌</th>
                </tr>
            </thead>
            <tbody>
@@ -73,7 +74,6 @@ while($row = mysqli_fetch_assoc($get)){
               ?>
             </tbody>
           </table>
-
       </div>
       </div>
       </div>
