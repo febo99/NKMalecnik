@@ -90,17 +90,45 @@ function getJson(){
   $.getJSON("./Prisotnost.php", function(data) {
     var d = document.getElementsByName('datum')[0].value;
     var e = document.getElementsByName('ekipa')[0].value;
+    var datum,counter=0;
     for(var i = 0; i < data.length; i++){
+      var listTH = document.getElementsByTagName("th");
       var s = data[i].datum;
       var s1 = data[i].ekipa;
       if(s.indexOf(d) >= 0 && s1 == e){
-        var tr = document.getElementById('tabela').tHead.children[0],
-        th = document.createElement('th');
-        console.log(d + " " + s);
-        console.log(s1 + " " + e);
+        if(datum != data[i].datum){
+          var tr = document.getElementById('tabela').tHead.children[0],
+          th = document.createElement('th');
           th.innerHTML = s.slice(-2);
           tr.appendChild(th);
+          datum = data[i].datum;
+          counter++;
+          }
         }
     }
+    for(var i = 0; i < data[0].steviloIgralcev; i++){
+    var tableRef = document.getElementById('tabela').getElementsByTagName('tbody')[0];
+    var newRow   = tableRef.insertRow(tableRef.rows.length);
+    var newCell  = newRow.insertCell(0);
+    var newText  = document.createTextNode(data[i].ime);
+    newCell.appendChild(newText);
+    var newCell  = newRow.insertCell(1);
+    var newText  = document.createTextNode(4);
+    newCell.appendChild(newText);
+    var newCell  = newRow.insertCell(2);
+    var newText  = document.createTextNode(3);
+    newCell.appendChild(newText);
+    newCell.appendChild(newText);
+    var newCell  = newRow.insertCell(2);
+    var newText  = document.createTextNode(12);
+    newCell.appendChild(newText);
+    if(e.indexOf(data[i].id)){
+      for(var j = 4; j < 4+counter; j++){
+        var newCell  = newRow.insertCell(j);
+        var newText  = document.createTextNode(data[i].prisotnost);
+        newCell.appendChild(newText);
+      }
+    }
+  }
   });
   }

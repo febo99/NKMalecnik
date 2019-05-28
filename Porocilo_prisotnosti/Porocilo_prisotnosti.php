@@ -69,9 +69,7 @@ while($row = mysqli_fetch_assoc($get)){
                </tr>
            </thead>
            <tbody>
-             <?php
-            echo $table;
-              ?>
+
             </tbody>
           </table>
       </div>
