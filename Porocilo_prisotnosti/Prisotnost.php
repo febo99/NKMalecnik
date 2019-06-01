@@ -2,12 +2,29 @@
 include "../login/config.php";
 session_start();
 header("Content-type: application/json; charset=utf-8");
-$sql = "SELECT * FROM prisotnost INNER JOIN treningi ON prisotnost.treningID=treningi.ID ORDER BY treningi.datum";
-$vsiTrening = "SELECT * FROM treningi";
-$getT = mysqli_query($db,$vsiTrening);
-$get = mysqli_query($db,$sql);
-$stevilo = mysqli_num_rows($getT);
-$eventi = array();
+$json = array();
+$sql = "SELECT * FROM ekipe";
+$basic = mysqli_query($db,$sql);
+$ekipe = array();
+$ekipa = array();
+$treningi = array();
+while($row = mysqli_fetch_assoc($basic)){
+  $ime = $row['imeEkipe'];
+  $idEkipe = $row['ID'];
+  $ekipa['trening'] = array();
+  $ekipa['ekipa'] = $ime;
+  $sqlTrening = "SELECT * FROM treningi WHERE `ekipaID` = '$idEkipe'";
+  $treningQ = mysqli_query($db,$sqlTrening);
+  while($row = mysqli_fetch_assoc($treningQ)){
+    $ekipa['trening']['ID'] = $row['ID'];
+    $ekipa['trening']['datum'] = $row['datum'];
+    $ekipa['trening']['naslov'] = $row['naslov'];
+    $ekipa['trening']['prisotni'] = array();
+
+  }
+  array_push($ekipe,$ekipa);
+}
+array_push($json,$ekipe);
 //array_push($eventi,$stevilo);
 while($row = mysqli_fetch_assoc($get)){
   $e = array();
@@ -40,6 +57,6 @@ while($row = mysqli_fetch_assoc($get)){
 
   array_push($eventi,$e);
 }
-echo json_encode($eventi,JSON_UNESCAPED_UNICODE);
+echo json_encode($json,JSON_UNESCAPED_UNICODE);
 exit();
 ?>
