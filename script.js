@@ -87,6 +87,7 @@ $(document).ready(function() {
 });
 function getJson(){
   $("#tabela th").not(".def").remove()
+  $("#tabela td").not(".def").remove()
   $.getJSON("./Prisotnost.php", function(data) {
     var d = document.getElementsByName('datum')[0].value;
     var e = document.getElementsByName('ekipa')[0].value;
@@ -94,27 +95,54 @@ function getJson(){
     var trening = false;
     for(var i = 0; i < data.length; i++){
       var listTH = document.getElementsByTagName("th");
-      if(data[i]['treningi'].datum != null){
-        var s = data[i]['treningi'].datum;
-        var s1 = data[i].ekipaID;
-        if(s.indexOf(d) >= 0 && s1 == e){
-          trening = true;
-          var tr = document.getElementById('tabela').tHead.children[0],
-          th = document.createElement('th');
-          th.innerHTML = s.slice(-2);
-          tr.appendChild(th);
-          datum = data[i].datum;
-          counter++;
-        }
-    }
+      for(var j = 0; j < data[i]['treningi'].length;j++){
+        if(data[i]['treningi'][j] != null){
+          if(data[i]['treningi'][j].datum != null){
+            var s = data[i]['treningi'][j].datum;
+            var s1 = data[i].ekipaID;
+            if(s.indexOf(d) >= 0 && s1 == e){
+              trening = true;
+              var tr = document.getElementById('tabela').tHead.children[0],
+              th = document.createElement('th');
+              th.innerHTML = s.slice(-2);
+              tr.appendChild(th);//dodajanje datumov
+              datum = data[i]['treningi'][j].datum;
+              counter++;
+
+              //dodajanje igralcev
+              var tableRef = document.getElementById('tabela').getElementsByTagName('tbody')[0];
+              var newCell,newRow,newText;
+              for(var k = 0; k < data[i]['treningi'][j]['prisotni'].length; k++){
+                newRow   = tableRef.insertRow(tableRef.rows.length);
+                newText  = document.createTextNode(data[i]['treningi'][j]['prisotni'][k]);
+                newCell  = newRow.insertCell(0);
+                newCell.appendChild(newText);
+
+
+                t  = document.createTextNode(data[i]['treningi'][j]['steviloIgralcev']);
+                newCell  = newRow.insertCell(1);
+                newCell.appendChild(t);
+              }
+              for(var k = 0; k < data[i]['treningi'][j]['manjkajoci'].length; k++){
+                newRow   = tableRef.insertRow(tableRef.rows.length);
+                newText  = document.createTextNode(data[i]['treningi'][j]['manjkajoci'][k]);
+                newCell  = newRow.insertCell(0);
+                newCell.appendChild(newText);
+
+
+                t  = document.createTextNode(data[i]['treningi'][j]['steviloIgralcev']);
+                newCell  = newRow.insertCell(1);
+                newCell.appendChild(t);
+              }
+             }
+          }
+      }
+      }
+
 }
     if(trening){
       for(var i = 0; i < data[0].steviloIgralcev; i++){
-      var tableRef = document.getElementById('tabela').getElementsByTagName('tbody')[0];
-      var newRow   = tableRef.insertRow(tableRef.rows.length);
-      var newCell  = newRow.insertCell(0);
-      var newText  = document.createTextNode(data[i].ime);
-      newCell.appendChild(newText);
+
       var newCell  = newRow.insertCell(1);
       var newText  = document.createTextNode(4);
       newCell.appendChild(newText);

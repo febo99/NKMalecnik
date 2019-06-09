@@ -5,9 +5,9 @@ header("Content-type: application/json; charset=utf-8");
 $sql = "SELECT * FROM ekipe";
 $basic = mysqli_query($db,$sql);
 $ekipe = array();
-$ekipa = array();
 $treningi = array();
 while($row = mysqli_fetch_assoc($basic)){
+  $ekipa = array();
   $ime = $row['imeEkipe'];
   $idEkipe = $row['ID'];
   $ekipa['ekipa'] = $ime;
@@ -21,25 +21,26 @@ while($row = mysqli_fetch_assoc($basic)){
     $trening['ID'] = $row['ID'];
     $trening['datum'] = $row['datum'];
     $trening['naslov'] = $row['naslov'];
-    array_push($ekipa['treningi'],$trening);
     $sqlPrisotnost = "SELECT * FROM prisotnost INNER JOIN igralci ON prisotnost.igralecID = igralci.ID WHERE `treningID` = '$treningID' AND `prisotnost` = 1";
     $prisotnostQ = mysqli_query($db,$sqlPrisotnost);
     $sqlManjka = "SELECT * FROM prisotnost INNER JOIN igralci ON prisotnost.igralecID = igralci.ID WHERE `treningID` = '$treningID' AND NOT `prisotnost` = 1";
     $manjkaQ = mysqli_query($db,$sqlManjka);
-    $ekipa['treningi']['steviloIgralcev'] = mysqli_num_rows($prisotnostQ) + mysqli_num_rows($manjkaQ);
-    $ekipa['treningi']['prisotni'] = array();
-    $ekipa['treningi']['manjkajoci'] = array();
+    $trening['steviloIgralcev'] = mysqli_num_rows($prisotnostQ) + mysqli_num_rows($manjkaQ);
+    $trening['prisotni'] = array();
     while($row = mysqli_fetch_assoc($prisotnostQ)){
       $igralec = $row['ime'] . " " . $row['priimek'];
-      array_push($ekipa['treningi']['prisotni'],$igralec);
+      array_push($trening['prisotni'],$igralec);
     }
+    $trening['manjkajoci'] = array();
     while($row = mysqli_fetch_assoc($manjkaQ)){
       $igralec = $row['ime'] . " " . $row['priimek'];
-      array_push($ekipa['treningi']['manjkajoci'],$igralec);
+      array_push($trening['manjkajoci'],$igralec);
     }
+    array_push($ekipa['treningi'],$trening);
   }
   array_push($ekipe,$ekipa);
 }
+
 //array_push($eventi,$stevilo);
 echo json_encode($ekipe,JSON_UNESCAPED_UNICODE);
 exit();

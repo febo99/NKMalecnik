@@ -18,7 +18,7 @@ while($row = mysqli_fetch_assoc($get)){
   $sqlNeprisotni = "SELECT * FROM prisotnost WHERE `prisotnost` != 1 AND `treningID` = '$idTreninga'";
   $getNo = mysqli_query($db,$sqlNeprisotni);
   $prisotni = $stvseh - mysqli_num_rows($getNo);
-  $procent = ($prisotni*100)/$stvseh;
+  $procent = round(($prisotni*100)/$stvseh,2);
   if($row['prisotnost'] == 0){
     $table .= "<tr><td>".$row['naslov']."</td>"."<td>".date("d.m.Y",strtotime($row['datum'])). " ".substr($row['zacetek'],strpos($row['zacetek'],"T")+1)."</td>"."<td>".$imeEkipe[0]."</td>"."<td>".$row['uvod']."</td>"."<td>".$row['glavni']."</td>"."<td>".$row['zakljucek']."</td><td>".$row['porocilo']."</td><td><button type=button class='btn btn-primary priso'  data-toggle=modal  value=".$idTreninga." data-target=#vnosPrisotnosti>Vnesi prisotne</td></tr>";
   }
@@ -37,7 +37,7 @@ while($row = mysqli_fetch_assoc($get)){
               <label class="custom-control-label" for="customRadioInline2">Opravicen</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="customRadioInline3" name="prisotnost" class="custom-control-input" value=0>
+              <input type="radio" id="customRadioInline3" name="prisotnost" class="custom-control-input" checked value=0>
               <label class="custom-control-label" for="customRadioInline3">Neopravicen</label>
             </div>';
   while($row = mysqli_fetch_assoc($getIgralci)){
