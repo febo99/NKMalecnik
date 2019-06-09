@@ -94,10 +94,10 @@ function getJson(){
     var trening = false;
     for(var i = 0; i < data.length; i++){
       var listTH = document.getElementsByTagName("th");
-      var s = data[i].datum;
-      var s1 = data[i].ekipa;
-      if(s.indexOf(d) >= 0 && s1 == e){
-        if(datum != data[i].datum){
+      if(data[i]['treningi'].datum != null){
+        var s = data[i]['treningi'].datum;
+        var s1 = data[i].ekipaID;
+        if(s.indexOf(d) >= 0 && s1 == e){
           trening = true;
           var tr = document.getElementById('tabela').tHead.children[0],
           th = document.createElement('th');
@@ -105,9 +105,9 @@ function getJson(){
           tr.appendChild(th);
           datum = data[i].datum;
           counter++;
-          }
         }
     }
+}
     if(trening){
       for(var i = 0; i < data[0].steviloIgralcev; i++){
       var tableRef = document.getElementById('tabela').getElementsByTagName('tbody')[0];
