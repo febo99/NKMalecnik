@@ -101,66 +101,59 @@ function getJson(){
             var s = data[i]['treningi'][j].datum;
             var s1 = data[i].ekipaID;
             if(s.indexOf(d) >= 0 && s1 == e){
+              counter++;
+            }}}}}
+    for(var i = 0; i < data.length; i++){
+      var listTH = document.getElementsByTagName("th");
+      for(var j = 0; j < data[i]['treningi'].length;j++){
+        if(data[i]['treningi'][j] != null){
+          if(data[i]['treningi'][j].datum != null){
+            var s = data[i]['treningi'][j].datum;
+            var s1 = data[i].ekipaID;
+            if(s.indexOf(d) >= 0 && s1 == e){
               trening = true;
               var tr = document.getElementById('tabela').tHead.children[0],
               th = document.createElement('th');
               th.innerHTML = s.slice(-2);
               tr.appendChild(th);//dodajanje datumov
               datum = data[i]['treningi'][j].datum;
-              counter++;
+              }
+            }
+          }
 
               //dodajanje igralcev
+              if(trening){
               var tableRef = document.getElementById('tabela').getElementsByTagName('tbody')[0];
               var newCell,newRow,newText;
               for(var k = 0; k < data[i]['treningi'][j]['prisotni'].length; k++){
-                newRow   = tableRef.insertRow(tableRef.rows.length);
-                newText  = document.createTextNode(data[i]['treningi'][j]['prisotni'][k]);
-                newCell  = newRow.insertCell(0);
-                newCell.appendChild(newText);
+                var table = $("#tabela");
+                if(!$("#tabela td:contains("+data[i]['treningi'][j]['prisotni'][k]+")").length){
+                  newRow   = tableRef.insertRow(tableRef.rows.length);
+                  newText  = document.createTextNode(data[i]['treningi'][j]['prisotni'][k]);
+                  newCell  = newRow.insertCell(0);
+                  newCell.appendChild(newText);
+                  t  = document.createTextNode(counter);
+                  newCell  = newRow.insertCell(1);
+                  newCell.appendChild(t);
+                }
 
-
-                t  = document.createTextNode(data[i]['treningi'][j]['steviloIgralcev']);
-                newCell  = newRow.insertCell(1);
-                newCell.appendChild(t);
               }
               for(var k = 0; k < data[i]['treningi'][j]['manjkajoci'].length; k++){
-                newRow   = tableRef.insertRow(tableRef.rows.length);
-                newText  = document.createTextNode(data[i]['treningi'][j]['manjkajoci'][k]);
-                newCell  = newRow.insertCell(0);
-                newCell.appendChild(newText);
+                var table = $("#tabela");
+                if(!$("#tabela td:contains("+data[i]['treningi'][j]['manjkajoci'][k]+")").length){
+                  newRow   = tableRef.insertRow(tableRef.rows.length);
+                  newText  = document.createTextNode(data[i]['treningi'][j]['manjkajoci'][k]);
+                  newCell  = newRow.insertCell(0);
+                  newCell.appendChild(newText);
 
 
-                t  = document.createTextNode(data[i]['treningi'][j]['steviloIgralcev']);
-                newCell  = newRow.insertCell(1);
-                newCell.appendChild(t);
+                  t  = document.createTextNode(counter);
+                  newCell  = newRow.insertCell(1);
+                  newCell.appendChild(t);
+                }
               }
              }
+             }
           }
-      }
-      }
-
-}
-    if(trening){
-      for(var i = 0; i < data[0].steviloIgralcev; i++){
-
-      var newCell  = newRow.insertCell(1);
-      var newText  = document.createTextNode(4);
-      newCell.appendChild(newText);
-      var newCell  = newRow.insertCell(2);
-      var newText  = document.createTextNode(3);
-      newCell.appendChild(newText);
-      newCell.appendChild(newText);
-      var newCell  = newRow.insertCell(2);
-      var newText  = document.createTextNode(12);
-      newCell.appendChild(newText);
-      if(e.indexOf(data[i].id)){
-        for(var j = 4; j < 4+counter; j++){
-          var newCell  = newRow.insertCell(j);
-          var newText  = document.createTextNode(data[i].prisotnost);
-          newCell.appendChild(newText);
-        }
-      }
-    }
-  }
   });
   }
