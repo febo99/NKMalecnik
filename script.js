@@ -86,9 +86,11 @@ $(document).ready(function() {
   });
 });
 function getJson(){
+  var table = $("#tabela");
   $("#tabela th").not(".def").remove()
   $("#tabela td").not(".def").remove()
   $.getJSON("./Prisotnost.php", function(data) {
+    var training = [];
     var d = document.getElementsByName('datum')[0].value;
     var e = document.getElementsByName('ekipa')[0].value;
     var datum,counter=0;
@@ -126,7 +128,6 @@ function getJson(){
               var tableRef = document.getElementById('tabela').getElementsByTagName('tbody')[0];
               var newCell,newRow,newText;
               for(var k = 0; k < data[i]['treningi'][j]['prisotni'].length; k++){
-                var table = $("#tabela");
                 if(!$("#tabela td:contains("+data[i]['treningi'][j]['prisotni'][k]+")").length){
                   newRow   = tableRef.insertRow(tableRef.rows.length);
                   newText  = document.createTextNode(data[i]['treningi'][j]['prisotni'][k]);
@@ -136,24 +137,35 @@ function getJson(){
                   newCell  = newRow.insertCell(1);
                   newCell.appendChild(t);
                 }
-
+                if(s.indexOf(d) >= 0 && s1 == e)training.push([data[i]['treningi'][j]['prisotni'][k],(data[i]['treningi'][j].datum).slice(-2),1,0,0]);
               }
               for(var k = 0; k < data[i]['treningi'][j]['manjkajoci'].length; k++){
-                var table = $("#tabela");
+
                 if(!$("#tabela td:contains("+data[i]['treningi'][j]['manjkajoci'][k]+")").length){
                   newRow   = tableRef.insertRow(tableRef.rows.length);
                   newText  = document.createTextNode(data[i]['treningi'][j]['manjkajoci'][k]);
                   newCell  = newRow.insertCell(0);
                   newCell.appendChild(newText);
 
-
                   t  = document.createTextNode(counter);
                   newCell  = newRow.insertCell(1);
                   newCell.appendChild(t);
                 }
+                if(s.indexOf(d) >= 0 && s1 == e)training.push([data[i]['treningi'][j]['manjkajoci'][k],(data[i]['treningi'][j].datum).slice(-2),0,0,0]);
               }
              }
              }
           }
+          var tb = document.getElementById("tabela");
+          for (var i = 1, row; row = tb.rows[i]; i++){
+            for(var j = 0; j < training.length; j++){
+              console.log(training[j][0] +  " " + row.cells[0].innerHTML);
+              if(training[j][0] == row.cells[0].innerHTML){
+                if(training[j][2] == 1)training[j][3]++;
+                else training[j][4]++;
+              }
+            }
+          }
+          console.log(training);
   });
   }
