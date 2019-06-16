@@ -25,5 +25,4 @@ include "../login/config.php";
      $sql = "INSERT INTO igralci(ime,priimek ,datumRojstva ,letnik ,ulica ,postnaStevilka ,mesto ,sola ,telefonIgralec ,emailIgralec ,nazivStars1 ,telefonStars1 ,emailStars1 ,nazivStars2 ,telefonStars2 ,emailStars2 ,emso ,registracijskaStevilka ,opombe,ustvaril,ekipaID) VALUES ('$ime','$priimek','$datumRojstva','$letnik','$ulica','$postnaStevilka','$mesto','$sola','$telefonIgralec','$emailIgralec','$nazivStars1','$telefonStars1','$emailStars1','$nazivStars2','$telefonStars2','$emailStars2','$emso','$registracijskaStevilka','$opombe','$ustvaril','$ekipa')";
      $result = mysqli_query($db,$sql);
      header("location:Nov_igralec.php");    
-
 }
