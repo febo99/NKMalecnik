@@ -42,6 +42,7 @@ while($row = mysqli_fetch_assoc($basic)){
 }
 
 //array_push($eventi,$stevilo);
+//testiranje
 echo json_encode($ekipe,JSON_UNESCAPED_UNICODE);
 exit();
 ?>
