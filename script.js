@@ -106,6 +106,7 @@ function getJson(){
     var counter=0;
     var vpis = false;
     var trening = false;
+    var x;
     for(var i = 0; i < data.length; i++){
       var listTH = document.getElementsByTagName("th");
       for(var j = 0; j < data[i]['treningi'].length;j++){
@@ -156,11 +157,13 @@ function getJson(){
                     training[data[i]['treningi'][j]['prisotni'][k]+"data"]['stevilo'] = 1;
                     training[data[i]['treningi'][j]['prisotni'][k]+"data"]['prisoten'] = 1;
                     training[data[i]['treningi'][j]['prisotni'][k]+"data"]['manjkal'] = 0;
+                    training[data[i]['treningi'][j]['prisotni'][k]+"data"]['prisotnostDatum'] = "1";
                     tabelaPrisotnost.push(training);
                   }
                   else{
                     training[data[i]['treningi'][j]['prisotni'][k]+"data"]['stevilo'] += 1;
                     training[data[i]['treningi'][j]['prisotni'][k]+"data"]['prisoten'] += 1;
+                    training[data[i]['treningi'][j]['prisotni'][k]+"data"]['prisotnostDatum'] += "1";
                   }
                 }
               }
@@ -171,7 +174,6 @@ function getJson(){
                   newText  = document.createTextNode(data[i]['treningi'][j]['manjkajoci'][k]);
                   newCell  = newRow.insertCell(0);
                   newCell.appendChild(newText);
-
                   t  = document.createTextNode(counter);
                   newCell  = newRow.insertCell(1);
                   newCell.appendChild(t);
@@ -183,24 +185,37 @@ function getJson(){
                       training[data[i]['treningi'][j]['manjkajoci'][k]+"data"]['stevilo'] = 1;
                       training[data[i]['treningi'][j]['manjkajoci'][k]+"data"]['prisoten'] = 0;
                       training[data[i]['treningi'][j]['manjkajoci'][k]+"data"]['manjkal'] = 1;
+                      training[data[i]['treningi'][j]['manjkajoci'][k]+"data"]['prisotnostDatum'] = "0";
                       tabelaPrisotnost.push(training);
                   }else{
                     training[data[i]['treningi'][j]['manjkajoci'][k]+"data"]['stevilo'] += 1;
                     training[data[i]['treningi'][j]['manjkajoci'][k]+"data"]['manjkal'] += 1;
+                    training[data[i]['treningi'][j]['manjkajoci'][k]+"data"]['prisotnostDatum'] += "0";
                   }
                 }
               }
              }
              }
           }
+          console.log(training);
           for(var i = 1; i < table.rows.length; i++){
             if(vpis == true){
-              var x = table.rows[i].insertCell(-1);
+              x = table.rows[i].insertCell(-1);
               x.innerHTML = training[Object.keys(training)[(i-1)*2+1]]['prisoten'];
+              x = table.rows[i].insertCell(-1);
+              x.innerHTML = training[Object.keys(training)[(i-1)*2+1]]['manjkal'];
+              for(var j = 0; j < training[Object.keys(training)[(i-1)*2+1]]['prisotnostDatum'].length; j++){
+                if(training[Object.keys(training)[(i-1)*2+1]]['prisotnostDatum'][j] == "1"){
+                  x = table.rows[i].insertCell(-1);
+                  x.innerHTML = "✔️";
+                }else if(training[Object.keys(training)[(i-1)*2+1]]['prisotnostDatum'][j] == "0"){
+                  x = table.rows[i].insertCell(-1);
+                  x.innerHTML = "❌";
+                }
+              }
             }
             if(vpis == true){
-              var x = table.rows[i].insertCell(-1);
-              x.innerHTML = training[Object.keys(training)[(i-1)*2+1]]['manjkal'];
+
             }
           }
           training = [];

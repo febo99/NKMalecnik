@@ -13,7 +13,7 @@ while($row = mysqli_fetch_assoc($basic)){
   $ekipa['ekipa'] = $ime;
   $ekipa['ekipaID'] = $idEkipe;
   $ekipa['treningi'] = array();
-  $sqlTrening = "SELECT * FROM treningi WHERE `ekipaID` = '$idEkipe'";
+  $sqlTrening = "SELECT * FROM treningi WHERE `ekipaID` = '$idEkipe' ORDER BY `datum`";
   $treningQ = mysqli_query($db,$sqlTrening);
   while($row = mysqli_fetch_assoc($treningQ)){
     $trening = array();

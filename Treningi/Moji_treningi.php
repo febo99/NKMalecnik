@@ -2,7 +2,7 @@
 include "../login/config.php";
 session_start();
 $id = $_SESSION['id'];
-$sql = "SELECT * FROM treningi WHERE `ustvaril` = '$id'";
+$sql = "SELECT * FROM treningi WHERE `ustvaril` = '$id' ORDER BY `datum`";
 $get=mysqli_query($db,$sql);
 $table = "";
 $beseda = "";
