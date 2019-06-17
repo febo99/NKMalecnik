@@ -85,28 +85,38 @@ $(document).ready(function() {
 
   });
 });
+function inTable(t,name){
+  for(var i = 0; i < t.length; i++){
+    if(t[i][name] == name)return true;
+  }
+  return false;
+}
 function getJson(){
-  var table = $("#tabela");
-  $("#tabela th").not(".def").remove()
-  $("#tabela td").not(".def").remove()
+  $("#tabela th").not(".def").remove();
+  $("#tabela td").not(".def").remove();
+  $("#tabela tr").not(".stat").remove();
   $.getJSON("./Prisotnost.php", function(data) {
+    $("#tabela th").not(".def").remove();
+    $("#tabela td").not(".def").remove();
+    var table = document.getElementById('tabela');
     var training = [];
+    var tabelaPrisotnost = [];
     var d = document.getElementsByName('datum')[0].value;
     var e = document.getElementsByName('ekipa')[0].value;
-    var datum,counter=0;
+    var counter=0;
+    var vpis = false;
     var trening = false;
     for(var i = 0; i < data.length; i++){
       var listTH = document.getElementsByTagName("th");
       for(var j = 0; j < data[i]['treningi'].length;j++){
         if(data[i]['treningi'][j] != null){
-          if(data[i]['treningi'][j].datum != null){
+          if(data[i]['treningi'][j].datum != null && data[i]['ekipaID'] == e){
             var s = data[i]['treningi'][j].datum;
             var s1 = data[i].ekipaID;
             if(s.indexOf(d) >= 0 && s1 == e){
               counter++;
             }}}}}
     for(var i = 0; i < data.length; i++){
-      var listTH = document.getElementsByTagName("th");
       for(var j = 0; j < data[i]['treningi'].length;j++){
         if(data[i]['treningi'][j] != null){
           if(data[i]['treningi'][j].datum != null){
@@ -128,7 +138,8 @@ function getJson(){
               var tableRef = document.getElementById('tabela').getElementsByTagName('tbody')[0];
               var newCell,newRow,newText;
               for(var k = 0; k < data[i]['treningi'][j]['prisotni'].length; k++){
-                if(!$("#tabela td:contains("+data[i]['treningi'][j]['prisotni'][k]+")").length){
+                if(!$("#tabela td:contains("+data[i]['treningi'][j]['prisotni'][k]+")").length && data[i]['ekipaID'] == e){
+                  vpis = true;
                   newRow   = tableRef.insertRow(tableRef.rows.length);
                   newText  = document.createTextNode(data[i]['treningi'][j]['prisotni'][k]);
                   newCell  = newRow.insertCell(0);
@@ -136,12 +147,26 @@ function getJson(){
                   t  = document.createTextNode(counter);
                   newCell  = newRow.insertCell(1);
                   newCell.appendChild(t);
+
                 }
-                if(s.indexOf(d) >= 0 && s1 == e)training.push([data[i]['treningi'][j]['prisotni'][k],(data[i]['treningi'][j].datum).slice(-2),1,0,0]);
+                if(s.indexOf(d) >= 0 && s1 == e && data[i]['ekipaID'] == e){
+                  if(!inTable(tabelaPrisotnost,data[i]['treningi'][j]['prisotni'][k])){
+                    training[data[i]['treningi'][j]['prisotni'][k]] = data[i]['treningi'][j]['prisotni'][k];
+                    training[data[i]['treningi'][j]['prisotni'][k]+"data"] = [];
+                    training[data[i]['treningi'][j]['prisotni'][k]+"data"]['stevilo'] = 1;
+                    training[data[i]['treningi'][j]['prisotni'][k]+"data"]['prisoten'] = 1;
+                    training[data[i]['treningi'][j]['prisotni'][k]+"data"]['manjkal'] = 0;
+                    tabelaPrisotnost.push(training);
+                  }
+                  else{
+                    training[data[i]['treningi'][j]['prisotni'][k]+"data"]['stevilo'] += 1;
+                    training[data[i]['treningi'][j]['prisotni'][k]+"data"]['prisoten'] += 1;
+                  }
+                }
               }
               for(var k = 0; k < data[i]['treningi'][j]['manjkajoci'].length; k++){
-
-                if(!$("#tabela td:contains("+data[i]['treningi'][j]['manjkajoci'][k]+")").length){
+                if(!$("#tabela td:contains("+data[i]['treningi'][j]['manjkajoci'][k]+")").length && data[i]['ekipaID'] == e){
+                  vpis = true;
                   newRow   = tableRef.insertRow(tableRef.rows.length);
                   newText  = document.createTextNode(data[i]['treningi'][j]['manjkajoci'][k]);
                   newCell  = newRow.insertCell(0);
@@ -151,21 +176,34 @@ function getJson(){
                   newCell  = newRow.insertCell(1);
                   newCell.appendChild(t);
                 }
-                if(s.indexOf(d) >= 0 && s1 == e)training.push([data[i]['treningi'][j]['manjkajoci'][k],(data[i]['treningi'][j].datum).slice(-2),0,0,0]);
+                if(s.indexOf(d) >= 0 && s1 == e && data[i]['ekipaID'] == e){
+                    if(!inTable(tabelaPrisotnost,data[i]['treningi'][j]['manjkajoci'][k])){
+                      training[data[i]['treningi'][j]['manjkajoci'][k]] = data[i]['treningi'][j]['manjkajoci'][k];
+                      training[data[i]['treningi'][j]['manjkajoci'][k]+"data"] = [];
+                      training[data[i]['treningi'][j]['manjkajoci'][k]+"data"]['stevilo'] = 1;
+                      training[data[i]['treningi'][j]['manjkajoci'][k]+"data"]['prisoten'] = 0;
+                      training[data[i]['treningi'][j]['manjkajoci'][k]+"data"]['manjkal'] = 1;
+                      tabelaPrisotnost.push(training);
+                  }else{
+                    training[data[i]['treningi'][j]['manjkajoci'][k]+"data"]['stevilo'] += 1;
+                    training[data[i]['treningi'][j]['manjkajoci'][k]+"data"]['manjkal'] += 1;
+                  }
+                }
               }
              }
              }
           }
-          var tb = document.getElementById("tabela");
-          for (var i = 1, row; row = tb.rows[i]; i++){
-            for(var j = 0; j < training.length; j++){
-              console.log(training[j][0] +  " " + row.cells[0].innerHTML);
-              if(training[j][0] == row.cells[0].innerHTML){
-                if(training[j][2] == 1)training[j][3]++;
-                else training[j][4]++;
-              }
+          for(var i = 1; i < table.rows.length; i++){
+            if(vpis == true){
+              var x = table.rows[i].insertCell(-1);
+              x.innerHTML = training[Object.keys(training)[(i-1)*2+1]]['prisoten'];
+            }
+            if(vpis == true){
+              var x = table.rows[i].insertCell(-1);
+              x.innerHTML = training[Object.keys(training)[(i-1)*2+1]]['manjkal'];
             }
           }
-          console.log(training);
+          training = [];
   });
+
   }

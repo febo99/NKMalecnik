@@ -61,7 +61,7 @@ while($row = mysqli_fetch_assoc($get)){
         <div class="table-responsive">
           <table id="tabela" class="table table-bordered">
             <thead>
-               <tr>
+               <tr class="stat">
                  <th class="def" scope="col">Igralec</th>
                  <th class="def" scope="col">Vsi</th>
                  <th class="def" scope="col">✔️</th>
