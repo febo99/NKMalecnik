@@ -26,7 +26,7 @@ session_start();
         //session_register("myusername");
         $_SESSION['login_user'] = $myusername;
     		$_SESSION['name'] = $name;
-    		$_SESSION['last_name'] = $lastName;
+    	   $_SESSION['last_name'] = $lastName;
         $_SESSION['id'] = $id;
         $_SESSION['vloga'] = $vloga;
          header("location: ../dashboard.php");

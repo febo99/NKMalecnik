@@ -3,6 +3,9 @@ include "../login/config.php";
 session_start();
 $sql = "SELECT * FROM ekipe";
 $get=mysqli_query($db,$sql);
+if(!isset($_SESSION['id']) && empty($_SESSION['id'])) {
+  header("location: ../index.php");
+}
 $option = "";
 while($row = mysqli_fetch_assoc($get)){
   $option .= '<option value = '. $row['ID'] .'>'.$row['imeEkipe'].'</option>';

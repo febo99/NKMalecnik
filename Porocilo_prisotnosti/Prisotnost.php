@@ -2,6 +2,7 @@
 include "../login/config.php";
 session_start();
 header("Content-type: application/json; charset=utf-8");
+
 $sql = "SELECT * FROM ekipe";
 $basic = mysqli_query($db,$sql);
 $ekipe = array();

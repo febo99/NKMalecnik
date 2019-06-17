@@ -1,6 +1,9 @@
 <?php
   include "../login/config.php";
   session_start();
+  if(!isset($_SESSION['id']) && empty($_SESSION['id'])) {
+    header("location: ../index.php");
+  }
   $id = $_SESSION['id'];
   $idTreninga = $_GET['id'];
   $sql = "SELECT * FROM treningi WHERE `ID` = '$idTreninga'";

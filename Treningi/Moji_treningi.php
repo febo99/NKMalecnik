@@ -1,6 +1,9 @@
 <?php
 include "../login/config.php";
 session_start();
+if(!isset($_SESSION['id']) && empty($_SESSION['id'])) {
+  header("location: ../index.php");
+}
 $id = $_SESSION['id'];
 $sql = "SELECT * FROM treningi WHERE `ustvaril` = '$id' ORDER BY `datum`";
 $get=mysqli_query($db,$sql);

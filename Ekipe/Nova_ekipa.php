@@ -2,6 +2,9 @@
 include "../login/config.php";
 session_start();
 $sql = "SELECT * FROM uporabniki";
+if(!isset($_SESSION['id']) && empty($_SESSION['id'])) {
+  header("location: ../index.php");
+}
 $get=mysqli_query($db,$sql);
 $option = "";
 while($row = mysqli_fetch_assoc($get)){

@@ -5,6 +5,9 @@ $id = $_SESSION['id'];
 $sql = "SELECT * FROM treningi";
 $get=mysqli_query($db,$sql);
 $table = "";
+if(!isset($_SESSION['id']) && empty($_SESSION['id'])) {
+  header("location: ../index.php");
+}
 while($row = mysqli_fetch_assoc($get)){
   $idEkipe = $row['ekipaID'];
   $sqlIme = "SELECT `imeEkipe` FROM ekipe WHERE `ID` = '$idEkipe'";

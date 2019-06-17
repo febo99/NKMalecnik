@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "../login/config.php";
    if($_SERVER["REQUEST_METHOD"] == "POST") {
      $ime = mysqli_real_escape_string($db,$_POST['ime']);

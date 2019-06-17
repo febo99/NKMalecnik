@@ -5,6 +5,9 @@ session_start();
 //header('Content-Type: text/html; charset=UTF-8');
 $sql = "SELECT * FROM `lokacije`";
 $get=mysqli_query($db,$sql);
+if(!isset($_SESSION['id']) && empty($_SESSION['id'])) {
+  header("location: ../index.php");
+}
 $table = "";
 while($row = mysqli_fetch_assoc($get)){
   $table .= "<tr><td>".$row['ime']."</td></tr>";

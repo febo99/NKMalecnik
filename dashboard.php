@@ -1,8 +1,12 @@
 <?php
 include('login/session.php');
 include('login/config.php');
-session_start();
+include('login/login.php');
 header('Content-Type: text/html; charset=UTF-8');
+session_start();
+if(!isset($_SESSION['id']) && empty($_SESSION['id'])) {
+    header("location: index.php");
+  }
 ?>
 
 <html>
@@ -28,7 +32,7 @@ header('Content-Type: text/html; charset=UTF-8');
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="dashboard.php">Domov</a>
+                <a class="nav-link" href=".">Domov</a>
             </li>
             <div class="dropdown-divider"></div>
             <li class="nav-item">

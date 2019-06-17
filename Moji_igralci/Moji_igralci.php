@@ -2,6 +2,9 @@
 include "../login/config.php";
 session_start();
 $id = $_SESSION['id'];
+if(!isset($_SESSION['id']) && empty($_SESSION['id'])) {
+  header("location: ../index.php");
+}
 $sql = "SELECT * FROM igralci WHERE `ustvaril` = '$id'";
 $get=mysqli_query($db,$sql);
 $table = "";

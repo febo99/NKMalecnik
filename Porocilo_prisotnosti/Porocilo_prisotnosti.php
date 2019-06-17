@@ -3,6 +3,9 @@ include('login/session.php');
 include "../login/config.php";
 session_start();
 //header('Content-Type: text/html; charset=UTF-8');
+if(!isset($_SESSION['id']) && empty($_SESSION['id'])) {
+  header("location: ../index.php");
+}
 $sql = "SELECT * FROM ekipe";
 $get=mysqli_query($db,$sql);
 $option = "";
