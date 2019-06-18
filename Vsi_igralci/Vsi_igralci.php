@@ -10,7 +10,7 @@ while($row = mysqli_fetch_assoc($get)){
   $sqlIme = "SELECT `imeEkipe` FROM ekipe WHERE `ID` = '$idEkipe'";
   $getIme = mysqli_query($db,$sqlIme);
   $imeEkipe = mysqli_fetch_row($getIme);
-  $table .= "<tr><td>".$row['ime']."</td>"."<td>".$row['priimek']."</td>"."<td>".date("d.m.Y",strtotime($row['datumRojstva']))."</td>"."<td>".$row['emailIgralec']."</td>"."<td>".$row['telefonIgralec']."</td>"."<td>".$imeEkipe[0]."</td><td>".$row['opomba']."</td>"."</td></tr>";
+  $table .= "<tr><td>".$row['ime']." ".$row['priimek']."</td><td>".date("d.m.Y",strtotime($row['datumRojstva']))."</td><td>"."<td>".$row['emailIgralec']."</td>"."<td>".$row['telefonIgralec']."</td>"."<td>".$imeEkipe[0]."</td><td>".$row['opomba']."</td>"."</td></tr>";
 }
  ?>
 
@@ -51,7 +51,7 @@ while($row = mysqli_fetch_assoc($get)){
       <div class="col colKavarna">
         <div class="row" style="margin-top:0.5vh;margin-left:1vh;">
           <div class="col-9">
-            <input type="text" id="iskanje" class="form-control" onkeyup="isci()" placeholder="Iskanje po priimkih..">
+            <input type="text" id="iskanje" class="form-control" onkeyup="isciE()" placeholder="Iskanje...">
           </div>
           <div class="col-1">
             <form name="exportExcel" action="../Export/excel.php" method="post">
@@ -63,8 +63,7 @@ while($row = mysqli_fetch_assoc($get)){
           <table id="tabela" class="table table-bordered">
             <thead>
                <tr>
-                 <th scope="col">Ime</th>
-                 <th scope="col">Priimek</th>
+                 <th scope="col">Ime in priimek</th>
                  <th scope="col">Datum rojstva</th>
                  <th scope="col">Email</th>
                  <th scope="col">Telefon</th>

@@ -34,13 +34,13 @@
     $imepriimek = mysqli_fetch_assoc($getImeI);
     $imepriimekText = $imepriimek['ime']. " ".$imepriimek["priimek"];
     if($rowD['prisotnost'] == 1){
-      $prisotnost = "Prisoten";
+      $prisotnost = "✔️";
     }
     else if($rowD['prisotnost'] == 0){
-      $prisotnost = "Neopravicen";
+      $prisotnost = "❌";
     }
     else if($rowD['prisotnost'] == 2){
-      $prisotnost = "Opravicen";
+      $prisotnost = "❌";
     }
     $table .= "<tr><td>".$imepriimekText."</td><td>".$prisotnost."</td></tr>";
   }
