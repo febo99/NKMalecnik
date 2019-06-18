@@ -44,6 +44,77 @@
     </div>
     <div class="row kavarna"><!--KAVARNA-->
       <div class="col colKavarna">
+      <div class="row">
+          <div class="col">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  <a class="nav-item nav-link active" href="#">Splošno <span class="sr-only">(current)</span></a>
+                  <a class="nav-item nav-link" href="#">Treningi</a>
+                  <a class="nav-item nav-link" href="#">Tekme</a>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <div class="row" id=splosno>
+          <div class=col-6>
+            Splošni podatki
+            <div class=row>
+              <div class=col-4>
+                Prisotnost zadnjih 10 treningov
+              </div>
+              <div class=col-4>
+                Prisotnost zadnjih 10 tekem
+              </div>
+            </div>
+            <div class=row>
+              <div class=col-4>
+                Ime in priimek<br>
+                Datum rojstva<br>
+                Ulica<br>
+                Mesto in poštna številka
+              </div>
+              <div class=col-4>
+                Ime in priimek<br>
+                Datum rojstva<br>
+                Ulica<br>
+                Mesto in poštna številka
+              </div>
+            </div>
+            <div class=row>
+              <div class="col-4">
+                Uredi
+              </div>
+              <div class="col-4">
+                Izbriši
+              </div>
+            </div>
+            </div>
+            <div class=col-6>
+              Ostali podatki
+            </div>
+          </div>
+        </div>
+        <div class="row" id=treningi>
+          <div class=col-6>
+            a
+          </div>
+          <div class=col-6>
+            a
+          </div>
+        </div>
+        <div class="row" id=tekme>
+          <div class=col-6>
+            c
+          </div>
+          <div class=col-6>
+            c
+          </div>
+        </div>
       </div>
     </div>
 
