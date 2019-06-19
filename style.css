@@ -64,8 +64,7 @@ input[type=number]::-webkit-outer-spin-button {
 .gumbNov{
   width:15vh;
 }
-.divNovGumb{
-}
+
 @media (max-width: 575.98px) {
   .gumbNov{
     width:10vh;
@@ -107,9 +106,7 @@ input[type=number]::-webkit-outer-spin-button {
 .lokacija{
   font-size:2vh;
 }
-#treningi,#tekme{
-  display:none;
-}
+
 #splosno{
   margin-left: 0.15vh;
 }

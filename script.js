@@ -222,3 +222,17 @@ function getJson(){
   });
 
   }
+  jQuery(document).ready(function($) {
+    $('.elementiIgralec') .hide()
+    $('#splosno').toggle();
+  $('a[href^="#"]').on('click', function(event) {
+  $('.elementiIgralec') .hide()
+      var target = $(this).attr('href');
+      $('.tt').removeClass('active');
+      $(this).addClass('active');
+      
+  
+      $('.elementiIgralec'+target).toggle();
+  
+  });
+  });
