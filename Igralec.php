@@ -157,8 +157,7 @@ $ime = $igralec[1] . " " . $igralec[2];
     <div class="row glava">
       <!--GLAVA-->
       <div class="col-9 colGlava">
-        <h3 style="margin-top:2vh;"><?php echo $ime; 
-                                    ?></h3>
+        <h3 style="margin-top:2vh;"><?php echo $ime; ?></h3>
         <h5><?php echo $igralec[23]; ?>
       </div>
     </div>
