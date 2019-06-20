@@ -21,6 +21,23 @@ while($row = mysqli_fetch_assoc($get)){
   $e['color'] = $barva['barva'];
   array_push($eventi,$e);
 }
+$sql = "SELECT * FROM tekme";
+$get = mysqli_query($db,$sql);
+while($row = mysqli_fetch_assoc($get)){
+  $e = array();
+  $id = $row['ekipaID'];
+  $sqlEkipa = "SELECT * FROM ekipe WHERE `ID` = '$id'";
+  $ekipaQuery = mysqli_query($db,$sqlEkipa);
+  $ekipa = mysqli_fetch_assoc($ekipaQuery);
+  $imeEkipe = $ekipa['imeEkipe'];
+  if($row['lokacija'] == 1)$barva = "orange";
+  else $barva = "green";
+  $e['title'] = $imeEkipe ." - ".$row['nasprotnik'] . " \n tekma\n Lokacija: ".$row['imeLokacije'];
+  $e['start'] = $row['zacetek'];
+  $e['end'] = $row['konec'];
+  $e['color'] = $barva;
+  array_push($eventi,$e);
+}
 echo json_encode($eventi);
 exit();
 ?>

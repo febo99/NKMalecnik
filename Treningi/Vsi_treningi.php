@@ -2,7 +2,7 @@
 include "../login/config.php";
 session_start();
 $id = $_SESSION['id'];
-$sql = "SELECT * FROM treningi";
+$sql = "SELECT * FROM treningi ORDER BY 'datum'";
 $get=mysqli_query($db,$sql);
 $table = "";
 if(!isset($_SESSION['id']) && empty($_SESSION['id'])) {
@@ -23,6 +23,9 @@ while($row = mysqli_fetch_assoc($get)){
   $procent = round(($prisotni*100)/$stvseh,2);
   if($row['prisotnost'] == 0){
     $table .= "<tr><td>".$row['naslov']."</td>"."<td>".date("d.m.Y",strtotime($row['datum'])). " ".substr($row['zacetek'],strpos($row['zacetek'],"T")+1)."</td>"."<td>".$imeEkipe[0]."</td>"."<td>".$row['uvod']."</td>"."<td>".$row['glavni']."</td>"."<td>".$row['zakljucek']."</td><td>".$row['porocilo']."</td><td>Ni prisotnosti</td></tr>";
+  }
+  else if($row['prisotnost'] == 0 && $row['ustvaril'] != $id){
+    $table .= "<tr><td>".$row['naslov']."</td>"."<td>".date("d.m.Y",strtotime($row['datum'])). " ".substr($row['zacetek'],strpos($row['zacetek'],"T")+1)."</td>"."<td>".$imeEkipe[0]."</td>"."<td>".$row['uvod']."</td>"."<td>".$row['glavni']."</td>"."<td>".$row['zakljucek']."</td><td>".$row['porocilo']."</td><td>Prisotnost še ni vnešena!</td></tr>";
   }
   else{
     $table .= "<tr><td>".$row['naslov']."</td>"."<td>".date("d.m.Y",strtotime($row['datum'])). " ".substr($row['zacetek'],strpos($row['zacetek'],"T")+1)."</td>"."<td>".$imeEkipe[0]."</td>"."<td>".$row['uvod']."</td>"."<td>".$row['glavni']."</td>"."<td>".$row['zakljucek']."</td><td>".$row['porocilo']."</td><td>".$prisotni." / ". $stvseh ." (".$procent ."%)" ."</td></tr>";

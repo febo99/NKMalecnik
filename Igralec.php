@@ -11,8 +11,7 @@ $queryIgralec = mysqli_query($db, $sqlIgralec);
 $igralec = mysqli_fetch_array($queryIgralec);
 $ime = $igralec[1] . " " . $igralec[2];
 ?>
-
-<html>
+<html lang="sl">
 
 <head>
   <title>NK Malecnik</title>

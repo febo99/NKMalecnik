@@ -10,7 +10,7 @@ while($row = mysqli_fetch_assoc($get)){
   $sqlIme = "SELECT `imeEkipe` FROM ekipe WHERE `ID` = '$idEkipe'";
   $getIme = mysqli_query($db,$sqlIme);
   $imeEkipe = mysqli_fetch_row($getIme);
-  $table .= "<tr><td>".$row['ime']." ".$row['priimek']."</td><td>".date("d.m.Y",strtotime($row['datumRojstva']))."</td><td>"."<td>".$row['emailIgralec']."</td>"."<td>".$row['telefonIgralec']."</td>"."<td>".$imeEkipe[0]."</td><td>".$row['opomba']."</td>"."</td></tr>";
+  $table .= "<tr><td>".$row['ime']." ".$row['priimek']."</td><td>".date("d.m.Y",strtotime($row['datumRojstva']))."</td>"."<td>".$row['emailIgralec']."</"."<td>"."<td>".$row['telefonIgralec']."</td>"."<td>".$imeEkipe[0]."</td><td>".$row['opomba']."</td>"."</tr>";
 }
  ?>
 
