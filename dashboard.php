@@ -77,19 +77,19 @@ if(!isset($_SESSION['id']) && empty($_SESSION['id'])) {
                   <a href="#tekmeSub" class="nav-link dropdown-toggle" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">Tekme</a>
                     <ul class="collapse list-unstyled" id="tekmeSub">
                       <li>
-                          <a class="nav-link sub-link" href="#">Nova tekma</a>
+                          <a class="nav-link sub-link" href="Tekme/Nova_tekma.php">Nova tekma</a>
                       </li>
                       <li>
-                          <a class="nav-link sub-link" href="#">Moje tekme</a>
+                          <a class="nav-link sub-link" href="Tekme/Moje_tekme.php">Moje tekme</a>
                       </li>
                       <li>
-                          <a class="nav-link sub-link" href="#">Vse tekme</a>
+                          <a class="nav-link sub-link" href="Tekme/Vse_tekme.php">Vse tekme</a>
                       </li>
                 </ul>
             </li>
             </li>
             <li class="nav-item">
-                <a class="nav-link"href="">Zdravstveni karton</a>
+                <a class="nav-link"href="">Delovne akcije</a>
 			</li>
       <div class="dropdown-divider"></div>
 			<li class="nav-item">

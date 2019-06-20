@@ -18,7 +18,7 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
 }
 ?>
 
-<html style="background-color: rgb(60, 68, 77);">
+<html style="background-color: rgb(60, 68, 77);" lang="sl">
 
 <head>
   <title>NK Malecnik</title>
@@ -55,7 +55,7 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
     <div class="row kavarna">
       <!--KAVARNA-->
       <div class="col-11 col-sm-11 order-sm-1  colKavarna novIgralec">
-        <form id="novTrening" action="Dodaj_trening.php" method="post" enctype="multipart/form-data">
+        <form id="novTrening" action="Dodaj_tekmo.php" method="post" enctype="multipart/form-data">
           <div class="row">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
@@ -63,9 +63,9 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
               </div>
               <select required class="form-control" name="tipTekme">
                 <option value="1" selected>Liga</option>
-                <option value="2" selected>Pokal</option>
-                <option value="3" selected>Prijateljska</option>
-                <option value="4" selected>Turnir</option>
+                <option value="2">Pokal</option>
+                <option value="3" >Prijateljska</option>
+                <option value="4" >Turnir</option>
               </select>
 
             </div>
@@ -76,11 +76,11 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
                 <span class="input-group-text" id="inputGrup-sizing-sm">Lokacija*</>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" checked=checked name="domaGost" id="inlineRadio1" value="1">
+                <input class="form-check-input" type="radio" checked=checked name="domaGost" id="inlineRadio1" value="1" onclick=vnosLokacije(this)>
                 <label class="form-check-label" for="inlineRadio1" >Doma</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="domaGost" id="inlineRadio2" value="2">
+                <input class="form-check-input" type="radio" name="domaGost" id="inlineRadio2" value="2" onclick=vnosLokacije(this)>
                 <label class="form-check-label" for="inlineRadio2">V gosteh</label>
               </div>
             </div>
@@ -94,7 +94,7 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
                 <option value="" disabled selected>Izberi ekipo!</option>
                 <?php echo $option; ?>
               </select>
-              <input type="number" class="form-control" name="domaciGoli" placeholder="Št. golov">
+              <input type="number" class="form-control"  value=0 name="domaciGoli" placeholder="Št. golov">
             </div>
           </div>
 
@@ -104,7 +104,7 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
                 <span class="input-group-text" id="inputGroup-sizing-sm">Nasprotnik *</span>
               </div>
               <input type="text" class="form-control" name="nasprotnik" placeholder="Ime nasprotnika">
-              <input type="number" class="form-control" name="nasprotnikGoli" placeholder="Št. golov">
+              <input type="number" class="form-control" value=0 name="nasprotnikGoli" placeholder="Št. golov">
             </div>
           </div>
           <div class="row">
@@ -112,7 +112,7 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Datum *</span>
               </div>
-              <input type="date" class="form-control" id="datumTrening" name="datumTrening" value=dd.mm.lll>
+              <input type="date" class="form-control" id="datumTrening" name="datumTekme" value=dd.mm.lll>
             </div>
 
           </div>
@@ -121,7 +121,7 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Ura tekme *</span>
               </div>
-              <input type="time" class="form-control" name="uraTreninga" required>
+              <input type="time" class="form-control" name="uraTekme" id="uraTekma" value=16:00 required>
             </div>
           </div>
           <div class="row">
@@ -129,7 +129,7 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Zbor *</span>
               </div>
-              <input type="time" class="form-control" name="uraZbora" required>
+              <input type="time" class="form-control" name="uraZbora" id="uraZbor" value=15:00 required>
             </div>
           </div>
           <div class="row">
@@ -137,7 +137,11 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Ime lokacije *</span>
               </div>
-              <input type="text" class="form-control" name="lokacija" placeholder="Kraj tekme">
+              <input type="text" class="form-control" id="gLokacija"name="lokacija" placeholder="Kraj tekme">
+              <select class="form-control" id="dLokacija" name="domacaLokacija">
+                <option value="" disabled selected>Izberi lokacijo!</option>
+                <?php echo $optionL; ?>
+              </select>
             </div>
           </div>
           <button type="submit" class="btn btn-primary btnForma">Dodaj</button>

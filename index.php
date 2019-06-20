@@ -1,3 +1,10 @@
+<?php
+include "../login/config.php";
+session_start();
+if(isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+    header("location: dashboard.php");
+  }
+?>
 <html>
 <head>
 <title>NK Malecnik</title>
