@@ -1,5 +1,4 @@
 <?php
-include('login/session.php');
 include("../login/config.php");
 session_start();
 header('Content-Type: text/html; charset=UTF-8');
@@ -27,8 +26,7 @@ while($row = mysqli_fetch_assoc($get)){
 <link rel="stylesheet" href="../fixed-left.css">
 <link rel="stylesheet" href="../style.css">
 <script src="../script.js"></script>
-<script src="koledar.js"></script>
-<script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
+<script src="./koledar.js"></script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script>
 <link href='../fullcalendar/packages/core/main.css' rel='stylesheet' />
