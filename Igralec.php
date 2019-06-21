@@ -21,7 +21,7 @@ $ime = $igralec[1] . " " . $igralec[2];
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="../script.js"></script>
+  <script src="script.js"></script>
   <link rel="stylesheet" href="fixed-left.css">
   <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
@@ -180,69 +180,35 @@ $ime = $igralec[1] . " " . $igralec[2];
           </div>
         </div>
         <div class="row elementiIgralec" id=splosno>
-          <div class=col-6>
+          <div class="row">
+            <div class=col>
             <h5>Splošni podatki</h5>
-            <div class=row>
-              <div class=col-4>
-                Prisotnost zadnjih 10 treningov<br>
-                <span id="stTreningov"></span>
-
-              </div>
-              <div class=col-4>
-                Prisotnost zadnjih 10 tekem<br>
-              </div>
+            <table id="tabela" class="table table-bordered">
+            <tr><td>Prisotnost zadnjih 10 treningov</td><td><span id="stTreningov"></span><br></td></tr>
+            <tr><td>Ime in priimek</td><td><?php echo $igralec[1] . " " . $igralec[2];?></td></tr>
+            <tr><td>Datum rojstva</td><td><?php echo date("d.m.Y", strtotime($igralec[3]));?></td></tr>
+            <tr><td>Ulica</td><td><?php echo $igralec[5];?></td></tr>
+            <tr><td>Mesto in poštna številka</td><td><?php echo $igralec[6] . " " . $igralec[7];?></td></tr>
+            <tr><td><?php echo "<a href=Uredi_igralca.php?id=".$idIgralec." >Uredi</a>" ;?></td><td>Izbriši</td></tr>
+            </table>
             </div>
-            <div class=row>
-              <div class=col-4>
-                Ime in priimek<br>
-                Datum rojstva<br>
-                Ulica<br>
-                Mesto in poštna številka
-              </div>
-              <div class=col-4>
-                <?php echo $igralec[1] . " " . $igralec[2] . "<br>"
-                  . date("d.m.Y", strtotime($igralec[3])) . " <br> " . $igralec[5] . " <br> " . $igralec[6] . ", " . $igralec[7] ?>
-              </div>
-            </div>
-            <div class=row>
-              <div class="col-4">
-                Uredi
-              </div>
-              <div class="col-4">
-                Izbriši
-              </div>
-            </div>
-          </div>
-          <div class=col-6>
-            <h5>Ostali podatki</h5>
-            <div class="row">
-              <div class=col>
-                <h6>Kontakti</h6>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-4">
-                Tel. igralec<br>
-                Email igralec<br>
-                Tel. stars<br>
-                Tel. stars<br>
-                Email stars<br>
-                Email stars<br>
-                Šola<br>
-                EMŠO<br>
-                Registracijska št<br>
-                Opombe<br>
-              </div>
-              <div class="col-4">
-                <?php
-                echo $igralec[9] . "<br>" . $igralec[10] . "<br>" . $igralec[12] . "<br>" . $igralec[15] . "<br>" . $igralec[13] . "<br>" . $igralec[16] . "<br>" . $igralec[8] . "<br>" .
-                  $igralec[17] . "<br>" . $igralec[18] . "<br>" . $igralec[19];
-                ?>
-              </div>
+            <div class=col>
+            <h5>Splošni podatki</h5>
+            <table id="tabela" class="table table-bordered">
+            <tr><td>Tel. igralec</td><td><?php echo $igralec[9];?><br></td></tr>
+            <tr><td>Email igralec</td><td><?php echo $igralec[10];?></td></tr>
+            <tr><td>Tel. stars</td><td><?php echo $igralec[12];?></td></tr>
+            <tr><td>Tel. stars</td><td><?php echo $igralec[15];?></td></tr>
+            <tr><td>Email stars</td><td><?php echo $igralec[13];?></td></tr>
+            <tr><td>Email stars</td><td><?php echo $igralec[16];?></td></tr>
+            <tr><td>Šola</td><td><?php echo $igralec[8];?></td></tr>
+            <tr><td>EMŠO</td><td><?php echo $igralec[17];?></td></tr>
+            <tr><td>Registracijska št</td><td><?php echo $igralec[18];?></td></tr>
+            <tr><td>Opombe</td><td><?php echo $igralec[19];?></td></tr>
+            </table>
             </div>
           </div>
         </div>
-
         <div class="row elementiIgralec" id=treningi>
           <div class=col-6>
             a
