@@ -42,7 +42,7 @@
     else if($rowD['prisotnost'] == 2){
       $prisotnost = "❌";
     }
-    $table .= "<tr><td>".$imepriimekText."</td><td>".$prisotnost."</td></tr>";
+    $table .= "<tr><td><a href=../Igralec.php?igralec=".$idIgralca.">".$imepriimekText."</a></td><td>".$prisotnost."</td></tr>";
   }
  ?>
 

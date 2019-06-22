@@ -10,6 +10,20 @@ $sqlIgralec = "SELECT * FROM igralci  INNER JOIN ekipe ON igralci.ekipaID = ekip
 $queryIgralec = mysqli_query($db, $sqlIgralec);
 $igralec = mysqli_fetch_array($queryIgralec);
 $ime = $igralec[1] . " " . $igralec[2];
+
+$sql = "SELECT * FROM treningi INNER JOIN prisotnost ON treningi.ID = prisotnost.treningID WHERE prisotnost.igralecID = '$idIgralec' ORDER BY treningi.datum DESC";
+$query = mysqli_query($db,$sql);
+$table = "";
+
+while($row = mysqli_fetch_assoc($query)){
+  $ekipaID = $row['ekipaID'];
+  $sqlEkipa = "SELECT imeEkipe FROM ekipe WHERE `ID` = '$ekipaID'";
+  $ekipaQ = mysqli_query($db,$sqlEkipa);
+  $ekipa = mysqli_fetch_array($ekipaQ);
+  if($row['prisotnost'] != 1)$table .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>❌</td></tr>";
+  else $table .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>✔️</td></tr>";
+  
+}
 ?>
 <html lang="sl">
 
@@ -183,7 +197,7 @@ $ime = $igralec[1] . " " . $igralec[2];
           <div class="row">
             <div class=col>
             <h5>Splošni podatki</h5>
-            <table id="tabela" class="table table-bordered">
+            <table id="tabela" class="table table-bordered table-striped">
             <tr><td>Prisotnost zadnjih 10 treningov</td><td><span id="stTreningov"></span><br></td></tr>
             <tr><td>Ime in priimek</td><td><?php echo $igralec[1] . " " . $igralec[2];?></td></tr>
             <tr><td>Datum rojstva</td><td><?php echo date("d.m.Y", strtotime($igralec[3]));?></td></tr>
@@ -194,7 +208,7 @@ $ime = $igralec[1] . " " . $igralec[2];
             </div>
             <div class=col>
             <h5>Splošni podatki</h5>
-            <table id="tabela" class="table table-bordered">
+            <table id="tabela" class="table table-bordered table-striped">
             <tr><td>Tel. igralec</td><td><?php echo $igralec[9];?><br></td></tr>
             <tr><td>Email igralec</td><td><?php echo $igralec[10];?></td></tr>
             <tr><td>Tel. stars</td><td><?php echo $igralec[12];?></td></tr>
@@ -211,16 +225,18 @@ $ime = $igralec[1] . " " . $igralec[2];
         </div>
         <div class="row elementiIgralec" id=treningi>
           <div class=col-6>
-            a
-          </div>
-          <div class=col-6>
-            a
+          <table id="tabela" class="table table-bordered table-striped">
+            <tr>
+              <th>Trening</th>
+              <th>Datum</th>
+              <th>Ekipa</th>
+              <th>Prisotnost</th>
+            </tr>
+            <?php echo $table;?>
+          </table>
           </div>
         </div>
         <div class="row elementiIgralec" id=tekme>
-          <div class=col-6>
-            c
-          </div>
           <div class=col-6>
             c
           </div>
