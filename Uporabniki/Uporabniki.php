@@ -25,11 +25,7 @@ while($row = mysqli_fetch_assoc($get)){
 <script src="../script.js"></script>
 <script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
 
-<link rel="stylesheet" href="/Web2Cal/css/Web2Cal.css"/>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script>
-<script src="/Web2Cal/Web2Cal-3.0.min.js" type="text/javascript"></script>
-<script src="/Web2Cal/Web2Cal.support.js" type="text/javascript"></script>
-<script src="/Web2Cal/Web2Cal.templates.js" type="text/javascript"></script>
 
 </head>
 <body>
