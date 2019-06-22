@@ -17,7 +17,7 @@ while($row = mysqli_fetch_assoc($get)){
   $imeTrener = $array[0];
   $priimekTrener = $array[1];
   if($trenerID == $_SESSION['id']){
-    $table .= "<tr><td><a href='Urejanje_ekipe.php?id=".$row['ID']."'>".$row['imeEkipe']."</a></td>"."<td>".$imeTrener." ".$priimekTrener. "</td></tr>";
+    $table .= "<tr><td><a href='Ekipa.php?id=".$row['ID']."'>".$row['imeEkipe']."</a></td>"."<td>".$imeTrener." ".$priimekTrener. "</td></tr>";
   }else{
     $table .= "<tr><td>".$row['imeEkipe']."</td>"."<td>".$imeTrener." ".$priimekTrener. "</td></tr>";
   }
