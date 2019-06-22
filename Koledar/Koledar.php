@@ -1,5 +1,5 @@
 <?php
-include("../login/config.php");
+include "../login/config.php";
 session_start();
 header('Content-Type: text/html; charset=UTF-8');
 if(!isset($_SESSION['id']) && empty($_SESSION['id'])) {
@@ -26,14 +26,13 @@ while($row = mysqli_fetch_assoc($get)){
 <link rel="stylesheet" href="../fixed-left.css">
 <link rel="stylesheet" href="../style.css">
 <script src="../script.js"></script>
-<script src="./koledar.js"></script>
+<script src="koledar.js"></script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script>
 <link href='../fullcalendar/packages/core/main.css' rel='stylesheet' />
 <link href='../fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
 <link href='../fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
 
-<script src='../fullcalendar/pacakges/core/locales/sl.js'></script>
 <script src='../fullcalendar/packages/core/main.js'></script>
 <script src='../fullcalendar/packages/daygrid/main.js'></script>
 <script src='../fullcalendar/packages/timegrid/main.js'></script>
