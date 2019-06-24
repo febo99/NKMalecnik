@@ -31,6 +31,12 @@ $table = "";
 while ($row = mysqli_fetch_assoc($queryI)){
 	$table .= "<tr><td><a href=../Igralec.php?igralec=".$row['ID'].">".$row['ime']." ".$row['priimek']."</a></td><td>".date("d.m.Y",strtotime($row['datumRojstva']))."</td>"."<td>".$row['emailIgralec']."</"."<td>"."<td>".$row['telefonIgralec']."</td><td>".$row['opomba']."</td>"."</tr>";
 }
+$prihajTreningi = "";
+$sqlTrening = "SELECT * FROM treningi INNER JOIN lokacije ON treningi.lokacijaID = lokacije.ID WHERE treningi.datum >= CURDATE() ORDER BY treningi.datum";
+$queryTrening = mysqli_query($db,$sqlTrening);
+while( $row = mysqli_fetch_assoc($queryTrening)){
+	$prihajTreningi .= "<tr><td>".$row['naslov']."</td><td>".date("d.m.Y",strtotime($row['datum'])). ", " .substr($row['zacetek'],strpos($row['zacetek'],"T")+1) ."</td><td>".$row['ime']."</td></tr>";
+}
 ?>
 
 <html style="background-color: rgb(60, 68, 77);">
@@ -116,7 +122,13 @@ while ($row = mysqli_fetch_assoc($queryI)){
             </div>
             <div class=col>
             <h5>Prihajajoči treningi</h5>
-						<table id="tabela" class="table table-bordered">
+						<table id="tabela" class="table table-bordered table-striped">
+						<tr>
+						<th>Naslov</th>
+						<th>Datum</th>
+						<th>Lokacija</th>
+						</tr>
+						<?php echo $prihajTreningi?>
 						</table>
             </div>
           </div>
