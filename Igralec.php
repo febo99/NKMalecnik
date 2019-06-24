@@ -4,39 +4,43 @@ session_start();
 if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
   header("location: ../index.php");
 }
-$id = $_SESSION['id'];
-$idIgralec = $_GET['igralec'];
-$sqlIgralec = "SELECT * FROM igralci  INNER JOIN ekipe ON igralci.ekipaID = ekipe.ID WHERE igralci.ID = '$idIgralec'";
-$queryIgralec = mysqli_query($db, $sqlIgralec);
-$igralec = mysqli_fetch_array($queryIgralec);
-$ime = $igralec[1] . " " . $igralec[2];
 
-$sql = "SELECT * FROM treningi INNER JOIN prisotnost ON treningi.ID = prisotnost.treningID WHERE prisotnost.igralecID = '$idIgralec' ORDER BY treningi.datum DESC";
-$query = mysqli_query($db,$sql);
-$table = "";
+  $id = $_SESSION['id'];
+  $idIgralec = $_GET['igralec'];
+  $sqlIgralec = "SELECT * FROM igralci  INNER JOIN ekipe ON igralci.ekipaID = ekipe.ID WHERE igralci.ID = '$idIgralec'";
+  $queryIgralec = mysqli_query($db, $sqlIgralec);
+  $igralec = mysqli_fetch_array($queryIgralec);
+  $ime = $igralec[1] . " " . $igralec[2];
+  if($igralec['ustvaril'] ==  $id ||  $_SESSION['vloga'] == 1){
+    $sql = "SELECT * FROM treningi INNER JOIN prisotnost ON treningi.ID = prisotnost.treningID WHERE prisotnost.igralecID = '$idIgralec' ORDER BY treningi.datum DESC";
+    $query = mysqli_query($db,$sql);
+    $table = "";
 
-while($row = mysqli_fetch_assoc($query)){
-  $ekipaID = $row['ekipaID'];
-  $sqlEkipa = "SELECT imeEkipe FROM ekipe WHERE `ID` = '$ekipaID'";
-  $ekipaQ = mysqli_query($db,$sqlEkipa);
-  $ekipa = mysqli_fetch_array($ekipaQ);
-  if($row['prisotnost'] != 1)$table .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>❌</td></tr>";
-  else $table .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>✔️</td></tr>";
-  
-}
+    while($row = mysqli_fetch_assoc($query)){
+      $ekipaID = $row['ekipaID'];
+      $sqlEkipa = "SELECT imeEkipe FROM ekipe WHERE `ID` = '$ekipaID'";
+      $ekipaQ = mysqli_query($db,$sqlEkipa);
+      $ekipa = mysqli_fetch_array($ekipaQ);
+      if($row['prisotnost'] != 1)$table .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>❌</td></tr>";
+      else $table .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>✔️</td></tr>";
+      
+    }
 
-$sqlT = "SELECT * FROM tekme INNER JOIN prisotnostTekme on tekme.ID = prisotnostTekme.tekmaID WHERE prisotnostTekme.igralecID  = '$idIgralec' ORDER BY tekme.datum DESC";
-$queryT = mysqli_query($db,$sqlT);
-$tableT = "";
-while($row = mysqli_fetch_assoc($queryT)){
-  $ekipaID = $row['ekipaID'];
-  $sqlEkipa = "SELECT imeEkipe FROM ekipe WHERE `ID` = '$ekipaID'";
-  $ekipaQ = mysqli_query($db,$sqlEkipa);
-  $ekipa = mysqli_fetch_array($ekipaQ);
-  if($row['prisotnost'] != 1)$tableT .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>❌</td></tr>";
-  else $tableT .= "<tr><td><a href=Tekme/Tekma.php?id=".$row['tekmaID'].">".$ekipa[0]."-".$row['nasprotnik']."</a></td><td>".$row['datum']."</td><td><b>".$row['golDomaci']."</b>:".$row['golGosti']."</td><td>✔️</td></tr>";
-  
-}
+    $sqlT = "SELECT * FROM tekme INNER JOIN prisotnostTekme on tekme.ID = prisotnostTekme.tekmaID WHERE prisotnostTekme.igralecID  = '$idIgralec' ORDER BY tekme.datum DESC";
+    $queryT = mysqli_query($db,$sqlT);
+    $tableT = "";
+    while($row = mysqli_fetch_assoc($queryT)){
+      $ekipaID = $row['ekipaID'];
+      $sqlEkipa = "SELECT imeEkipe FROM ekipe WHERE `ID` = '$ekipaID'";
+      $ekipaQ = mysqli_query($db,$sqlEkipa);
+      $ekipa = mysqli_fetch_array($ekipaQ);
+      if($row['prisotnost'] != 1)$tableT .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>❌</td></tr>";
+      else $tableT .= "<tr><td><a href=Tekme/Tekma.php?id=".$row['tekmaID'].">".$ekipa[0]."-".$row['nasprotnik']."</a></td><td>".$row['datum']."</td><td><b>".$row['golDomaci']."</b>:".$row['golGosti']."</td><td>✔️</td></tr>";
+      
+    }
+  }else{
+    header("Location:Vsi_igralci/Vsi_igralci.php");
+  }
 ?>
 <html lang="sl">
 

@@ -22,13 +22,23 @@ while($row = mysqli_fetch_assoc($get)){
   $prisotni = $stvseh - mysqli_num_rows($getNo);
   $procent = round(($prisotni*100)/$stvseh,2);
   if($row['prisotnost'] == 0){
-    $table .= "<tr><td>".$row['naslov']."</td>"."<td>".date("d.m.Y",strtotime($row['datum'])). " ".substr($row['zacetek'],strpos($row['zacetek'],"T")+1)."</td>"."<td>".$imeEkipe[0]."</td>"."<td>".$row['uvod']."</td>"."<td>".$row['glavni']."</td>"."<td>".$row['zakljucek']."</td><td>".$row['porocilo']."</td><td>Ni prisotnosti</td></tr>";
+    if($_SESSION['vloga'] == 1 || $row['ustvaril'] == $id){
+      $table .= "<tr><td><a href=Trening.php?id=".$idTreninga.">".$row['naslov']."</a></td><td>".date("d.m.Y",strtotime($row['datum'])). " ".substr($row['zacetek'],strpos($row['zacetek'],"T")+1)."</td>"."<td>".$imeEkipe[0]."</td>"."<td>".$row['uvod']."</td>"."<td>".$row['glavni']."</td>"."<td>".$row['zakljucek']."</td><td>".$row['porocilo']."</td><td>Vnesi prisotnost!</td></tr>";
+    }else {
+      $table .= "<tr><td>".$row['naslov']."</td>"."<td>".date("d.m.Y",strtotime($row['datum'])). " ".substr($row['zacetek'],strpos($row['zacetek'],"T")+1)."</td>"."<td>".$imeEkipe[0]."</td>"."<td>".$row['uvod']."</td>"."<td>".$row['glavni']."</td>"."<td>".$row['zakljucek']."</td><td>".$row['porocilo']."</td><td>Prisotnost še ni vnešena!</td></tr>";
+    }
   }
   else if($row['prisotnost'] == 0 && $row['ustvaril'] != $id){
-    $table .= "<tr><td>".$row['naslov']."</td>"."<td>".date("d.m.Y",strtotime($row['datum'])). " ".substr($row['zacetek'],strpos($row['zacetek'],"T")+1)."</td>"."<td>".$imeEkipe[0]."</td>"."<td>".$row['uvod']."</td>"."<td>".$row['glavni']."</td>"."<td>".$row['zakljucek']."</td><td>".$row['porocilo']."</td><td>Prisotnost še ni vnešena!</td></tr>";
+    if($_SESSION['vloga'] == 1 || $row['ustvaril'] == $id){
+      $table .= "<tr><td><a href=Trening.php?id=".$idTreninga.">".$row['naslov']."</a><td>".date("d.m.Y",strtotime($row['datum'])). " ".substr($row['zacetek'],strpos($row['zacetek'],"T")+1)."</td>"."<td>".$imeEkipe[0]."</td>"."<td>".$row['uvod']."</td>"."<td>".$row['glavni']."</td>"."<td>".$row['zakljucek']."</td><td>".$row['porocilo']."</td><td>Prisotnost še ni vnešena!</td></tr>";
+    }
+    else $table .= "<tr><td>".$row['naslov']."</td>"."<td>".date("d.m.Y",strtotime($row['datum'])). " ".substr($row['zacetek'],strpos($row['zacetek'],"T")+1)."</td>"."<td>".$imeEkipe[0]."</td>"."<td>".$row['uvod']."</td>"."<td>".$row['glavni']."</td>"."<td>".$row['zakljucek']."</td><td>".$row['porocilo']."</td><td>Prisotnost še ni vnešena!</td></tr>";
   }
   else{
-    $table .= "<tr><td>".$row['naslov']."</td>"."<td>".date("d.m.Y",strtotime($row['datum'])). " ".substr($row['zacetek'],strpos($row['zacetek'],"T")+1)."</td>"."<td>".$imeEkipe[0]."</td>"."<td>".$row['uvod']."</td>"."<td>".$row['glavni']."</td>"."<td>".$row['zakljucek']."</td><td>".$row['porocilo']."</td><td>".$prisotni." / ". $stvseh ." (".$procent ."%)" ."</td></tr>";
+    if($_SESSION['vloga'] == 1 || $row['ustvaril'] == $id){
+      $table .= "<tr><td><a href=Trening.php?id=".$idTreninga.">".$row['naslov']."</a><td>".date("d.m.Y",strtotime($row['datum'])). " ".substr($row['zacetek'],strpos($row['zacetek'],"T")+1)."</td>"."<td>".$imeEkipe[0]."</td>"."<td>".$row['uvod']."</td>"."<td>".$row['glavni']."</td>"."<td>".$row['zakljucek']."</td><td>".$row['porocilo']."</td><td>".$prisotni." / ". $stvseh ." (".$procent ."%)" ."</td></tr>";
+    }
+    else $table .= "<tr><td>".$row['naslov']."</td>"."<td>".date("d.m.Y",strtotime($row['datum'])). " ".substr($row['zacetek'],strpos($row['zacetek'],"T")+1)."</td>"."<td>".$imeEkipe[0]."</td>"."<td>".$row['uvod']."</td>"."<td>".$row['glavni']."</td>"."<td>".$row['zakljucek']."</td><td>".$row['porocilo']."</td><td>".$prisotni." / ". $stvseh ." (".$procent ."%)" ."</td></tr>";
   }
   }
  ?>

@@ -11,42 +11,46 @@
   $row = mysqli_fetch_assoc($get);
   $table = "";
   $idEkipe = $row['ekipaID'];
-  $sqlIme = "SELECT `imeEkipe` FROM ekipe WHERE `ID` = '$idEkipe'";
-  $getIme = mysqli_query($db,$sqlIme);
-  $imeEkipe = mysqli_fetch_row($getIme)[0];
-  $sqlPrisotni = "SELECT * FROM prisotnostTekme  WHERE `tekmaID` = '$idTekme'";
-  $getPrisotni = mysqli_query($db,$sqlPrisotni);
-  $stvseh = mysqli_num_rows($getPrisotni);
-  $sqlNeprisotni = "SELECT * FROM prisotnostTekme WHERE `prisotnost` != 1 AND `tekmaID` = '$idTekme'";
-  $getNo = mysqli_query($db,$sqlNeprisotni);
-  $prisotni = $stvseh - mysqli_num_rows($getNo);
-  $procent = ($prisotni*100)/$stvseh;
-  $tipTekme = "";
-  $domGost = "";
-  if(!empty($row['priponka']))$priponka = $row['priponka'];
-  if($row['tip'] == 1)$tipTekme = "Liga";
-  else if($row['tip'] == 2)$tipTekme = "Pokal";
-  else if($row['tip'] == 3)$tipTekme = "Prijateljska";
-  else if($row['tip'] == 4)$tipTekme = "Turnir";
-  if($row['lokacija'] == 1)$domGost = "domača";
-  else $domGost = "gostujoča";
-  while($rowD = mysqli_fetch_assoc($getPrisotni)){
-    $idIgralca = $rowD['igralecID'];
-    $sqlImeI = "SELECT * FROM igralci WHERE `ID` = '$idIgralca'";
-    $getImeI = mysqli_query($db,$sqlImeI);
-    $imepriimek = mysqli_fetch_assoc($getImeI);
-    $imepriimekText = $imepriimek['ime']. " ".$imepriimek["priimek"];
-    if($rowD['prisotnost'] == 1){
-      $prisotnost = "✔️";
+  if($row['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1){
+    $sqlIme = "SELECT `imeEkipe` FROM ekipe WHERE `ID` = '$idEkipe'";
+    $getIme = mysqli_query($db,$sqlIme);
+    $imeEkipe = mysqli_fetch_row($getIme)[0];
+    $sqlPrisotni = "SELECT * FROM prisotnostTekme  WHERE `tekmaID` = '$idTekme'";
+    $getPrisotni = mysqli_query($db,$sqlPrisotni);
+    $stvseh = mysqli_num_rows($getPrisotni);
+    $sqlNeprisotni = "SELECT * FROM prisotnostTekme WHERE `prisotnost` != 1 AND `tekmaID` = '$idTekme'";
+    $getNo = mysqli_query($db,$sqlNeprisotni);
+    $prisotni = $stvseh - mysqli_num_rows($getNo);
+    $procent = ($prisotni*100)/$stvseh;
+    $tipTekme = "";
+    $domGost = "";
+    if(!empty($row['priponka']))$priponka = $row['priponka'];
+    if($row['tip'] == 1)$tipTekme = "Liga";
+    else if($row['tip'] == 2)$tipTekme = "Pokal";
+    else if($row['tip'] == 3)$tipTekme = "Prijateljska";
+    else if($row['tip'] == 4)$tipTekme = "Turnir";
+    if($row['lokacija'] == 1)$domGost = "domača";
+    else $domGost = "gostujoča";
+    while($rowD = mysqli_fetch_assoc($getPrisotni)){
+      $idIgralca = $rowD['igralecID'];
+      $sqlImeI = "SELECT * FROM igralci WHERE `ID` = '$idIgralca'";
+      $getImeI = mysqli_query($db,$sqlImeI);
+      $imepriimek = mysqli_fetch_assoc($getImeI);
+      $imepriimekText = $imepriimek['ime']. " ".$imepriimek["priimek"];
+      if($rowD['prisotnost'] == 1){
+        $prisotnost = "✔️";
+      }
+      else if($rowD['prisotnost'] == 0){
+        $prisotnost = "❌";
+      }
+      else if($rowD['prisotnost'] == 2){
+        $prisotnost = "❌";
+      }
+      $table .= "<tr><td><a href=../Igralec.php?igralec=".$idIgralca.">".$imepriimekText."</a></td><td>".$prisotnost."</td></tr>";
     }
-    else if($rowD['prisotnost'] == 0){
-      $prisotnost = "❌";
+  }else{
+      header("Location:Vse_tekme.php");
     }
-    else if($rowD['prisotnost'] == 2){
-      $prisotnost = "❌";
-    }
-    $table .= "<tr><td><a href=../Igralec.php?igralec=".$idIgralca.">".$imepriimekText."</a></td><td>".$prisotnost."</td></tr>";
-  }
  ?>
 
 <html>

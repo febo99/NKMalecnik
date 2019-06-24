@@ -14,28 +14,32 @@ $trener = "";
 $sqlEkipa = "SELECT * FROM ekipe WHERE `ID` = '$idEkipe'";
 $query = mysqli_query($db, $sqlEkipa);
 $ekipa = mysqli_fetch_assoc($query);
-while ($row = mysqli_fetch_assoc($get)) {
-	if ($row['ID'] == $ekipa['trenerID']) {
-		$trener = $row['ime'] . " " . $row['priimek'];
-	} 
-	else if ($row['ID'] == $ekipa['pomocnik1ID']) {
-		$pom1 = $row['ime'] . " " . $row['priimek'];
+if($ekipa['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1){
+	while ($row = mysqli_fetch_assoc($get)) {
+		if ($row['ID'] == $ekipa['trenerID']) {
+			$trener = $row['ime'] . " " . $row['priimek'];
+		} 
+		else if ($row['ID'] == $ekipa['pomocnik1ID']) {
+			$pom1 = $row['ime'] . " " . $row['priimek'];
+		}
+		else if ($row['ID'] == $ekipa['pomocnik2ID']) {
+			$pom2 = $row['ime'] . " " . $row['priimek'];
+		} 
 	}
-	else if ($row['ID'] == $ekipa['pomocnik2ID']) {
-		$pom2 = $row['ime'] . " " . $row['priimek'];
-	} 
-}
-$sqlIgralci = "SELECT * FROM igralci WHERE `ekipaID` = '$idEkipe'";
-$queryI = mysqli_query($db,$sqlIgralci);
-$table = "";
-while ($row = mysqli_fetch_assoc($queryI)){
-	$table .= "<tr><td><a href=../Igralec.php?igralec=".$row['ID'].">".$row['ime']." ".$row['priimek']."</a></td><td>".date("d.m.Y",strtotime($row['datumRojstva']))."</td>"."<td>".$row['emailIgralec']."</"."<td>"."<td>".$row['telefonIgralec']."</td><td>".$row['opomba']."</td>"."</tr>";
-}
-$prihajTreningi = "";
-$sqlTrening = "SELECT * FROM treningi INNER JOIN lokacije ON treningi.lokacijaID = lokacije.ID WHERE treningi.datum >= CURDATE() ORDER BY treningi.datum";
-$queryTrening = mysqli_query($db,$sqlTrening);
-while( $row = mysqli_fetch_assoc($queryTrening)){
-	$prihajTreningi .= "<tr><td>".$row['naslov']."</td><td>".date("d.m.Y",strtotime($row['datum'])). ", " .substr($row['zacetek'],strpos($row['zacetek'],"T")+1) ."</td><td>".$row['ime']."</td></tr>";
+	$sqlIgralci = "SELECT * FROM igralci WHERE `ekipaID` = '$idEkipe'";
+	$queryI = mysqli_query($db,$sqlIgralci);
+	$table = "";
+	while ($row = mysqli_fetch_assoc($queryI)){
+		$table .= "<tr><td><a href=../Igralec.php?igralec=".$row['ID'].">".$row['ime']." ".$row['priimek']."</a></td><td>".date("d.m.Y",strtotime($row['datumRojstva']))."</td>"."<td>".$row['emailIgralec']."</"."<td>"."<td>".$row['telefonIgralec']."</td><td>".$row['opomba']."</td>"."</tr>";
+	}
+	$prihajTreningi = "";
+	$sqlTrening = "SELECT * FROM treningi INNER JOIN lokacije ON treningi.lokacijaID = lokacije.ID WHERE treningi.datum >= CURDATE() AND treningi.ekipaID = '$idEkipe' ORDER BY treningi.datum";
+	$queryTrening = mysqli_query($db,$sqlTrening);
+	while( $row = mysqli_fetch_assoc($queryTrening)){
+		$prihajTreningi .= "<tr><td>".$row['naslov']."</td><td>".date("d.m.Y",strtotime($row['datum'])). ", " .substr($row['zacetek'],strpos($row['zacetek'],"T")+1) ."</td><td>".$row['ime']."</td></tr>";
+	}
+}else{
+	header("Location:Ekipe.php");
 }
 ?>
 

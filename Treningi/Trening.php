@@ -7,42 +7,47 @@
   $id = $_SESSION['id'];
   $idTreninga = $_GET['id'];
   $sql = "SELECT * FROM treningi WHERE `ID` = '$idTreninga'";
+
   $get=mysqli_query($db,$sql);
   $row = mysqli_fetch_assoc($get);
-  $table = "";
-  $idEkipe = $row['ekipaID'];
-  $sqlIme = "SELECT `imeEkipe` FROM ekipe WHERE `ID` = '$idEkipe'";
-  $getIme = mysqli_query($db,$sqlIme);
-  $imeEkipe = mysqli_fetch_row($getIme)[0];
-  $sqlPrisotni = "SELECT * FROM prisotnost WHERE `treningID` = '$idTreninga'";
-  $getPrisotni = mysqli_query($db,$sqlPrisotni);
-  $stvseh = mysqli_num_rows($getPrisotni);
-  $sqlNeprisotni = "SELECT * FROM prisotnost WHERE `prisotnost` != 1 AND `treningID` = '$idTreninga'";
-  $getNo = mysqli_query($db,$sqlNeprisotni);
-  $prisotni = $stvseh - mysqli_num_rows($getNo);
-  $procent = ($prisotni*100)/$stvseh;
+  if($row['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1){
+    $table = "";
+    $idEkipe = $row['ekipaID'];
+    $sqlIme = "SELECT `imeEkipe` FROM ekipe WHERE `ID` = '$idEkipe'";
+    $getIme = mysqli_query($db,$sqlIme);
+    $imeEkipe = mysqli_fetch_row($getIme)[0];
+    $sqlPrisotni = "SELECT * FROM prisotnost WHERE `treningID` = '$idTreninga'";
+    $getPrisotni = mysqli_query($db,$sqlPrisotni);
+    $stvseh = mysqli_num_rows($getPrisotni);
+    $sqlNeprisotni = "SELECT * FROM prisotnost WHERE `prisotnost` != 1 AND `treningID` = '$idTreninga'";
+    $getNo = mysqli_query($db,$sqlNeprisotni);
+    $prisotni = $stvseh - mysqli_num_rows($getNo);
+    $procent = ($prisotni*100)/$stvseh;
 
-  $uDel = $row['uvod'];
-  $zDel = $row['zakljucek'];
-  $gDel = $row['glavni'];
-  if(!empty($row['priponka']))$priponka = $row['priponka'];
+    $uDel = $row['uvod'];
+    $zDel = $row['zakljucek'];
+    $gDel = $row['glavni'];
+    if(!empty($row['priponka']))$priponka = $row['priponka'];
 
-  while($rowD = mysqli_fetch_assoc($getPrisotni)){
-    $idIgralca = $rowD['igralecID'];
-    $sqlImeI = "SELECT * FROM igralci WHERE `ID` = '$idIgralca'";
-    $getImeI = mysqli_query($db,$sqlImeI);
-    $imepriimek = mysqli_fetch_assoc($getImeI);
-    $imepriimekText = $imepriimek['ime']. " ".$imepriimek["priimek"];
-    if($rowD['prisotnost'] == 1){
-      $prisotnost = "✔️";
+    while($rowD = mysqli_fetch_assoc($getPrisotni)){
+      $idIgralca = $rowD['igralecID'];
+      $sqlImeI = "SELECT * FROM igralci WHERE `ID` = '$idIgralca'";
+      $getImeI = mysqli_query($db,$sqlImeI);
+      $imepriimek = mysqli_fetch_assoc($getImeI);
+      $imepriimekText = $imepriimek['ime']. " ".$imepriimek["priimek"];
+      if($rowD['prisotnost'] == 1){
+        $prisotnost = "✔️";
+      }
+      else if($rowD['prisotnost'] == 0){
+        $prisotnost = "❌";
+      }
+      else if($rowD['prisotnost'] == 2){
+        $prisotnost = "❌";
+      }
+      $table .= "<tr><td><a href=../Igralec.php?igralec=".$idIgralca.">".$imepriimekText."</a></td><td>".$prisotnost."</td></tr>";
     }
-    else if($rowD['prisotnost'] == 0){
-      $prisotnost = "❌";
-    }
-    else if($rowD['prisotnost'] == 2){
-      $prisotnost = "❌";
-    }
-    $table .= "<tr><td><a href=../Igralec.php?igralec=".$idIgralca.">".$imepriimekText."</a></td><td>".$prisotnost."</td></tr>";
+  }else{
+    header("Location:Vsi_treningi.php");
   }
  ?>
 

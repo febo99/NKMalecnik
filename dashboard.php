@@ -131,6 +131,9 @@ if(!isset($_SESSION['id']) && empty($_SESSION['id'])) {
 	  <h1><?php echo $_SESSION['name']. " " . $_SESSION['last_name']; ?></h1> <!-- IME iz php session-->
         <h2 class="text-light-op"><?php echo $_SESSION['vloga']; ?></h2>
       </div>
+      <div class="col-2 colGlava divNovGumb">
+			<button type="button"  class="btn btn-primary btn-md btn-block gumbNov" onclick="location.href='login/odjava.php'">Odjavi se</button>
+	</div>
     </div>
     <div class="row kavarna"><!--KAVARNA-->
       <div class="col colKavarna">

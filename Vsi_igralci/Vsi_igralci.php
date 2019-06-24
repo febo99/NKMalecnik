@@ -5,13 +5,19 @@ session_start();
 $sql = "SELECT * FROM igralci";
 $get=mysqli_query($db,$sql);
 $table = "";
+$vloga = $_SESSION['vloga'];
 while($row = mysqli_fetch_assoc($get)){
   $idEkipe = $row['ekipaID'];
   $sqlIme = "SELECT `imeEkipe` FROM ekipe WHERE `ID` = '$idEkipe'";
   $getIme = mysqli_query($db,$sqlIme);
   $imeEkipe = mysqli_fetch_row($getIme);
-  $table .= "<tr><td>".$row['ime']." ".$row['priimek']."</td><td>".date("d.m.Y",strtotime($row['datumRojstva']))."</td>"."<td>".$row['emailIgralec']."</"."<td>"."<td>".$row['telefonIgralec']."</td>"."<td>".$imeEkipe[0]."</td><td>".$row['opomba']."</td>"."</tr>";
-}
+  if($vloga == 1 || $row['ustvaril'] == $_SESSION['id']){
+    $table .= "<tr><td><a href=../Igralec.php?igralec=".$row['ID'].">".$row['ime']." ".$row['priimek']."</a></td><td>".date("d.m.Y",strtotime($row['datumRojstva']))."</td>"."<td>".$row['emailIgralec']."</"."<td>"."<td>".$row['telefonIgralec']."</td>"."<td>".$imeEkipe[0]."</td><td>".$row['opomba']."</td>"."</tr>";
+  }else{
+    $table .= "<tr><td>".$row['ime']." ".$row['priimek']."</td><td>".date("d.m.Y",strtotime($row['datumRojstva']))."</td>"."<td>".$row['emailIgralec']."</"."<td>"."<td>".$row['telefonIgralec']."</td>"."<td>".$imeEkipe[0]."</td><td>".$row['opomba']."</td>"."</tr>";
+  }
+  }
+
  ?>
 
 <html>

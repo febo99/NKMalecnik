@@ -23,13 +23,24 @@ while ($row = mysqli_fetch_assoc($get)) {
     $prisotni = $stvseh - mysqli_num_rows($getNo);
     $procent = round(($prisotni * 100) / $stvseh, 2);
     if ($row['prisotnost'] == 0 && $row['ustvaril'] == $id) {
-        $table .= "<tr><td>" . $imeEkipe[0] ." - " .$row['nasprotnik']. "</td>" . "<td>" . date("d.m.Y", strtotime($row['datum'])) . " " . substr($row['zacetek'], strpos($row['zacetek'], "T") + 1) . "</td>" . "<td>" . $row['imeLokacije'] . "</td>" . "<td>" . $row['golDomaci'] .":". $row['golGosti']. "</td><td><button type=button class='btn btn-primary priso'  data-toggle=modal  value=" . $idTekma . " data-target=#vnosPrisotnosti>Vnesi prisotne</td></tr>";
+        if($_SESSION['vloga'] == 1 || $row['trenerID'] == $id){
+            $table .= "<tr><td><a href=Tekma.php?id=".$idTekma.">". $imeEkipe[0] ." - " .$row['nasprotnik']. "</a><td>" . date("d.m.Y", strtotime($row['datum'])) . " " . substr($row['zacetek'], strpos($row['zacetek'], "T") + 1) . "</td>" . "<td>" . $row['imeLokacije'] . "</td>" . "<td>" . $row['golDomaci'] .":". $row['golGosti']. "</td><td><button type=button class='btn btn-primary priso'  data-toggle=modal  value=" . $idTekma . " data-target=#vnosPrisotnosti>Vnesi prisotne</td></tr>";
+        }
+        else $table .= "<tr><td>" . $imeEkipe[0] ." - " .$row['nasprotnik']. "</td>" . "<td>" . date("d.m.Y", strtotime($row['datum'])) . " " . substr($row['zacetek'], strpos($row['zacetek'], "T") + 1) . "</td>" . "<td>" . $row['imeLokacije'] . "</td>" . "<td>" . $row['golDomaci'] .":". $row['golGosti']. "</td><td><button type=button class='btn btn-primary priso'  data-toggle=modal  value=" . $idTekma . " data-target=#vnosPrisotnosti>Vnesi prisotne</td></tr>";
     } 
     else if($row['prisotnost'] == 0 && $row['ustvaril'] != $id){
-        $table .= "<tr><td>" . $imeEkipe[0] ." - " .$row['nasprotnik']. "</td>" . "<td>" . date("d.m.Y", strtotime($row['datum'])) . " " . substr($row['zacetek'], strpos($row['zacetek'], "T") + 1) . "</td>" . "<td>" . $row['imeLokacije'] . "</td>" . "<td>" . $row['golDomaci'] .":". $row['golGosti']. "</td><td>Prisotnost še ni vnešena!</td></tr>";
+        if($_SESSION['vloga'] == 1 || $row['trenerID'] == $id){
+            $table .= "<tr><td><a href=Tekma.php?id=".$idTekma.">". $imeEkipe[0] ." - " .$row['nasprotnik']. "</a><td>" . date("d.m.Y", strtotime($row['datum'])) . " " . substr($row['zacetek'], strpos($row['zacetek'], "T") + 1) . "</td>" . "<td>" . $row['imeLokacije'] . "</td>" . "<td>" . $row['golDomaci'] .":". $row['golGosti']. "</td><td>Prisotnost še ni vnešena!</td></tr>";
+        }
+        else $table .= "<tr><td>" . $imeEkipe[0] ." - " .$row['nasprotnik']. "</td>" . "<td>" . date("d.m.Y", strtotime($row['datum'])) . " " . substr($row['zacetek'], strpos($row['zacetek'], "T") + 1) . "</td>" . "<td>" . $row['imeLokacije'] . "</td>" . "<td>" . $row['golDomaci'] .":". $row['golGosti']. "</td><td>Prisotnost še ni vnešena!</td></tr>";
     }
     else {
-        $table .= "<tr><td>" . $imeEkipe[0] ." - " .$row['nasprotnik']. "</td>" . "<td>" . date("d.m.Y", strtotime($row['datum'])) . " " . substr($row['zacetek'], strpos($row['zacetek'], "T") + 1) . "</td>" . "<td>" . $row['imeLokacije'] . "</td>" . "<td>" . $row['golDomaci'] .":". $row['golGosti']. "</td><td>" . $prisotni . " / " . $stvseh . " (" . $procent . "%)" . "</td></tr>";
+        if($_SESSION['vloga'] == 1 || $row['trenerID'] == $id){
+            $table .= "<tr><td><a href=Tekma.php?id=".$idTekma.">". $imeEkipe[0] ." - " .$row['nasprotnik']. "</a></td>" . "<td>" . date("d.m.Y", strtotime($row['datum'])) . " " . substr($row['zacetek'], strpos($row['zacetek'], "T") + 1) . "</td>" . "<td>" . $row['imeLokacije'] . "</td>" . "<td>" . $row['golDomaci'] .":". $row['golGosti']. "</td><td>" . $prisotni . " / " . $stvseh . " (" . $procent . "%)" . "</td></tr>";
+        }else{
+            $table .= "<tr><td>" . $imeEkipe[0] ." - " .$row['nasprotnik']. "</td>" . "<td>" . date("d.m.Y", strtotime($row['datum'])) . " " . substr($row['zacetek'], strpos($row['zacetek'], "T") + 1) . "</td>" . "<td>" . $row['imeLokacije'] . "</td>" . "<td>" . $row['golDomaci'] .":". $row['golGosti']. "</td><td>" . $prisotni . " / " . $stvseh . " (" . $procent . "%)" . "</td></tr>";
+        }
+        
     }
     $igralciSQL = "SELECT * FROM igralci WHERE `ekipaID` = '$idEkipe'";
     $getIgralci = mysqli_query($db, $igralciSQL);
