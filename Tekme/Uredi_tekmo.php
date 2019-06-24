@@ -28,7 +28,7 @@ include "../login/config.php";
         $lokacijaIme = mysqli_real_escape_string($db,$_POST['lokacija']);
     }
      $sql = "UPDATE tekme SET `lokacija` = '$lokacijaT',`tip` = '$tip',`ekipaID` = '$ekipa',`nasprotnik` = '$nasprotnik',`datum` = '$datumTekme',`uraZbora` = '$uraZbora',
-	 `uraTekme` = '$uraTekme',`lokacijaID` = '$lokacijaID',`imeLokacije` = '$lokacijaIme',`golDomaci` = '$nasprotnik',`golGosti` = '$nasprotnik',`zacetek` = '$zacetek',`konec` = '$konec' WHERE `ID` = '$idTekme'";
+	 `uraTekme` = '$uraTekme',`lokacijaID` = '$lokacijaID',`imeLokacije` = '$lokacijaIme',`golDomaci` = '$golDomaci',`golGosti` = '$golGosti',`zacetek` = '$zacetek',`konec` = '$konec' WHERE `ID` = '$idTekme'";
     mysqli_query($db,$sql);
      header("location:Tekma.php?id=".$idTekme);    
    }

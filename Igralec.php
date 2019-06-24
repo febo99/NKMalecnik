@@ -24,6 +24,19 @@ while($row = mysqli_fetch_assoc($query)){
   else $table .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>✔️</td></tr>";
   
 }
+
+$sqlT = "SELECT * FROM tekme INNER JOIN prisotnostTekme on tekme.ID = prisotnostTekme.tekmaID WHERE prisotnostTekme.igralecID  = '$idIgralec' ORDER BY tekme.datum DESC";
+$queryT = mysqli_query($db,$sqlT);
+$tableT = "";
+while($row = mysqli_fetch_assoc($queryT)){
+  $ekipaID = $row['ekipaID'];
+  $sqlEkipa = "SELECT imeEkipe FROM ekipe WHERE `ID` = '$ekipaID'";
+  $ekipaQ = mysqli_query($db,$sqlEkipa);
+  $ekipa = mysqli_fetch_array($ekipaQ);
+  if($row['prisotnost'] != 1)$tableT .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>❌</td></tr>";
+  else $tableT .= "<tr><td><a href=Tekme/Tekma.php?id=".$row['tekmaID'].">".$ekipa[0]."-".$row['nasprotnik']."</a></td><td>".$row['datum']."</td><td><b>".$row['golDomaci']."</b>:".$row['golGosti']."</td><td>✔️</td></tr>";
+  
+}
 ?>
 <html lang="sl">
 
@@ -118,13 +131,13 @@ while($row = mysqli_fetch_assoc($query)){
           <a href="#tekmeSub" class="nav-link dropdown-toggle" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">Tekme</a>
           <ul class="collapse list-unstyled" id="tekmeSub">
             <li>
-              <a class="nav-link sub-link" href="../Tekme/Nova_tekma.php">Nova tekma</a>
+              <a class="nav-link sub-link" href="Tekme/Nova_tekma.php">Nova tekma</a>
             </li>
             <li>
-              <a class="nav-link sub-link" href="../Tekme/Moje_tekme.php">Moje tekme</a>
+              <a class="nav-link sub-link" href="Tekme/Moje_tekme.php">Moje tekme</a>
             </li>
             <li>
-              <a class="nav-link sub-link" href="../Tekme/Vse_tekme.php">Vse tekme</a>
+              <a class="nav-link sub-link" href="Tekme/Vse_tekme.php">Vse tekme</a>
             </li>
           </ul>
         </li>
@@ -238,7 +251,15 @@ while($row = mysqli_fetch_assoc($query)){
         </div>
         <div class="row elementiIgralec" id=tekme>
           <div class=col-6>
-            c
+          <table id="tabela" class="table table-bordered table-striped">
+            <tr>
+              <th>Tekma</th>
+              <th>Datum</th>
+              <th>Rezultat</th>
+              <th>Prisotnost</th>
+            </tr>
+            <?php echo $tableT;?>
+          </table>
           </div>
         </div>
       </div>
