@@ -59,9 +59,11 @@ while($row = mysqli_fetch_assoc($get)){
                 <?php echo $lokacije;?>
             </div>
         </div>
-          <div id='calendar'></div>
+          
         </div>
+        <div id='calendar'></div>
       </div>
+
     </div>
 	</div>
 

@@ -5,14 +5,14 @@ document.addEventListener('DOMContentLoaded', function() {
     locale: 'sl',
     defaultView: 'dayGridMonth',
     displayEventTime:true,
-    columnHeaderFormat:{ weekday: 'long' },
+    columnHeaderFormat:{ weekday: 'short' },
     eventTimeFormat:{
       hour: 'numeric',
       minute: '2-digit',
       meridiem: false
     },
     allDaySlot: false,
-    dayNames: ['Nedelja','Ponedeljek','Torek','Sreda','Cetrtek','Petek','Sobota'],
+    dayNames: ['Ned','Pon','Tor','Sre','Čet','Pet','Sob'],
     monthNames: ['Januar', 'Februar', 'Marec', 'April', 'Maj', 'Junij', 'Julij',
   'Avgust', 'September', 'Oktober', 'November', 'December'],
     buttonText:{
