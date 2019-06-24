@@ -104,6 +104,8 @@
             <tr><td>Datum in čas</td><td><?php echo date("d.m.Y", strtotime($row['datum'])) . " ". $row['uraTekme'];?></td></tr>
             <tr><td>Zbor</td><td><?php echo $row['uraZbora'];?></td></tr>
             <tr><td>Lokacija</td><td><?php echo $row['imeLokacije'];?></td></tr>
+            <tr><td>Rezultat</td><td><?php echo "<b>".$row['golDomaci'] . "</b>:" . $row['golGosti'];?></td></tr>
+            <tr><td><?php echo "<a href=Urejanje_tekme.php?id=".$idTekme.">Uredi</a>"?></td><td></td></tr>
             </tbody>
           </table>
       </div>

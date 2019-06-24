@@ -237,7 +237,6 @@ function getJson(){
   });
   });
   function vnosLokacije(el){
-    console.log(el.id);
     if(el.id == "inlineRadio1"){
       document.getElementById('gLokacija').style.display = "none";
       document.getElementById('gLokacija').value = ""; 
@@ -247,5 +246,18 @@ function getJson(){
       document.getElementById('dLokacija').style.display = "none";
       document.getElementById('dLokacija').value = "";
       document.getElementById('gLokacija').style.display = "initial";
+    }
+  }
+  function displayLokacija(){
+    console.log("t");
+    if(document.getElementById('inlineRadio2').checked){
+      console.log("test");
+      document.getElementById('dLokacija').style.display = "none";
+      document.getElementById('dLokacija').value = "";
+      document.getElementById('gLokacija').style.display = "initial";
+    }else{
+      document.getElementById('gLokacija').style.display = "none";
+      document.getElementById('gLokacija').value = ""; 
+      document.getElementById('dLokacija').style.display = "initial";
     }
   }
