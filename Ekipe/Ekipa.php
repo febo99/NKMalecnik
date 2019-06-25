@@ -14,6 +14,9 @@ $trener = "";
 $sqlEkipa = "SELECT * FROM ekipe WHERE `ID` = '$idEkipe'";
 $query = mysqli_query($db, $sqlEkipa);
 $ekipa = mysqli_fetch_assoc($query);
+if(empty($ekipa)){
+	header("Location:Ekipe.php");
+}
 if($ekipa['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1){
 	while ($row = mysqli_fetch_assoc($get)) {
 		if ($row['ID'] == $ekipa['trenerID']) {
