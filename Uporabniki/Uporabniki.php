@@ -7,7 +7,8 @@ $sql = "SELECT * FROM `uporabniki`";
 $get=mysqli_query($db,$sql);
 $table = "";
 while($row = mysqli_fetch_assoc($get)){
-  $table .= "<tr><td>".$row['email']."</td><td>".$row['ime']."</td><td>".$row['priimek']."</td><td>".$row['vloga']."</td></tr>";
+  if($_SESSION['vloga'] == 1 || $_SESSION['vloga'] == 2) $table .= "<tr><td><a href=Urejanje_uporabnika.php?id=".$row['ID'].">".$row['email']."</a></td><td>".$row['ime']."</td><td>".$row['priimek']."</td><td>".$row['vloga']."</td></tr>";
+  else $table .= "<tr><td>".$row['email']."</td><td>".$row['ime']."</td><td>".$row['priimek']."</td><td>".$row['vloga']."</td></tr>";
 }
 ?>
 
