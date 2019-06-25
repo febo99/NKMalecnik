@@ -25,7 +25,10 @@ while ($row = mysqli_fetch_assoc($get)) {
     if ($row['prisotnost'] == 0) {
         $table .= "<tr><td>" . $imeEkipe[0] ." - " .$row['nasprotnik']. "</td>" . "<td>" . date("d.m.Y", strtotime($row['datum'])) . " " . substr($row['zacetek'], strpos($row['zacetek'], "T") + 1) . "</td>" . "<td>" . $row['imeLokacije'] . "</td>" . "<td>" . $row['golDomaci'] .":". $row['golGosti']. "</td><td><button type=button class='btn btn-primary priso'  data-toggle=modal  value=" . $idTekma . " data-target=#vnosPrisotnosti>Vnesi prisotne</td></tr>";
     } else {
-        $table .= "<tr><td><a href=Tekma.php?id=". $row['ID']. ">" .$imeEkipe[0] ." - " .$row['nasprotnik']. "</a></td>" . "<td>" . date("d.m.Y", strtotime($row['datum'])) . " " . substr($row['zacetek'], strpos($row['zacetek'], "T") + 1) . "</td>" . "<td>" . $row['imeLokacije'] . "</td>" . "<td>" . $row['golDomaci'] .":". $row['golGosti']. "</td><td>" . $prisotni . " / " . $stvseh . " (" . $procent . "%)" . "</td></tr>";
+        $table .= "<tr><td><a href=Tekma.php?id=". $row['ID']. ">" .$imeEkipe[0] ." - " .$row['nasprotnik']. "</a></td>" .
+         "<td>" . date("d.m.Y", strtotime($row['datum'])) . " " . substr($row['zacetek'], strpos($row['zacetek'], "T") + 1) 
+         . "</td>" . "<td>" . $row['imeLokacije'] . "</td>" . "<td>" . $row['golDomaci'] .":". $row['golGosti']. "</td><td>" 
+         . $prisotni . " / " . $stvseh . " (" . $procent . "%)" . "</td></tr>";
     }
     $igralciSQL = "SELECT * FROM igralci WHERE `ekipaID` = '$idEkipe'";
     $getIgralci = mysqli_query($db, $igralciSQL);
