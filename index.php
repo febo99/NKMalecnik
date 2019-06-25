@@ -24,7 +24,7 @@ if(isset($_SESSION['id']) && !empty($_SESSION['id'])) {
 			<form method="post" action="login/login.php" >
 				<div class="form-group">
 					<label for="inputUporabnik">Uporabniško ime</label>
-					<input type="text" class="form-control" name="inputUporabnik" id="inputUporabnik" placeholder="Vnesi uporabniško ime">
+					<input type="text" class="form-control" name="inputUporabnik" id="inputUporabnik" placeholder="Vnesi uporabniško ime" autofocus>
 				</div>
 				<div class="form-group">
 					<label for="inputGeslo">Geslo</label>
