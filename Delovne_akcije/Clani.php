@@ -7,8 +7,8 @@ $get=mysqli_query($db,$sql);
 $table = "";
 $vloga = $_SESSION['vloga'];
 while($row = mysqli_fetch_assoc($get)){
-  if($vloga == 1 || $vloga == 2 || $vloga == 3 || $row['ustvaril'] == $_SESSION['id'] || $imeEkipe[2] == $_SESSION['id'] || $imeEkipe[3] == $_SESSION['id'] || $imeEkipe[4] == $_SESSION['id']){
-    $table .= "<tr><td><a href=../Igralec.php?igralec=".$row['ID'].">".$row['ime']." ".$row['priimek']."</td><td>".$row['email']."</td><td>".$row['telefon']."</td><td>1</td></tr>";
+  if($vloga == 1 || $vloga == 2){
+    $table .= "<tr><td><a href=Clan.php?id=".$row['ID'].">".$row['ime']." ".$row['priimek']."</td><td>".$row['email']."</td><td>".$row['telefon']."</td><td>1</td></tr>";
   }else{
     $table .= "<tr><td>".$row['ime']." ".$row['priimek']."</td><td>".date("d.m.Y",strtotime($row['datumRojstva']))."</td>"."<td>".$row['emailIgralec']."</"."<td>"."<td>".$row['telefonIgralec']."</td>"."<td>".$imeEkipe[1]."</td><td>".$row['opomba']."</td>"."</tr>";
   }
