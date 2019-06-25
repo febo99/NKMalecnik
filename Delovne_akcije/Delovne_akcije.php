@@ -4,6 +4,45 @@ session_start();
 if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
     header("location: ../index.php");
 }
+$sql = "SELECT * FROM delovneAkcije";
+$query = mysqli_query($db,$sql);
+$table = "";
+while($row = mysqli_fetch_assoc($query)){
+    $idAkcija = $row['ID'];
+    $sqlPrisotni = "SELECT * FROM prisotnostAkcije WHERE `akcijaID` = '$idAkcija'";
+    $getPrisotni = mysqli_query($db, $sqlPrisotni);
+    $stvseh = mysqli_num_rows($getPrisotni);
+    $sqlNeprisotni = "SELECT * FROM prisotnostAkcije WHERE `prisotnost` != 1 AND `akcijaID` = '$idAkcija'";
+    $getNo = mysqli_query($db, $sqlNeprisotni);
+    $prisotni = $stvseh - mysqli_num_rows($getNo);
+    $procent = round(($prisotni * 100) / $stvseh, 2);
+    if($row['prisotnost'] == 0){
+        $table .= "<tr><td>".$row['naslov']."</td><td>".$row['datum'].", ".$row['zacetek']."-".$row['konec']."<td>".htmlspecialchars($row['porocilo'])."<td>".$row['ure']."</td></td><td><button type=button class='btn btn-primary priso'  data-toggle=modal  value=" . $row['ID'] . " data-target=#vnosPrisotnosti>Vnesi prisotne</td></tr>";
+    }else $table .= "<tr><td><a href=Akcija.php?id=".$row['ID'].">".$row['naslov']."</a></td><td>".$row['datum'].", ".$row['zacetek']."-".$row['konec']."<td>".htmlspecialchars($row['porocilo'])."<td>".$row['ure']."</td></td><td>". $prisotni . " / " . $stvseh . " (" . $procent . "%)" ."</td></tr>";
+
+    $igralciSQL = "SELECT * FROM clani";
+    $getIgralci = mysqli_query($db, $igralciSQL);
+    $beseda .= "<span id='" . $row['ID'] . "' style='display:none;'><form action='prisotnost.php' method='post' ><input type='hidden' name='treningID' value=" . $row['ID'] . ">";
+    $forma = '<div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="customRadioInline1" name="prisotnost" class="custom-control-input" value=1>
+              <label class="custom-control-label" for="customRadioInline1">Prisoten</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="customRadioInline2" name="prisotnost" class="custom-control-input" value=2>
+              <label class="custom-control-label" for="customRadioInline2">Manjkal</label>
+            </div>';
+    while ($row = mysqli_fetch_assoc($getIgralci)) {
+        $dodatno = "prisotnost" . $row['ID'] . $idTreninga;
+        $dodatnoide = "customRadioInline1" . $row['ID'] . $idTreninga;
+        $dodatnoidd = "customRadioInline2" . $row['ID'] . $idTreninga;
+        $forma = str_replace("prisotnost", $dodatno, $forma);
+        $forma = str_replace("customRadioInline1", $dodatnoide, $forma);
+        $forma = str_replace("customRadioInline2", $dodatnoidd, $forma);
+        $beseda .= "<h5>" . $row['ime'] . " " . $row['priimek'] . "</h5>" . $forma . "<br>";
+    }
+    $beseda .= '<button type="submit"  class="btn btn-primary zapri">Shrani</button>
+    <button type="reset" class="btn btn-secondary zapri" data-dismiss="modal">Prekliči</button></form></span>';
+            }
 ?>
 <html>
 <head>
