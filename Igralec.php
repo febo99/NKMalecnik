@@ -10,6 +10,9 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
   $sqlIgralec = "SELECT * FROM igralci  INNER JOIN ekipe ON igralci.ekipaID = ekipe.ID WHERE igralci.ID = '$idIgralec'";
   $queryIgralec = mysqli_query($db, $sqlIgralec);
   $igralec = mysqli_fetch_array($queryIgralec);
+  if(empty($igralec)){
+    header("Location:Vsi_igralci/Vsi_igralci.php");
+  }
   $ime = $igralec[1] . " " . $igralec[2];
   if($igralec['ustvaril'] ==  $id ||  $_SESSION['vloga'] == 1){
     $sql = "SELECT * FROM treningi INNER JOIN prisotnost ON treningi.ID = prisotnost.treningID WHERE prisotnost.igralecID = '$idIgralec' ORDER BY treningi.datum DESC";
@@ -68,7 +71,7 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
             steviloVseh = data[i]['treningi'].length;
             if(steviloVseh > 10)steviloVseh = 10;
             for (var j = 0; j < steviloVseh; j++) {
-              if (data[i]['treningi'][j]['prisotni'].includes("Admin1 Admin1")) {
+              if (data[i]['treningi'][j]['prisotni'].includes($("#ime").text())) {
                 prisotnost++;
               }
             }
@@ -187,7 +190,7 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
     <div class="row glava">
       <!--GLAVA-->
       <div class="col-9 colGlava">
-        <h3 style="margin-top:2vh;"><?php echo $ime; ?></h3>
+        <h3 id = "ime" style="margin-top:2vh;"><?php echo $ime; ?></h3>
         <h5><?php echo $igralec[23]; ?>
       </div>
     </div>
