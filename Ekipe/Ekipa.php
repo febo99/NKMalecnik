@@ -17,7 +17,7 @@ $ekipa = mysqli_fetch_assoc($query);
 if(empty($ekipa)){
 	header("Location:Ekipe.php");
 }
-if($ekipa['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1){
+if($ekipa['trenerID'] == $_SESSION['id'] || $ekipa['pomocnik1ID'] == $_SESSION['id'] || $ekipa['pomocnik2ID'] == $_SESSION['id'] || $_SESSION['vloga'] == 1){
 	while ($row = mysqli_fetch_assoc($get)) {
 		if ($row['ID'] == $ekipa['trenerID']) {
 			$trener = $row['ime'] . " " . $row['priimek'];
