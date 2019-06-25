@@ -154,13 +154,13 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
                     <a href="#akcijaSub" class="nav-link dropdown-toggle" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">Delovne akcije</a>
                       <ul class="collapse list-unstyled" id="akcijaSub">
                         <li>
-                            <a class="nav-link sub-link" href="/Delovne_akcije/Clani.php">Člani</a>
+                            <a class="nav-link sub-link" href="Delovne_akcije/Clani.php">Člani</a>
                         </li>
                         <li>
-                            <a class="nav-link sub-link" href="/Delovne_akcije/Nova_akcija.php">Nova akcija</a>
+                            <a class="nav-link sub-link" href="Delovne_akcije/Nova_akcija.php">Nova akcija</a>
                         </li>
                         <li>
-                            <a class="nav-link sub-link" href="/Delovne_akcije/Delovne_akcije.php">Delovne akcije</a>
+                            <a class="nav-link sub-link" href="Delovne_akcije/Delovne_akcije.php">Delovne akcije</a>
                         </li>
                   </ul>
               </li>
