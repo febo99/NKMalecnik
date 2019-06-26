@@ -1,12 +1,12 @@
 #container{
-  background-color:rgb(60, 68, 77);
+  background-color:white;
   height: 100%;
 }
 body{
-  background-color:rgb(60, 68, 77);
+  background-color:white;
 }
 html{
-  background-color:rgb(60, 68, 77);
+  background-color:white;
 }
 .sub-link{
   padding: 5px;
@@ -21,13 +21,16 @@ html{
   margin-left: 0.01%;
 }
 .kavarna{
-  background-color: rgb(60, 68, 77);
+  background-color: white;
   width:100%
 }
-
+a{
+  color: #00368e;
+  font-weight:bolder;
+}
 .glava h1{
   padding: 1vh;
-  font-size: 7vh;
+  font-size: 5vh;
 }
 .glava h2{
   padding-left: 1vh;
