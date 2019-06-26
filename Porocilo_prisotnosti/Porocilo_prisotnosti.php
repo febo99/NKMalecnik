@@ -47,7 +47,7 @@ while($row = mysqli_fetch_assoc($get)){
     </div>
     <div class="row kavarna"><!--KAVARNA-->
       <div class="col colKavarna">
-        <div class="col-2">
+        <div class="col">
             <select id="ekipa" required class="form-control" name="ekipa" placeholder="Izberi ekipo">
               <option value="" disabled selected>Izberi ekipo!</option>
               <?php echo $option; ?>

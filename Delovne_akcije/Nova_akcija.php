@@ -1,7 +1,12 @@
 <?php
 include "../login/config.php";
 session_start();
-
+if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
+  header("location: ../index.php");
+}
+if($_SESSION['vloga'] != 1 && $_SESSION['vloga'] != 2 ){
+  header("location: Delovne_akcije.php");
+}
 ?>
 
 <html style="background-color: rgb(60, 68, 77);" lang="sl">

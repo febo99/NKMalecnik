@@ -6,11 +6,14 @@ session_start();
        $clanID = (int)substr($param_name,10,1);
        $prisotnost = (int)$param_val;
        $akcijaID = $_POST['treningID'];
+       $redir  = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM delovneAkcije WHERE `ID` = '$akcijaID'"));
+       
        $sql = "UPDATE prisotnostAkcije SET `prisotnost` = '$prisotnost' WHERE `clanID` = '$clanID' AND `akcijaID` = '$akcijaID'";
-       $sqltrening = "UPDATE delovneAkcije SET `prisotnost` = 1 WHERE `ID` = '$akcijaID'";
+       $sqltrening = "UPDATE delovneAkcije SET `prisotnostT` = 1 WHERE `ID` = '$akcijaID'";
        mysqli_query($db,$sql);
        mysqli_query($db,$sqltrening);
 
   }
-  header("location:Delovne_akcije.php");
+  if($redir['prisotnostT'] == 0) header("location:Delovne_akcije.php");
+  else header("location:Akcija.php?id=".$akcijaID);
 }

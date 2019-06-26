@@ -4,6 +4,7 @@ session_start();
 if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
     header("location: ../index.php");
 }
+
 $sql = "SELECT * FROM delovneAkcije";
 $query = mysqli_query($db,$sql);
 $table = "";
@@ -16,9 +17,9 @@ while($row = mysqli_fetch_assoc($query)){
     $getNo = mysqli_query($db, $sqlNeprisotni);
     $prisotni = $stvseh - mysqli_num_rows($getNo);
     $procent = round(($prisotni * 100) / $stvseh, 2);
-    if($row['prisotnost'] == 0){
-        $table .= "<tr><td>".$row['naslov']."</td><td>".$row['datum'].", ".$row['zacetek']."-".$row['konec']."<td>".htmlspecialchars($row['porocilo'])."<td>".$row['ure']."</td></td><td><button type=button class='btn btn-primary priso'  data-toggle=modal  value=" . $row['ID'] . " data-target=#vnosPrisotnosti>Vnesi prisotne</td></tr>";
-    }else $table .= "<tr><td><a href=Akcija.php?id=".$row['ID'].">".$row['naslov']."</a></td><td>".$row['datum'].", ".$row['zacetek']."-".$row['konec']."<td>".htmlspecialchars($row['porocilo'])."<td>".$row['ure']."</td></td><td>". $prisotni . " / " . $stvseh . " (" . $procent . "%)" ."</td></tr>";
+    if($row['prisotnostT'] == 0){
+        $table .= "<tr><td>".$row['naslov']."</td><td>".$row['datum'].", ".$row['zacetek']."-".$row['konec']."<td>".$row['ure']."</td></td><td><button type=button class='btn btn-primary priso'  data-toggle=modal  value=" . $row['ID'] . " data-target=#vnosPrisotnosti>Vnesi prisotne</td></tr>";
+    }else $table .= "<tr><td><a href=Akcija.php?id=".$row['ID'].">".$row['naslov']."</a></td><td>".$row['datum'].", ".$row['zacetek']."-".$row['konec']."<td>".$row['ure']."</td></td><td>". $prisotni . " / " . $stvseh . " (" . $procent . "%)" ."</td></tr>";
 
     $igralciSQL = "SELECT * FROM clani";
     $getIgralci = mysqli_query($db, $igralciSQL);
@@ -32,9 +33,9 @@ while($row = mysqli_fetch_assoc($query)){
               <label class="custom-control-label" for="customRadioInline2">Manjkal</label>
             </div>';
     while ($row = mysqli_fetch_assoc($getIgralci)) {
-        $dodatno = "prisotnost" . $row['ID'] . $idTreninga;
-        $dodatnoide = "customRadioInline1" . $row['ID'] . $idTreninga;
-        $dodatnoidd = "customRadioInline2" . $row['ID'] . $idTreninga;
+        $dodatno = "prisotnost" . $row['ID'] . $idAkcija;
+        $dodatnoide = "customRadioInline1" . $row['ID'] . $idAkcija;
+        $dodatnoidd = "customRadioInline2" . $row['ID'] . $idAkcija;
         $forma = str_replace("prisotnost", $dodatno, $forma);
         $forma = str_replace("customRadioInline1", $dodatnoide, $forma);
         $forma = str_replace("customRadioInline2", $dodatnoidd, $forma);
@@ -117,7 +118,6 @@ while($row = mysqli_fetch_assoc($query)){
                             <tr>
                                 <th scope="col">Naslov</th>
                                 <th scope="col">Datum</th>
-                                <th scope="col">Poročilo</th>
                                 <th scope="col">Število ur</th>
                                 <th scope="col">Prisotnost</th>
                             </tr>
