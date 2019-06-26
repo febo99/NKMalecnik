@@ -75,7 +75,6 @@ function setDate(){
 $(document).ready(function() {
   $(".priso").click(function () {
     var id = $(this).val();
-    console.log(id);
     $("#"+id).css("display","block");
   });
   $(".zapri").click(function () {
@@ -197,7 +196,6 @@ function getJson(){
              }
              }
           }
-          console.log(training);
           for(var i = 1; i < table.rows.length; i++){
             if(vpis == true){
               x = table.rows[i].insertCell(-1);
@@ -261,3 +259,20 @@ function getJson(){
       document.getElementById('dLokacija').style.display = "initial";
     }
   }
+  function poMesecih(id){
+    var datum = document.getElementById("datumAkcija").value;
+    var ure = 0;
+    const dd = new Date(datum);
+    const mesec = dd.toLocaleString('sl',{month: 'long'});
+    document.getElementById("mesec").innerHTML = mesec + "u";
+    $.getJSON("./prisotnostJSON.php", function(data) {
+      for(var i = 0; i < data.length; i++){
+        if(data[i]['id'] == id && data[i]['datum'].includes(datum)){
+          ure += parseInt(data[i]['ure'],10);
+        }
+      }
+      document.getElementById("steviloUr").innerHTML = ure;
+    });
+    
+  }
+  

@@ -11,21 +11,21 @@
   $clan = mysqli_fetch_assoc(mysqli_query($db,$sql));
   $table = "";
   if($_SESSION['vloga'] == 1){
-    $sql = "SELECT * FROM prisotnostAkcije INNER JOIN clani ON  prisotnostAkcije.clanID = clani.ID  WHERE prisotnostAkcije.clanID = '$idClan'";
+    $sql = "SELECT * FROM prisotnostAkcije INNER JOIN clani ON  prisotnostAkcije.clanID = clani.ID  WHERE prisotnostAkcije.clanID = '$idClan' AND prisotnostAkcije.prisotnost = 1";
     $query = mysqli_query($db,$sql);
     while($row = mysqli_fetch_assoc($query)){
         $idAkcije = $row['akcijaID'];
-        $sqlAkcija = "SELECT * FROM delovneAkcije WHERE `ID` = '$idAkcije'";
+        $sqlAkcija = "SELECT * FROM delovneAkcije WHERE `ID` = '$idAkcije' ";
         $queryAkcija = mysqli_query($db,$sqlAkcija);
         $akcija = mysqli_fetch_assoc($queryAkcija);
         if($row['prisotnost'] == 1){
-          $table .= "<tr><td>".$akcija['naslov']."</td><td>".$akcija['datum'].", ".$akcija['zacetek']."-".$akcija['konec']."<td>".htmlspecialchars($akcija['porocilo'])."<td>".$akcija['ure']."</td></td><td>✔️</td></tr>";
+          $table .= "<tr><td><a href=Akcija.php?id=".$idAkcije.">".$akcija['naslov']."</a></td><td>".$akcija['datum'].", ".$akcija['zacetek']."-".$akcija['konec']."<td>".$akcija['ure']."</<td></td><td>✔️</td></tr>";
         }
           else{
-          $table .= "<tr><td>".$akcija['naslov']."</td><td>".$akcija['datum'].", ".$akcija['zacetek']."-".$akcija['konec']."<td>".htmlspecialchars($akcija['porocilo'])."<td>".$akcija['ure']."</td></td><td>❌</td></tr>";
+          $table .= "<tr><td><a href=Akcija.php?id=".$idAkcije.">".$akcija['naslov']."</a></td><td>".$akcija['datum'].", ".$akcija['zacetek']."-".$akcija['konec']."<td>".$akcija['ure']."</td></td><td>❌</td></tr>";
       }
     }
-
+    $sqlMesec = "SELECT * FROM prisotnostAkcije INNER JOIN clani ON  prisotnostAkcije.clanID = clani.ID  WHERE prisotnostAkcije.clanID = '$idClan' AND prisotnostAkcije.prisotnost = 1";
   }else{
     header("Location:Clani.php");
   }
@@ -63,7 +63,7 @@
     </div>
     <div class="row kavarna"><!--KAVARNA-->
       <div class="col colKavarna">
-        <div class="col-8">
+        <div class="col">
         <div class="table-responsive">
         <h5>Delovne akcije</h5>
         <input type="text" id="iskanje" class="form-control" onkeyup="isciE()" placeholder="Iskanje...">
@@ -72,7 +72,6 @@
             <tr>
                 <th scope="col">Naslov</th>
                 <th scope="col">Datum</th>
-                <th scope="col">Poročilo</th>
                 <th scope="col">Število ur</th>
                 <th scope="col">Prisotnost</th>
             </tr>
@@ -81,9 +80,14 @@
              <?php
             echo $table;
               ?>
+              
             </tbody>
           </table>
+          <h4><a href="Urejanje_clana.php?id=<?php echo $idClan?>">Urejanje člana</a></h4>
       </div>
+      <input id="datumAkcija" name="datum" value="<?=date('Y-m')?>" type="month">
+      <button type="submit" onclick="poMesecih(<?php echo $idClan?>)">🔎</button>
+      <h3>Stevilo ur v mesecu <span id="mesec"></span>: <span id="steviloUr"></span></h3>
     </div>
 
     </div>

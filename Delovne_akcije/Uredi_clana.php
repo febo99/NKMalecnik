@@ -9,6 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $id = mysqli_real_escape_string($db, $_POST['id']);
     $sql = "UPDATE clani SET `ime` = '$ime',`priimek` = '$priimek',`email` = '$email',`telefon` = '$telefon' WHERE `ID` = '$id'";
     $d = mysqli_query($db,$sql);
-    header("location:Clani.php");
+    header("location:Clan.php?id=".$id);
 }
 ?>

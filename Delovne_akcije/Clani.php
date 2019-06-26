@@ -2,15 +2,25 @@
 include "../login/config.php";
 include('login/session.php');
 session_start();
+if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
+  header("location: ../index.php");
+}
 $sql = "SELECT * FROM clani";
 $get=mysqli_query($db,$sql);
 $table = "";
 $vloga = $_SESSION['vloga'];
 while($row = mysqli_fetch_assoc($get)){
+  $idClan = $row['ID'];
+  $sqlA = "SELECT * FROM prisotnostAkcije INNER JOIN delovneAkcije ON  prisotnostAkcije.akcijaID = delovneAkcije.ID  WHERE prisotnostAkcije.clanID = '$idClan' AND prisotnostAkcije.prisotnost = '1'";
+  $steviloUr = 0;
+  $queryA = mysqli_query($db,$sqlA);
+  while($ure = mysqli_fetch_assoc($queryA)){
+    $steviloUr += $ure['ure'];
+  }
   if($vloga == 1 || $vloga == 2){
-    $table .= "<tr><td><a href=Clan.php?id=".$row['ID'].">".$row['ime']." ".$row['priimek']."</td><td>".$row['email']."</td><td>".$row['telefon']."</td><td>1</td></tr>";
+    $table .= "<tr><td><a href=Clan.php?id=".$row['ID'].">".$row['ime']." ".$row['priimek']."</td><td>".$row['email']."</td><td>".$row['telefon']."</td><td>".$steviloUr."</td></tr>";
   }else{
-    $table .= "<tr><td>".$row['ime']." ".$row['priimek']."</td><td>".date("d.m.Y",strtotime($row['datumRojstva']))."</td>"."<td>".$row['emailIgralec']."</"."<td>"."<td>".$row['telefonIgralec']."</td>"."<td>".$imeEkipe[1]."</td><td>".$row['opomba']."</td>"."</tr>";
+    $table .= "<tr><td>".$row['ime']." ".$row['priimek']."</td><td>".$row['email']."</td><td>".$row['telefon']."</td><td>1</td></tr>";
   }
   }
 

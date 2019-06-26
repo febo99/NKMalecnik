@@ -8,6 +8,8 @@ $id = $_GET['id'];
 $sql = "SELECT * FROM clani WHERE `ID` = '$id'";
 $get=mysqli_query($db,$sql);
 $clan = mysqli_fetch_assoc($get);
+if(empty($clan))header("location: Clani.php");
+if($_SESSION['vloga'] != 1 && $_SESSION['vloga'] != 2)header("location: Clani.php");
  ?>
 
 <html style="background-color: rgb(60, 68, 77);">
