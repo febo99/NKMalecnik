@@ -50,7 +50,6 @@ while($row = mysqli_fetch_assoc($get)){
 	  </div>
 	<div class="col-2 colGlava divNovGumb">
 			<button type="button"  class="btn btn-primary btn-md btn-block gumbNov" onclick="location.href='../Moji_igralci/Nov_igralec.php'">Dodaj igralca</button>
-			<button type="button"  class="btn btn-secondary btn-md btn-block gumbNov" >Neaktivni igralci</button>
 	</div>
     </div>
     <div class="row kavarna"><!--KAVARNA-->
