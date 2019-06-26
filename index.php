@@ -23,7 +23,7 @@ if(isset($_SESSION['id']) && !empty($_SESSION['id'])) {
 			<h1>Dobrodošli nazaj!</h1>
 			<form method="post" action="login/login.php" >
 				<div class="form-group">
-					<label for="inputUporabnik">Uporabniško ime</label>
+					<label for="inputUporabnik">Email</label>
 					<input type="text" class="form-control" name="inputUporabnik" id="inputUporabnik" placeholder="Vnesi uporabniško ime" autofocus>
 				</div>
 				<div class="form-group">
