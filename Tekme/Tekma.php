@@ -49,8 +49,68 @@
       $table .= "<tr><td><a href=../Igralec.php?igralec=".$idIgralca.">".$imepriimekText."</a></td><td>".$prisotnost."</td></tr>";
     }
   }else{
-      header("Location:Vse_tekme.php");
+    header("Location:Vse_tekme.php");
+  }
+
+    $igralciSQL = "SELECT * FROM igralci WHERE `ekipaID` = '$idEkipe'";
+    $getIgralci = mysqli_query($db, $igralciSQL);
+    $beseda .= "<span id='" . $idTekme . "' style='display:none;'><form action='prisotnost.php' method='post' ><input type='hidden' name='treningID' value=" . $idTekme . ">";
+  
+    while ($rowC = mysqli_fetch_assoc($getIgralci)) {
+      $idTekme = $_GET['id'];
+      $forma = '<div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" id="customRadioInlineI" name="prisotnost" class="custom-control-input" value=1>
+      <label class="custom-control-label" for="customRadioInlineI">Prisoten</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" id="customRadioInlineD" name="prisotnost" class="custom-control-input" value=2>
+      <label class="custom-control-label" for="customRadioInlineD">Opravicen</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" id="customRadioInlineT" name="prisotnost" class="custom-control-input" value=0>
+      <label class="custom-control-label" for="customRadioInlineT">Neopravicen</label>
+    </div>';
+      $idIgralca = $rowC['ID'];
+      $sqlPrisotnost = "SELECT * FROM prisotnostTekme WHERE `igralecID` = '$idIgralca' AND `tekmaID` = '$idTekme'";
+      $queryP = mysqli_query($db,$sqlPrisotnost);
+      $prisotnost = mysqli_fetch_assoc($queryP);
+      $dodatno = "prisotnost" . $rowC['ID'] ."_". $idTekme;
+      if($prisotnost['prisotnost'] == 1){
+        $dodatnoide = 'customRadioInlineI' . $rowC['ID'] ."_". $idTekme . '" checked ';
+        $dodatnoidd = "customRadioInlineD" . $rowC['ID'] ."_". $idTekme;
+        $dodatnoidt = "customRadioInlineT" . $rowC['ID'] ."_". $idTekme;
+        $forma = str_replace("prisotnost", $dodatno, $forma);
+        $forma = str_replace("customRadioInlineI", $dodatnoide, $forma);
+        $forma = str_replace("customRadioInlineD", $dodatnoidd, $forma);
+        $forma = str_replace("customRadioInlineT", $dodatnoidt, $forma);
+      }
+      else if($prisotnost['prisotnost'] == 2){
+        $dodatnoide = 'customRadioInlineI' . $rowC['ID'] ."_". $idTekme;
+        $dodatnoidd = 'customRadioInlineD' . $rowC['ID'] ."_". $idTekme . '" checked ';
+        $dodatnoidt = "customRadioInlineT" . $rowC['ID'] ."_". $idTekme;
+        $forma = str_replace("prisotnost", $dodatno, $forma);
+        $forma = str_replace("customRadioInlineI", $dodatnoide, $forma);
+        $forma = str_replace("customRadioInlineD", $dodatnoidd, $forma);
+        $forma = str_replace("customRadioInlineT", $dodatnoidt, $forma);
+      }
+      else if($prisotnost['prisotnost'] == 0){
+        $dodatnoide = 'customRadioInlineI' . $rowC['ID'] ."_". $idTekme;
+        $dodatnoidd = "customRadioInlineD" . $rowC['ID'] ."_". $idTekme;
+        $dodatnoidt = 'customRadioInlineT' . $rowC['ID'] ."_". $idTekme . '" checked ';
+        $forma = str_replace("prisotnost", $dodatno, $forma);
+        $forma = str_replace("customRadioInlineI", $dodatnoide, $forma);
+        $forma = str_replace("customRadioInlineD", $dodatnoidd, $forma);
+        $forma = str_replace("customRadioInlineT", $dodatnoidt, $forma);
+      }
+      $beseda .= "<h5>" . $rowC['ime'] . " " . $rowC['priimek'] . "</h5>" . $forma . "<br>";
     }
+    $beseda .= '
+    <button type="reset" class="btn btn-secondary zapri" data-dismiss="modal">Prekliči</button>
+               <button type="submit"  class="btn btn-primary zapri">Shrani</button></form></span>';
+
+    
+
+
  ?>
 
 <html>
@@ -70,6 +130,25 @@
  
 </head>
 <body>
+<div class="modal fade" id="vnosPrisotnosti" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Prisotnost</h5>
+          <button type="button" class="close zapri" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="text-align:center;">
+          <?php echo $beseda; ?>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
   <div id="nav-placeholder">
     <script>
   $(function(){
@@ -131,6 +210,7 @@
               ?>
             </tbody>
           </table>
+          <button type=button class='btn btn-primary priso'  data-toggle=modal  value="<?php if($_SESSION['vloga'] == 1 ||$_SESSION['vloga'] == 2)echo $idTekme?>" data-target=#vnosPrisotnosti>Urejanje prisotnosti
       </div>
     </div>
 

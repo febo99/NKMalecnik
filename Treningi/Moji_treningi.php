@@ -32,26 +32,26 @@ while($row = mysqli_fetch_assoc($get)){
   $getIgralci=mysqli_query($db,$igralciSQL);
   $beseda .= "<span id='".$idTreninga."' style='display:none;'><form action='prisotnost.php' method='post' ><input type='hidden' name='treningID' value=".$idTreninga.">";
   $forma = '<div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="customRadioInline1" name="prisotnost" class="custom-control-input" value=1>
-              <label class="custom-control-label" for="customRadioInline1">Prisoten</label>
+              <input type="radio" id="customRadioInlineI" name="prisotnost" class="custom-control-input" value=1>
+              <label class="custom-control-label" for="customRadioInlineI">Prisoten</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="customRadioInline2" name="prisotnost" class="custom-control-input" value=2>
-              <label class="custom-control-label" for="customRadioInline2">Opravicen</label>
+              <input type="radio" id="customRadioInlineD" name="prisotnost" class="custom-control-input" value=2>
+              <label class="custom-control-label" for="customRadioInlineD">Opravicen</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="customRadioInline3" name="prisotnost" class="custom-control-input" checked value=0>
-              <label class="custom-control-label" for="customRadioInline3">Neopravicen</label>
+              <input type="radio" id="customRadioInlineT" name="prisotnost" class="custom-control-input" checked value=0>
+              <label class="custom-control-label" for="customRadioInlineT">Neopravicen</label>
             </div>';
   while($row = mysqli_fetch_assoc($getIgralci)){
     $dodatno = "prisotnost".$row['ID'].$idTreninga;
-    $dodatnoide = "customRadioInline1".$row['ID'].$idTreninga;
-    $dodatnoidd = "customRadioInline2".$row['ID'].$idTreninga;
-    $dodatnoidt = "customRadioInline3".$row['ID'].$idTreninga;
+    $dodatnoide = "customRadioInlineI".$row['ID'].$idTreninga;
+    $dodatnoidd = "customRadioInlineD".$row['ID'].$idTreninga;
+    $dodatnoidt = "customRadioInlineT".$row['ID'].$idTreninga;
     $forma = str_replace("prisotnost",$dodatno,$forma);
-    $forma = str_replace("customRadioInline1",$dodatnoide,$forma);
-    $forma = str_replace("customRadioInline2",$dodatnoidd,$forma);
-    $forma = str_replace("customRadioInline3",$dodatnoidt,$forma);
+    $forma = str_replace("customRadioInlineI",$dodatnoide,$forma);
+    $forma = str_replace("customRadioInlineD",$dodatnoidd,$forma);
+    $forma = str_replace("customRadioInlineT",$dodatnoidt,$forma);
     $beseda .= "<h5>".$row['ime']. " ".$row['priimek'] ."</h5>". $forma."<br>";
   }
    $beseda .= '          <button type="reset" class="btn btn-secondary zapri" data-dismiss="modal">Prekliči</button>

@@ -40,30 +40,30 @@
 
 				while ($row = mysqli_fetch_assoc($getIgralci)) {
 					$forma = '<div class="custom-control custom-radio custom-control-inline">
-					<input type="radio" id="customRadioInline1" name="prisotnost" class="custom-control-input" value=1>
-					<label class="custom-control-label" for="customRadioInline1">Prisoten</label>
+					<input type="radio" id="customRadioInlineI" name="prisotnost" class="custom-control-input" value=1>
+					<label class="custom-control-label" for="customRadioInlineI">Prisoten</label>
 					</div>
 					<div class="custom-control custom-radio custom-control-inline">
-					<input type="radio" id="customRadioInline2" name="prisotnost" class="custom-control-input" value=2>
-					<label class="custom-control-label" for="customRadioInline2">Manjkal</label>
+					<input type="radio" id="customRadioInlineD" name="prisotnost" class="custom-control-input" value=2>
+					<label class="custom-control-label" for="customRadioInlineD">Manjkal</label>
 					</div>';
 					$idClan = $row['ID'];
 					$sqlT = "SELECT prisotnost FROM prisotnostAkcije WHERE `clanID` = '$idClan' AND `akcijaID` = '$idAkcije'";
 					$prisotnost = mysqli_fetch_assoc(mysqli_query($db,$sqlT));
 					$dodatno = "prisotnost" . $row['ID'] . $idAkcije;
 					if($prisotnost['prisotnost'] == 1){
-						$dodatnoide = 'customRadioInline1' . $row['ID'] . $idAkcije . '" checked ';
-						$dodatnoidd = 'customRadioInline2' . $row['ID'] . $idAkcije;
+						$dodatnoide = 'customRadioInlineI' . $row['ID'] . $idAkcije . '" checked ';
+						$dodatnoidd = 'customRadioInlineD' . $row['ID'] . $idAkcije;
 						$forma = str_replace("prisotnost", $dodatno, $forma);
-						$forma = str_replace("customRadioInline1", $dodatnoide, $forma);
-						$forma = str_replace("customRadioInline2", $dodatnoidd, $forma);
+						$forma = str_replace("customRadioInlineI", $dodatnoide, $forma);
+						$forma = str_replace("customRadioInlineD", $dodatnoidd, $forma);
 						
 					}else if($prisotnost['prisotnost'] == 2){
-						$dodatnoide = 'customRadioInline1' . $row['ID'] . $idAkcije;
-						$dodatnoidd = 'customRadioInline2' . $row['ID'] . $idAkcije . '" checked ';
+						$dodatnoide = 'customRadioInlineI' . $row['ID'] . $idAkcije;
+						$dodatnoidd = 'customRadioInlineD' . $row['ID'] . $idAkcije . '" checked ';
 						$forma = str_replace("prisotnost", $dodatno, $forma);
-						$forma = str_replace("customRadioInline1", $dodatnoide, $forma);
-						$forma = str_replace("customRadioInline2", $dodatnoidd, $forma);
+						$forma = str_replace("customRadioInlineI", $dodatnoide, $forma);
+						$forma = str_replace("customRadioInlineD", $dodatnoidd, $forma);
 						
 					}
 					$beseda .= "<h5>" . $row['ime'] . " " . $row['priimek'] . "</h5>" . $forma . "<br>";

@@ -25,20 +25,20 @@ while($row = mysqli_fetch_assoc($query)){
     $getIgralci = mysqli_query($db, $igralciSQL);
     $beseda .= "<span id='" . $row['ID'] . "' style='display:none;'><form action='prisotnost.php' method='post' ><input type='hidden' name='treningID' value=" . $row['ID'] . ">";
     $forma = '<div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="customRadioInline1" name="prisotnost" class="custom-control-input" value=1>
-              <label class="custom-control-label" for="customRadioInline1">Prisoten</label>
+              <input type="radio" id="customRadioInlineI" name="prisotnost" class="custom-control-input" value=1>
+              <label class="custom-control-label" for="customRadioInlineI">Prisoten</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="customRadioInline2" name="prisotnost" class="custom-control-input" value=2>
-              <label class="custom-control-label" for="customRadioInline2">Manjkal</label>
+              <input type="radio" id="customRadioInlineD" name="prisotnost" class="custom-control-input" value=2>
+              <label class="custom-control-label" for="customRadioInlineD">Manjkal</label>
             </div>';
     while ($row = mysqli_fetch_assoc($getIgralci)) {
         $dodatno = "prisotnost" . $row['ID'] . $idAkcija;
-        $dodatnoide = "customRadioInline1" . $row['ID'] . $idAkcija;
-        $dodatnoidd = "customRadioInline2" . $row['ID'] . $idAkcija;
+        $dodatnoide = "customRadioInlineI" . $row['ID'] . $idAkcija;
+        $dodatnoidd = "customRadioInlineD" . $row['ID'] . $idAkcija;
         $forma = str_replace("prisotnost", $dodatno, $forma);
-        $forma = str_replace("customRadioInline1", $dodatnoide, $forma);
-        $forma = str_replace("customRadioInline2", $dodatnoidd, $forma);
+        $forma = str_replace("customRadioInlineI", $dodatnoide, $forma);
+        $forma = str_replace("customRadioInlineD", $dodatnoidd, $forma);
         $beseda .= "<h5>" . $row['ime'] . " " . $row['priimek'] . "</h5>" . $forma . "<br>";
     }
     $beseda .= '<button type="submit"  class="btn btn-primary zapri">Shrani</button>

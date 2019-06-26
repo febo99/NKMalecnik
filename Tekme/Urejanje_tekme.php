@@ -123,8 +123,8 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Nasprotnik *</span>
               </div>
-              <input type="text" class="form-control" name="nasprotnik" value=<?php echo $tekma['nasprotnik'];?> placeholder="Ime nasprotnika">
-              <input type="number" class="form-control" value=<?php echo $tekma['golGosti'];?> name="nasprotnikGoli" placeholder="Št. golov">
+              <input type="text" class="form-control" name="nasprotnik" value="<?php echo $tekma['nasprotnik'];?>" placeholder="Ime nasprotnika">
+              <input type="number" class="form-control" value="<?php echo $tekma['golGosti'];?>" name="nasprotnikGoli" placeholder="Št. golov">
             </div>
           </div>
           <div class="row">
