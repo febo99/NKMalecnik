@@ -46,10 +46,10 @@ while ($row = mysqli_fetch_assoc($get)) {
               <label class="custom-control-label" for="customRadioInline3">Neopravicen</label>
             </div>';
     while ($row = mysqli_fetch_assoc($getIgralci)) {
-        $dodatno = "prisotnost" . $row['ID'] . $idTreninga;
-        $dodatnoide = "customRadioInline1" . $row['ID'] . $idTreninga;
-        $dodatnoidd = "customRadioInline2" . $row['ID'] . $idTreninga;
-        $dodatnoidt = "customRadioInline3" . $row['ID'] . $idTreninga;
+        $dodatno = "prisotnost" . $row['ID'] . $idTekma;
+        $dodatnoide = "customRadioInline1" . $row['ID'] . $idTekma;
+        $dodatnoidd = "customRadioInline2" . $row['ID'] . $idTekma;
+        $dodatnoidt = "customRadioInline3" . $row['ID'] . $idTekma;
         $forma = str_replace("prisotnost", $dodatno, $forma);
         $forma = str_replace("customRadioInline1", $dodatnoide, $forma);
         $forma = str_replace("customRadioInline2", $dodatnoidd, $forma);

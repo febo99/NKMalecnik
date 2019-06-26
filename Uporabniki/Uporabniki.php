@@ -7,8 +7,11 @@ $sql = "SELECT * FROM `uporabniki`";
 $get=mysqli_query($db,$sql);
 $table = "";
 while($row = mysqli_fetch_assoc($get)){
-  if($_SESSION['vloga'] == 1 || $_SESSION['vloga'] == 2) $table .= "<tr><td><a href=Urejanje_uporabnika.php?id=".$row['ID'].">".$row['email']."</a></td><td>".$row['ime']."</td><td>".$row['priimek']."</td><td>".$row['vloga']."</td></tr>";
-  else $table .= "<tr><td>".$row['email']."</td><td>".$row['ime']."</td><td>".$row['priimek']."</td><td>".$row['vloga']."</td></tr>";
+  $vlogaID = $row['vloga'];
+  $sqlV = "SELECT vloga FROM vloga WHERE `ID` = '$vlogaID'";
+  $vloga = mysqli_fetch_assoc(mysqli_query($db,$sqlV));
+  if($_SESSION['vloga'] == 1 || $_SESSION['vloga'] == 2) $table .= "<tr><td><a href=Urejanje_uporabnika.php?id=".$row['ID'].">".$row['email']."</a></td><td>".$row['ime']."</td><td>".$row['priimek']."</td><td>".$vloga['vloga']."</td></tr>";
+  else $table .= "<tr><td>".$row['email']."</td><td>".$row['ime']."</td><td>".$row['priimek']."</td><td>".$vloga['vloga']."</td></tr>";
 }
 ?>
 
@@ -67,11 +70,9 @@ while($row = mysqli_fetch_assoc($get)){
               ?>
             </tbody>
           </table>
-
       </div>
       </div>
       </div>
     </div>
-
 </body>
 </html>

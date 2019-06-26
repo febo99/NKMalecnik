@@ -27,19 +27,20 @@ if ($row['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1) {
   $igralciSQL = "SELECT * FROM igralci WHERE `ekipaID` = '$idEkipe'";
   $getIgralci = mysqli_query($db, $igralciSQL);
   $beseda .= "<span id='" . $idTreninga . "' style='display:none;'><form action='prisotnost.php' method='post' ><input type='hidden' name='treningID' value=" . $idTreninga . ">";
-  $forma = '<div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="customRadioInline1" name="prisotnost" class="custom-control-input" value=1>
-              <label class="custom-control-label" for="customRadioInline1">Prisoten</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="customRadioInline2" name="prisotnost" class="custom-control-input" value=2>
-              <label class="custom-control-label" for="customRadioInline2">Opravicen</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="customRadioInline3" name="prisotnost" class="custom-control-input" value=0>
-              <label class="custom-control-label" for="customRadioInline3">Neopravicen</label>
-            </div>';
+
   while ($row = mysqli_fetch_assoc($getIgralci)) {
+    $forma = '<div class="custom-control custom-radio custom-control-inline">
+    <input type="radio" id="customRadioInline1" name="prisotnost" class="custom-control-input" value=1>
+    <label class="custom-control-label" for="customRadioInline1">Prisoten</label>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input type="radio" id="customRadioInline2" name="prisotnost" class="custom-control-input" value=2>
+    <label class="custom-control-label" for="customRadioInline2">Opravicen</label>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input type="radio" id="customRadioInline3" name="prisotnost" class="custom-control-input" value=0>
+    <label class="custom-control-label" for="customRadioInline3">Neopravicen</label>
+  </div>';
     $idIgralca = $row['ID'];
     $sqlPrisotnost = "SELECT * FROM prisotnost WHERE `igralecID` = '$idIgralca' AND `treningID` = '$idTreninga'";
     $queryP = mysqli_query($db,$sqlPrisotnost);
