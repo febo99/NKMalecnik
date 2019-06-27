@@ -12,7 +12,7 @@ while($row = mysqli_fetch_assoc($get)){
 }
  ?>
 
-<html style="background-color: rgb(60, 68, 77);">
+<html>
 <head>
 <title>NK Malecnik</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">

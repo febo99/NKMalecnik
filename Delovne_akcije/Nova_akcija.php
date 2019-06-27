@@ -47,7 +47,7 @@ if($_SESSION['vloga'] != 1 && $_SESSION['vloga'] != 2 ){
       <!--KAVARNA-->
       <div class="col-11 col-sm-11 order-sm-1  colKavarna novIgralec">
         <form id="novTrening" action="Dodaj_akcijo.php" method="post" enctype="multipart/form-data">
-
+        <br>
           <div class="row">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
@@ -92,7 +92,6 @@ if($_SESSION['vloga'] != 1 && $_SESSION['vloga'] != 2 ){
           <button type="submit" class="btn btn-primary btnForma">Dodaj</button>
           <button type="reset" class="btn btn-danger btnForma">Prekliči</button>
         </form>
-
 
 
       </div>

@@ -7,6 +7,17 @@ session_start();
 if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
     header("location: index.php");
 }
+$sql = "SELECT * FROM objave INNER JOIN uporabniki WHERE uporabniki.ID = objave.avtorID ORDER BY objave.datumCas DESC";
+$query = mysqli_query($db,$sql);
+$feed = "";
+while($row = mysqli_fetch_assoc($query)){
+    $feed .= "<div class='row feedRow'>
+                <div class='col-xs col-md-3 feed' >
+                    <div class='col feedGlava' >
+                    <b>".$row['ime']." ".$row['priimek'] ."</b>, " .date("d.m.Y H:i:s",strtotime($row['datumCas']))."
+                    </div>"."<div class=col>".$row['obvestilo'] . 
+                    "</div></div></div>";
+}
 ?>
 
 <html>
@@ -93,7 +104,7 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
                 <li class="nav-item">
                 <li class="nav-item dropdown">
                     <a href="#akcijaSub" class="nav-link dropdown-toggle" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">Delovne akcije</a>
-                      <ul class="collapse list-unstyled" id="akcijaSub">
+                    <ul class="collapse list-unstyled" id="akcijaSub">
                         <li>
                             <a class="nav-link sub-link" href="Delovne_akcije/Clani.php">Člani</a>
                         </li>
@@ -103,9 +114,9 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
                         <li>
                             <a class="nav-link sub-link" href="Delovne_akcije/Delovne_akcije.php">Delovne akcije</a>
                         </li>
-                  </ul>
-              </li>
-              </li>
+                    </ul>
+                </li>
+                </li>
                 <div class="dropdown-divider"></div>
                 <li class="nav-item">
                     <a class="nav-link" href="Porocilo_prisotnosti/Porocilo_prisotnosti.php">Poročilo prisotnosti</a>
@@ -133,7 +144,7 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
                             <a class="nav-link sub-link" href="#">Prestavi igralce</a>
                         </li>
                         <li>
-                            <a class="nav-link sub-link" href="#">Lokacije treningov</a>
+                            <a class="nav-link sub-link" href="Treningi/Lokacije.php">Lokacije treningov</a>
                         </li>
                     </ul>
                 </li>
@@ -148,15 +159,27 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
 
             </div>
             <div class="col">
-                    <button type="button" class="btn btn-primary btn-md btn-block gumbNov" onclick="location.href='login/odjava.php'">Odjavi se</button>
-                </div>
+                <button type="button" class="btn btn-primary btn-md btn-block gumbNov" onclick="location.href='login/odjava.php'">Odjavi se</button>
+            </div>
         </div>
         <div class="row kavarna">
             <!--KAVARNA-->
             <div class="col colKavarna">
-                yočđžš
+                <div class="row" style="margin-top:0.5vh;margin-left:1vh;">
+                    <div class="col-lg-4 col-sm">
+                        <form id="nova objava" method=post action="Nova_objava.php">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name=objava value="" placeholder="Vnesi obvestilo" id=objava>
+                                <button type="submit" id=objavaGumb class="btn btn-primary btnForma btn-sm">Objavi</button>
+                            </div>
+                    </div>
+                    </form>
+                </div>
+                <?php echo $feed;?>
             </div>
+            
         </div>
+    </div>
     </div>
 
 </body>

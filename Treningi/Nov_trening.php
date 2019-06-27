@@ -50,6 +50,7 @@ while($rowL = mysqli_fetch_assoc($getL)){
 	</div>
     </div>
     <div class="row kavarna"><!--KAVARNA-->
+    <div class="row" style="margin-top:0.5vh;margin-left:1vh;">
         <div class="col-11 col-sm-11 order-sm-1  colKavarna novIgralec">
     		<form id="novTrening" action="Dodaj_trening.php" method="post" enctype="multipart/form-data">
           <div class="row">
@@ -119,7 +120,7 @@ while($rowL = mysqli_fetch_assoc($getL)){
       </form>
 
 
-
+      </div>
     </div>
 
   </div>

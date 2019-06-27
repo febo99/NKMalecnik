@@ -14,7 +14,7 @@ html{
 }
 
 .glava{
-  height: 18%;
+  height: 13%;
   width: 100%;
   background-color: #0069db;
   border-bottom: 0.1em gray solid;
@@ -22,7 +22,7 @@ html{
 }
 .kavarna{
   background-color: white;
-  width:100%
+  width:100%;
 }
 a{
   color: #00368e;
@@ -71,7 +71,7 @@ input[type=number]::-webkit-outer-spin-button {
 @media (max-width: 575.98px) {
   .gumbNov{
     width:10vh;
-    font-size:1.7vh;
+    font-size:2vh;
     padding: 0;
   }
   h3{
@@ -80,6 +80,10 @@ input[type=number]::-webkit-outer-spin-button {
   h5{
     font-size:2.3vh;
     margin-top: -0.5vh;
+  }
+  #container{
+    background-color:white;
+    margin-top: -5.1vh;
   }
 }
 .btnForma{
@@ -126,4 +130,38 @@ input[type=number]::-webkit-outer-spin-button {
 }
 #gLokacija{
   display: none;
+}
+#objava{
+  text-align: center;
+}
+#objavaGumb{
+  margin:0 ;
+  padding: 0;
+  width: 100vh;
+  font-size: 2vh;
+}
+#basic-addon2{
+  padding: 0;
+  margin:0;
+}
+.feed{
+  border: 1px solid #0055b3;
+  padding: 0;
+  margin-bottom: 2vh;
+}
+.feedRow{
+  margin-top:0.5vh;margin-left:1vh;
+}
+.feedGlava{
+  margin: 0;
+  background-color: #007aff;
+}
+.btn-primary{
+  background-color: #dfe4ed;
+  color:black;
+  border-color: #dfe4ed;
+}
+.btn-primary:hover{
+  background-color: #bbbbbd;
+  border-color: #bbbbbd;
 }

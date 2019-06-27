@@ -45,7 +45,7 @@ while($row = mysqli_fetch_assoc($get)){
         <h1>Poročilo prisotnosti</h1>
       </div>
     </div>
-    <div class="row kavarna"><!--KAVARNA-->
+    <div class="row kavarna" style="margin-top:0.5vh;margin-left:1vh;"><!--KAVARNA-->
       <div class="col colKavarna">
         <div class="col">
             <select id="ekipa" required class="form-control" name="ekipa" placeholder="Izberi ekipo">

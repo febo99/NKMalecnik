@@ -26,108 +26,13 @@ while($row = mysqli_fetch_assoc($get)){
 <script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-left">
-    <a class="navbar-brand" href="">NK MALEČNIK</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="../dashboard.php">Domov</a>
-            </li>
-            <div class="dropdown-divider"></div>
-            <li class="nav-item">
-                <a class="nav-link"href="Moji_igralci.php">Moji igralci</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"href="../Vsi_igralci/Vsi_igralci.php">Vsi igralci</a>
-			</li>
-			<li class="nav-item">
-                <a class="nav-link"href="Ekipe.php">Ekipe</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"href="">Obvestilo</a>
-			</li>
-
-      <div class="dropdown-divider"></div>
-			<!-- NOVA KATEGORIJA -->
-            <li class="nav-item">
-                <a class="nav-link"href="">Koledar</a>
-			</li>
-            <li class="nav-item">
-              <li class="nav-item dropdown">
-                  <a href="#treningiSub" class="nav-link dropdown-toggle" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">Treningi</a>
-                    <ul class="collapse list-unstyled" id="treningiSub">
-                      <li>
-                          <a class="nav-link sub-link" href="#">Nov trening</a>
-                      </li>
-                      <li>
-                          <a class="nav-link sub-link" href="#">Moji treningi</a>
-                      </li>
-                      <li>
-                          <a class="nav-link sub-link" href="#">Vsi treningi</a>
-                      </li>
-                      <li>
-                          <a class="nav-link sub-link" href="#">Predloge treningov</a>
-                      </li>
-                </ul>
-            </li>
-            </li>
-            <li class="nav-item">
-              <li class="nav-item dropdown">
-                  <a href="#tekmeSub" class="nav-link dropdown-toggle" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">Tekme</a>
-                    <ul class="collapse list-unstyled" id="tekmeSub">
-                      <li>
-                          <a class="nav-link sub-link" href="#">Nova tekma</a>
-                      </li>
-                      <li>
-                          <a class="nav-link sub-link" href="#">Moje tekme</a>
-                      </li>
-                      <li>
-                          <a class="nav-link sub-link" href="#">Vse tekme</a>
-                      </li>
-                </ul>
-            </li>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"href="">Zdravstveni karton</a>
-			</li>
-      <div class="dropdown-divider"></div>
-			<li class="nav-item">
-                <a class="nav-link"href="">Poročilo prisotnosti</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"href="">Testiranja</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"href="">Skavting</a>
-			</li>
-			<li class="nav-item">
-                <a class="nav-link"href="">Video analiza</a>
-            </li>
-        <div class="dropdown-divider"></div>
-        <li class="nav-item">
-              <a class="nav-link"href="">Uporabniki</a>
-        </li>
-              <li class="nav-item dropdown">
-                  <a href="#nastavitveSub" class="nav-link dropdown-toggle" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">Nastavitve</a>
-                    <ul class="collapse list-unstyled" id="nastavitveSub">
-                      <li>
-                          <a class="nav-link sub-link" href="#">Podatki kluba</a>
-                      </li>
-                      <li>
-                          <a class="nav-link sub-link" href="#">Prestavi igralce</a>
-                      </li>
-                      <li>
-                          <a class="nav-link sub-link" href="#">Lokacije treningov</a>
-                      </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</nav>
+<div id="nav-placeholder">
+    <script>
+  $(function(){
+    $("#nav-placeholder").load("../nav.html");
+  });
+  </script>
+  </div>
 	<div id="container">
     <div class="row glava"><!--GLAVA-->
       <div class="col-11 colGlava">

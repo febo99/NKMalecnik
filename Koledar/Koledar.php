@@ -54,13 +54,15 @@ while($row = mysqli_fetch_assoc($get)){
     </div>
     <div class="row kavarna"><!--KAVARNA-->
         <div class="col colKavarna">
-          <div class="row">
+          <div class="row" style="margin-top:0.5vh;margin-left:1vh;">
             <div class="col lokacija">
                 <?php echo $lokacije;?>
             </div>
         </div>
         </div>
+        <div class="row" style="margin-top:0.5vh;margin-left:1vh;">
         <div id='calendar'></div>
+</div>
       </div>
 
     </div>

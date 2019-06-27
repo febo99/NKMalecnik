@@ -55,6 +55,7 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
     <div class="row kavarna">
       <!--KAVARNA-->
       <div class="col-11 col-sm-11 order-sm-1  colKavarna novIgralec">
+      <div class="row" style="margin-top:0.5vh;margin-left:1vh;">
         <form id="novTrening" action="Dodaj_tekmo.php" method="post" enctype="multipart/form-data">
           <div class="row">
             <div class="input-group mb-3">
@@ -75,7 +76,7 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGrup-sizing-sm">Lokacija*</>
               </div>
-              <div class="form-check form-check-inline">
+              <div class="form-check form-check-inline" style="margin-left:0.5vh">
                 <input class="form-check-input" type="radio" checked=checked name="domaGost" id="inlineRadio1" value="1" onclick=vnosLokacije(this)>
                 <label class="form-check-label" for="inlineRadio1" >Doma</label>
               </div>
@@ -147,10 +148,8 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
           <button type="submit" class="btn btn-primary btnForma">Dodaj</button>
           <button type="reset" class="btn btn-danger btnForma">Prekliči</button>
         </form>
-
-
-
-      </div>
+    </div>
+        </div>
 
     </div>
 </body>

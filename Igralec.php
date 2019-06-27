@@ -208,26 +208,26 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
       </div>
     </div>
     <div class="row kavarna">
-      <!--KAVARNA-->
       <div class="col colKavarna">
         <div class="row">
           <div class="col">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark " id=igralecMenu >
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                  <a class="nav-item nav-link active tt" href="#splosno">Splošno</a>
-                  <a class="nav-item nav-link tt" href="#treningi">Treningi</a>
-                  <a class="nav-item nav-link tt" href="#tekme">Tekme</a>
+                  <a class="nav-item nav-link active tt"  data-toggle="collapse" data-target="#navbarNavAltMarkup" href="#splosno">Splošno</a>
+                  <a class="nav-item nav-link tt"  data-toggle="collapse" data-target="#navbarNavAltMarkup" href="#treningi">Treningi</a>
+                  <a class="nav-item nav-link tt"  data-toggle="collapse" data-target="#navbarNavAltMarkup" href="#tekme">Tekme</a>
                 </div>
               </div>
             </nav>
           </div>
         </div>
+        <br>
         <div class="row elementiIgralec" id=splosno>
-          <div class="row">
+          <div class="row" style="margin-top:0.5vh;margin-left:1vh;">
             <div class=col>
             <h5>Splošni podatki</h5>
             <table id="tabela" class="table table-bordered table-striped">
@@ -256,7 +256,7 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
             </div>
           </div>
         </div>
-        <div class="row elementiIgralec" id=treningi>
+        <div class="row elementiIgralec"  style="margin-top:0.5vh;margin-left:1vh;" id=treningi>
           <div class=col-6>
           <table id="tabela" class="table table-bordered table-striped">
             <tr>
@@ -269,7 +269,7 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
           </table>
           </div>
         </div>
-        <div class="row elementiIgralec" id=tekme>
+        <div class="row elementiIgralec" style="margin-top:0.5vh;margin-left:1vh;" id=tekme>
           <div class=col-6>
           <table id="tabela" class="table table-bordered table-striped">
             <tr>
