@@ -7,16 +7,29 @@ session_start();
 if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
     header("location: index.php");
 }
-$sql = "SELECT * FROM objave INNER JOIN uporabniki WHERE uporabniki.ID = objave.avtorID ORDER BY objave.datumCas DESC";
+$sql = "SELECT objave.*,uporabniki.ime,uporabniki.priimek FROM objave INNER JOIN uporabniki WHERE uporabniki.ID = objave.avtorID ORDER BY objave.datumCas DESC";
 $query = mysqli_query($db,$sql);
 $feed = "";
 while($row = mysqli_fetch_assoc($query)){
+    $id = $row['ID'];
     $feed .= "<div class='row feedRow'>
                 <div class='col-xs col-md-3 feed' >
-                    <div class='col feedGlava' >
+                    <div class='col feedGlava' ><form action=Nov_komentar.php method=post>
                     <b>".$row['ime']." ".$row['priimek'] ."</b>, " .date("d.m.Y H:i:s",strtotime($row['datumCas']))."
-                    </div>"."<div class=col>".$row['obvestilo'] . 
-                    "</div></div></div>";
+                    </div>"."<div class=col>".$row['obvestilo']."</div><div class='col komentar'>";
+                    
+    $sqlKom = "SELECT komentarji.*,uporabniki.ime,uporabniki.priimek FROM komentarji INNER JOIN uporabniki ON uporabniki.ID = komentarji.avtorID WHERE `objavaID` = '$id' ORDER BY komentarji.datumCas  ";
+    $queryKom = mysqli_query($db,$sqlKom);
+    while($rowK = mysqli_fetch_assoc($queryKom)){
+        $feed .= "<div class='col feedKomentarGlava' ><b>".$rowK['ime']." ".$rowK['priimek'] ."</b>, " .date("d.m.Y H:i:s",strtotime($rowK['datumCas']))."</div>"
+        ."<div class='col komentarVsebina'>".$rowK['komentar']."</div>";
+    }
+    $feed .= "<br>
+    <div class='input-group mb-3'>
+    <input type=hidden name=idKomentarja value=".$row['ID'].">
+    <input type=text class=form-control  name=komentar".$row['ID']." 
+    placeholder='Tvoj komentar...'><div class='input-group-prepend'><button type=submit class='btn btn-primary btn-sm btn-block gumbNov gumbKom'>Objavi</button>
+    </div></div><br></div></div></div></form>";
 }
 ?>
 
@@ -158,7 +171,7 @@ while($row = mysqli_fetch_assoc($query)){
                 <h1><?php echo $_SESSION['name'] . " " . $_SESSION['last_name']; ?></h1> <!-- IME iz php session-->
 
             </div>
-            <div class="col">
+            <div class="col-1">
                 <button type="button" class="btn btn-primary btn-md btn-block gumbNov" onclick="location.href='login/odjava.php'">Odjavi se</button>
             </div>
         </div>
