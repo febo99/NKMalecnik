@@ -2,7 +2,7 @@
 include "../login/config.php";
 session_start();
 $id = $_SESSION['id'];
-$sql = "SELECT * FROM treningi ORDER BY 'datum'";
+$sql = "SELECT * FROM treningi ORDER BY datum DESC";
 $get=mysqli_query($db,$sql);
 $table = "";
 if(!isset($_SESSION['id']) && empty($_SESSION['id'])) {

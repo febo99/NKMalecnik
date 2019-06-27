@@ -165,3 +165,12 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #bbbbbd;
   border-color: #bbbbbd;
 }
+.gumbKom{
+  margin-top: -0.1%;
+}
+.feedKomentarGlava{
+  background-color: #00a2ff;
+}
+.komentarVsebina{
+  border: 1px solid black;
+}
