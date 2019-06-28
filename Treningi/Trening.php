@@ -95,7 +95,7 @@ if ($row['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1) {
     } else if ($rowD['prisotnost'] == 0) {
       $prisotnost = "❌";
     } else if ($rowD['prisotnost'] == 2) {
-      $prisotnost = "❌";
+      $prisotnost = "⭕";
     }
     $table .= "<tr><td><a href=../Igralec.php?igralec=" . $idIgralca . ">" . $imepriimekText . "</a></td><td>" . $prisotnost . "</td></tr>";
   }

@@ -44,7 +44,7 @@
         $prisotnost = "❌";
       }
       else if($rowD['prisotnost'] == 2){
-        $prisotnost = "❌";
+        $prisotnost = "⭕";
       }
       $table .= "<tr><td><a href=../Igralec.php?igralec=".$idIgralca.">".$imepriimekText."</a></td><td>".$prisotnost."</td></tr>";
     }

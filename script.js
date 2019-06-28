@@ -209,6 +209,9 @@ function getJson(){
                 }else if(training[Object.keys(training)[(i-1)*2+1]]['prisotnostDatum'][j] == "0"){
                   x = table.rows[i].insertCell(-1);
                   x.innerHTML = "❌";
+                }else if(training[Object.keys(training)[(i-1)*2+1]]['prisotnostDatum'][j] == "2"){
+                  x = table.rows[i].insertCell(-1);
+                  x.innerHTML = "⭕";
                 }
               }
             }

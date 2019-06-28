@@ -24,9 +24,9 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
       $sqlEkipa = "SELECT imeEkipe FROM ekipe WHERE `ID` = '$ekipaID'";
       $ekipaQ = mysqli_query($db,$sqlEkipa);
       $ekipa = mysqli_fetch_array($ekipaQ);
-      if($row['prisotnost'] != 1)$table .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>❌</td></tr>";
-      else $table .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>✔️</td></tr>";
-      
+      if($row['prisotnost'] == 1)$table .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>✔️</td></tr>";
+      else if($row['prisotnost'] == 2) $table .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>⭕</td></tr>";
+      else if($row['prisotnost'] == 0) $table .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>❌</td></tr>";
     }
 
     $sqlT = "SELECT * FROM tekme INNER JOIN prisotnostTekme on tekme.ID = prisotnostTekme.tekmaID WHERE prisotnostTekme.igralecID  = '$idIgralec' ORDER BY tekme.datum DESC";
@@ -37,9 +37,9 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
       $sqlEkipa = "SELECT imeEkipe FROM ekipe WHERE `ID` = '$ekipaID'";
       $ekipaQ = mysqli_query($db,$sqlEkipa);
       $ekipa = mysqli_fetch_array($ekipaQ);
-      if($row['prisotnost'] != 1)$tableT .= "<tr><td><a href=Treningi/Trening.php?id=".$row['treningID'].">".$row['naslov']."</a></td><td>".$row['datum']."</td><td>".$ekipa[0]."</td><td>❌</td></tr>";
-      else $tableT .= "<tr><td><a href=Tekme/Tekma.php?id=".$row['tekmaID'].">".$ekipa[0]."-".$row['nasprotnik']."</a></td><td>".$row['datum']."</td><td><b>".$row['golDomaci']."</b>:".$row['golGosti']."</td><td>✔️</td></tr>";
-      
+      if($row['prisotnost'] == 1)$tableT .= "<tr><td><a href=Tekme/Tekma.php?id=".$row['tekmaID'].">".$ekipa[0]."-".$row['nasprotnik']."</a></td><td>".$row['datum']."</td><td><b>".$row['golDomaci']."</b>:".$row['golGosti']."</td><td>✔️</td></tr>";
+      else if($row['prisotnost'] == 0) $tableT .= "<tr><td><a href=Tekme/Tekma.php?id=".$row['tekmaID'].">".$ekipa[0]."-".$row['nasprotnik']."</a></td><td>".$row['datum']."</td><td><b>".$row['golDomaci']."</b>:".$row['golGosti']."</td><td>❌</td></tr>";
+      else if($row['prisotnost'] == 2)$tableT .= "<tr><td><a href=Tekme/Tekma.php?id=".$row['tekmaID'].">".$ekipa[0]."-".$row['nasprotnik']."</a></td><td>".$row['datum']."</td><td><b>".$row['golDomaci']."</b>:".$row['golGosti']."</td><td>⭕</td></tr>";
     }
   }else{
     header("Location:Vsi_igralci/Vsi_igralci.php");
@@ -260,10 +260,10 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
           <div class=col-6>
           <table id="tabela" class="table table-bordered table-striped">
             <tr>
-              <th>Trening</th>
-              <th>Datum</th>
-              <th>Ekipa</th>
-              <th>Prisotnost</th>
+              <th scope=col-3>Trening</th>
+              <th scope=col-2>Datum</th>
+              <th scope=col-2>Ekipa</th>
+              <th scope=col-1>Prisotnost</th>
             </tr>
             <?php echo $table;?>
           </table>
