@@ -17,6 +17,12 @@ $ekipa = mysqli_fetch_assoc($query);
 if(empty($ekipa)){
 	header("Location:Ekipe.php");
 }
+$sqlVseEkipe = "SELECT * FROM ekipe";
+$getVse=mysqli_query($db,$sqlVseEkipe);
+while($rowVE = mysqli_fetch_assoc($getVse)){
+	if($rowVE['ID'] == $idEkipe)$vseEkipe .= '<option selected value = '. $rowVE['ID'] .'>'.$rowVE['imeEkipe'].'</option>';
+	else $vseEkipe .= '<option value = '. $rowVE['ID'] .'>'.$rowVE['imeEkipe'].'</option>';
+  }
 if($ekipa['trenerID'] == $_SESSION['id'] || $ekipa['pomocnik1ID'] == $_SESSION['id'] || $ekipa['pomocnik2ID'] == $_SESSION['id'] || $_SESSION['vloga'] == 1){
 	while ($row = mysqli_fetch_assoc($get)) {
 		if ($row['ID'] == $ekipa['trenerID']) {
@@ -34,6 +40,7 @@ if($ekipa['trenerID'] == $_SESSION['id'] || $ekipa['pomocnik1ID'] == $_SESSION['
 	$table = "";
 	while ($row = mysqli_fetch_assoc($queryI)){
 		$table .= "<tr><td><a href=../Igralec.php?igralec=".$row['ID'].">".$row['ime']." ".$row['priimek']."</a></td><td>".date("d.m.Y",strtotime($row['datumRojstva']))."</td>"."<td>".$row['emailIgralec']."</"."<td>"."<td>".$row['telefonIgralec']."</td><td>".$row['opomba']."</td>"."</tr>";
+		$tablePrestavi .= "<tr><td><a href=../Igralec.php?igralec=".$row['ID'].">".$row['ime']." ".$row['priimek']."</a></td><td><select required class=form-control name=ekipa".$row['ID'].">".$vseEkipe."</select><input name=igralec".$row['ID']." type=hidden value=".$row['ID']."></td></tr>";
 	}
 	$prihajTreningi = "";
 	$sqlTrening = "SELECT * FROM treningi INNER JOIN lokacije ON treningi.lokacijaID = lokacije.ID WHERE treningi.datum >= CURDATE() AND treningi.ekipaID = '$idEkipe' ORDER BY treningi.datum";
@@ -76,7 +83,7 @@ if($ekipa['trenerID'] == $_SESSION['id'] || $ekipa['pomocnik1ID'] == $_SESSION['
 			<!--GLAVA-->
 			<div class="col-11 colGlava">
 				<h1>Ekipa <?php echo $ekipa['imeEkipe']; ?></h1>
-				<p>Trener: <?php echo $trener; ?><br>
+				<p>Trener: <?php echo $trener.","; ?>
 					Pomočniki: <?php echo $pom1 . " , " . $pom2; ?></p>
 			</div>
 			<div class="col colGlava">
@@ -93,8 +100,9 @@ if($ekipa['trenerID'] == $_SESSION['id'] || $ekipa['pomocnik1ID'] == $_SESSION['
 					</button>
 					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 						<div class="navbar-nav">
-							<a class="nav-item nav-link active tt" href="#splosno">Splošno</a>
-							<a class="nav-item nav-link tt" href="#igralci">Igralci</a>
+							<a class="nav-item nav-link active tt" data-toggle="collapse" href="#splosno">Splošno</a>
+							<a class="nav-item nav-link tt" data-toggle="collapse" href="#igralci">Igralci</a>
+							<a class="nav-item nav-link tt" data-toggle="collapse" href="#prestavi">Prestavi igralce</a>
 						</div>
 					</div>
 				</nav>
@@ -152,6 +160,20 @@ if($ekipa['trenerID'] == $_SESSION['id'] || $ekipa['pomocnik1ID'] == $_SESSION['
                </tr>
 			   <?php echo $table; ?>
 			</table>
+			</div>
+		</div>
+		<div class="row elementiIgralec" id=prestavi>
+		<div class=col>
+		<form id=prestavi action=Prestavi_igralce.php method=post enctype=multipart/form-data>
+		<table id="tabela" class="table table-bordered table-striped">
+				<tr>
+                 <th scope="col">Ime in priimek</th>
+				 <th scope="col">Ekipe</th>
+				 </tr>
+			   <?php echo $tablePrestavi; ?>
+			   <button type="submit" class="btn btn-primary btnForma">Prestavi igralce</button>
+			</table>
+			</form>
 			</div>
         </div>
       </div>
