@@ -58,13 +58,13 @@ while($row = mysqli_fetch_assoc($get)){
         </div>
 
         <div class="table-responsive">
-          <table id="tabela" class="table table-bordered">
+          <table id="tabela" class="table table-bordered prisotnostTabela">
             <thead>
                <tr class="stat">
                  <th class="def" scope="col">Igralec</th>
                  <th class="def" scope="col">Vsi</th>
-                 <th class="def" scope="col">✔️</th>
-                 <th class="def" scope="col">❌</th>
+                 <th class="def zelen"  scope="col">✔️</th>
+                 <th class="def rdec" scope="col">❌</th>
                </tr>
            </thead>
            <tbody>

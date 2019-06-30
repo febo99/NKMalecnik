@@ -141,7 +141,7 @@ function getJson(){
                 if(!$("#tabela td:contains("+data[i]['treningi'][j]['prisotni'][k]+")").length && data[i]['ekipaID'] == e){
                   vpis = true;
                   newRow   = tableRef.insertRow(tableRef.rows.length);
-                  newText  = document.createTextNode(data[i]['treningi'][j]['prisotni'][k]);
+                  newText  = document.createTextNode(data[i]['treningi'][j]['prisotni'][k]);//ustvarjanje novih vrstic s tekstom
                   newCell  = newRow.insertCell(0);
                   newCell.appendChild(newText);
                   t  = document.createTextNode(counter);
@@ -150,7 +150,7 @@ function getJson(){
 
                 }
                 if(s.indexOf(d) >= 0 && s1 == e && data[i]['ekipaID'] == e){
-                  if(!inTable(tabelaPrisotnost,data[i]['treningi'][j]['prisotni'][k])){
+                  if(!inTable(tabelaPrisotnost,data[i]['treningi'][j]['prisotni'][k])){ //če je igralec bil prisoten na treningu in še ni zapisan v tabeli, init spremenljivk
                     training[data[i]['treningi'][j]['prisotni'][k]] = data[i]['treningi'][j]['prisotni'][k];
                     training[data[i]['treningi'][j]['prisotni'][k]+"data"] = [];
                     training[data[i]['treningi'][j]['prisotni'][k]+"data"]['stevilo'] = 1;
@@ -160,13 +160,13 @@ function getJson(){
                     tabelaPrisotnost.push(training);
                   }
                   else{
-                    training[data[i]['treningi'][j]['prisotni'][k]+"data"]['stevilo'] += 1;
+                    training[data[i]['treningi'][j]['prisotni'][k]+"data"]['stevilo'] += 1; //igralec je že v tabeli, vrednost samo povečamo
                     training[data[i]['treningi'][j]['prisotni'][k]+"data"]['prisoten'] += 1;
                     training[data[i]['treningi'][j]['prisotni'][k]+"data"]['prisotnostDatum'] += "1";
                   }
                 }
               }
-              for(var k = 0; k < data[i]['treningi'][j]['manjkajoci'].length; k++){
+              for(var k = 0; k < data[i]['treningi'][j]['manjkajoci'].length; k++){//za igralce, ki jih ni bilo
                 if(!$("#tabela td:contains("+data[i]['treningi'][j]['manjkajoci'][k]+")").length && data[i]['ekipaID'] == e){
                   vpis = true;
                   newRow   = tableRef.insertRow(tableRef.rows.length);
@@ -199,9 +199,11 @@ function getJson(){
           for(var i = 1; i < table.rows.length; i++){
             if(vpis == true){
               x = table.rows[i].insertCell(-1);
-              x.innerHTML = training[Object.keys(training)[(i-1)*2+1]]['prisoten'];
+              x.innerHTML = training[Object.keys(training)[(i-1)*2+1]]['prisoten']; //stevilo obiskov na treningu(kolikokrat je igralec bil oz. ni bil na treningu)
+              x.classList.add("zelen");
               x = table.rows[i].insertCell(-1);
               x.innerHTML = training[Object.keys(training)[(i-1)*2+1]]['manjkal'];
+              x.classList.add("rdec");
               for(var j = 0; j < training[Object.keys(training)[(i-1)*2+1]]['prisotnostDatum'].length; j++){
                 if(training[Object.keys(training)[(i-1)*2+1]]['prisotnostDatum'][j] == "1"){
                   x = table.rows[i].insertCell(-1);
