@@ -138,9 +138,6 @@ while($row = mysqli_fetch_assoc($get)){
               <a class="nav-link sub-link" href="#">Podatki kluba</a>
             </li>
             <li>
-              <a class="nav-link sub-link" href="#">Prestavi igralce</a>
-            </li>
-            <li>
               <a class="nav-link sub-link" href="#">Lokacije treningov</a>
             </li>
           </ul>
