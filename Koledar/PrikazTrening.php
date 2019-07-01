@@ -19,6 +19,9 @@ while($row = mysqli_fetch_assoc($get)){
   $e['start'] = $row['zacetek'];
   $e['end'] = $row['konec'];
   $e['color'] = $barva['barva'];
+  $e['lokacija'] = $barva['ime'];
+  $e['ekipa'] = $imeEkipe;
+  $e['tip'] = "trening";
   array_push($eventi,$e);
 }
 $sql = "SELECT * FROM tekme";
@@ -36,6 +39,9 @@ while($row = mysqli_fetch_assoc($get)){
   $e['start'] = $row['zacetek'];
   $e['end'] = $row['konec'];
   $e['color'] = $barva;
+  $e['lokacija'] = $row['imeLokacije'];
+  $e['ekipa'] = $imeEkipe;
+  $e['tip'] = "tekma";
   array_push($eventi,$e);
 }
 echo json_encode($eventi);
