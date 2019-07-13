@@ -169,6 +169,7 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
         <li class="nav-item">
           <a class="nav-link" href="Porocilo_prisotnosti/Porocilo_prisotnosti.php">Poročilo prisotnosti</a>
         </li>
+        <!-- 
         <li class="nav-item">
           <a class="nav-link" href="">Testiranja</a>
         </li>
@@ -177,7 +178,7 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
         </li>
         <li class="nav-item">
           <a class="nav-link" href="">Video analiza</a>
-        </li>
+        </li>-->
         <div class="dropdown-divider"></div>
         <li class="nav-item">
           <a class="nav-link" href="Uporabniki/Uporabniki.php">Uporabniki</a>
@@ -208,7 +209,7 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
       <div class="col colKavarna">
         <div class="row">
           <div class="col">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark " id=igralecMenu >
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark modalNav" id=igralecMenu >
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
                 <span class="navbar-toggler-icon"></span>
               </button>

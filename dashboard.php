@@ -133,7 +133,7 @@ while($row = mysqli_fetch_assoc($query)){
                 <div class="dropdown-divider"></div>
                 <li class="nav-item">
                     <a class="nav-link" href="Porocilo_prisotnosti/Porocilo_prisotnosti.php">Poročilo prisotnosti</a>
-                </li>
+                </li><!--
                 <li class="nav-item">
                     <a class="nav-link" href="">Testiranja</a>
                 </li>
@@ -142,7 +142,7 @@ while($row = mysqli_fetch_assoc($query)){
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">Video analiza</a>
-                </li>
+                </li>-->
                 <div class="dropdown-divider"></div>
                 <li class="nav-item">
                     <a class="nav-link" href="Uporabniki/Uporabniki.php">Uporabniki</a>

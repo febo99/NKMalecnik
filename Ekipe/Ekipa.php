@@ -53,7 +53,7 @@ if($ekipa['trenerID'] == $_SESSION['id'] || $ekipa['pomocnik1ID'] == $_SESSION['
 }
 ?>
 
-<html style="background-color: rgb(60, 68, 77);">
+<html>
 
 <head>
 	<title>NK Malecnik</title>
@@ -90,12 +90,11 @@ if($ekipa['trenerID'] == $_SESSION['id'] || $ekipa['pomocnik1ID'] == $_SESSION['
 			</div>
 		</div>
 		<div class="row kavarna">
-			<!--KAVARNA-->
 			<div class="col colKavarna">
         <div class="row">
           <div class="col">
-		  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		  <nav class="navbar navbar-expand-lg navbar-dark bg-dark modalNav">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -107,7 +106,8 @@ if($ekipa['trenerID'] == $_SESSION['id'] || $ekipa['pomocnik1ID'] == $_SESSION['
 					</div>
 				</nav>
           </div>
-        </div>
+		</div>
+		<br>
         <div class="row elementiIgralec" id=splosno>
           <div class="row">
             <div class=col-9>
@@ -135,7 +135,7 @@ if($ekipa['trenerID'] == $_SESSION['id'] || $ekipa['pomocnik1ID'] == $_SESSION['
 							</tr>
 						</table>
             </div>
-            <div class=col>
+            <div class=col><br>
             <h5>Prihajajoči treningi</h5>
 						<table id="tabela" class="table table-bordered table-striped">
 						<tr>
@@ -149,7 +149,7 @@ if($ekipa['trenerID'] == $_SESSION['id'] || $ekipa['pomocnik1ID'] == $_SESSION['
           </div>
         </div>
         <div class="row elementiIgralec" id=igralci>
-		<div class=col>
+		<div class="col table-responsive">
 			<table id="tabela" class="table table-bordered table-striped">
 				<tr>
                  <th scope="col">Ime in priimek</th>
@@ -163,7 +163,7 @@ if($ekipa['trenerID'] == $_SESSION['id'] || $ekipa['pomocnik1ID'] == $_SESSION['
 			</div>
 		</div>
 		<div class="row elementiIgralec" id=prestavi>
-		<div class=col>
+		<div class="col table-responsive">
 		<form id=prestavi action=Prestavi_igralce.php method=post enctype=multipart/form-data>
 		<table id="tabela" class="table table-bordered table-striped">
 				<tr>
@@ -171,8 +171,8 @@ if($ekipa['trenerID'] == $_SESSION['id'] || $ekipa['pomocnik1ID'] == $_SESSION['
 				 <th scope="col">Ekipe</th>
 				 </tr>
 			   <?php echo $tablePrestavi; ?>
-			   <button type="submit" class="btn btn-primary btnForma">Prestavi igralce</button>
 			</table>
+			<button type="submit" class="btn btn-primary btnForma">Prestavi igralce</button>
 			</form>
 			</div>
         </div>

@@ -40,6 +40,9 @@ a{
 .colGlava{
   width: 100%;
 }
+.colGlava p{
+  margin-top: -1vh;
+}
 .colKavarna{
   width: 100%;
 }
@@ -65,37 +68,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .gumbNov{
   width:15vh;
-}
-
-@media (max-width: 575.98px) {
-  .gumbNov{
-    width:10vh;
-    font-size:2vh;
-    padding: 0;
-  }
-  h3{
-    font-size:3.5vh;
-  }
-  h5{
-    font-size:2.3vh;
-    margin-top: -0.5vh;
-  }
-  #container{
-    background-color:white;
-    margin-top: -5.1vh;
-  }
-  .fc-center h2{
-    font-size: 2.5vh !important;
-  }
-  .fc-button{
-    width: 5.7vh !important;
-    height: 3.7vh !important;
-    font-size:1.2vh !important;
-  }
-  .modal-dialog{
-    max-width: 100% !important;
-
-  }
 }
 .btnForma{
   margin:1vh;
@@ -167,6 +139,9 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
   background-color: #007aff;
 }
+.modalNav{
+  width: 101.8%;
+}
 .btn-primary{
   background-color: #dfe4ed;
   color:black;
@@ -195,4 +170,41 @@ input[type=number]::-webkit-outer-spin-button {
 .rdec{
   background-color:rgba(255,0,0,0.3);
   font-weight: bold;
+}
+
+@media (max-width: 575.98px) {
+  .gumbNov{
+    width:10vh;
+    font-size:2vh;
+    padding: 0;
+  }
+  h3{
+    font-size:3.5vh;
+  }
+  h5{
+    font-size:2.3vh;
+    margin-top: -0.5vh;
+  }
+  #container{
+    background-color:white;
+    margin-top: -5.1vh;
+  }
+  .fc-center h2{
+    font-size: 2.5vh !important;
+  }
+  .fc-button{
+    width: 5.7vh !important;
+    height: 3.7vh !important;
+    font-size:1.2vh !important;
+  }
+  .modal-dialog{
+    max-width: 100% !important;
+
+  }
+  .glava{
+    height: 17%;
+  }
+  .modalNav{
+    width: 107.5%;
+  }
 }
