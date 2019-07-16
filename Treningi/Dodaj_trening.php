@@ -8,6 +8,10 @@ session_start();
      $trajanje = mysqli_real_escape_string($db,$_POST['trajanje']);
      $lokacija = mysqli_real_escape_string($db,$_POST['lokacijaTrening']);
      $ekipa = mysqli_real_escape_string($db,$_POST['ekipa']);
+     $porocilo = mysqli_real_escape_string($db,$_POST['porocilo']);
+     $uvod = mysqli_real_escape_string($db,$_POST['uvod']);
+     $glavni = mysqli_real_escape_string($db,$_POST['glavni']);
+     $zakljucni = mysqli_real_escape_string($db,$_POST['zakljucni']);
      $vmes = date('Y-m-d H:i', strtotime("$datum  $ura"));
      $zacetek = date('Y-m-d\\TH:i:s', strtotime("$datum  $ura"));
      $izracun = new DateTime($vmes);
@@ -21,11 +25,11 @@ session_start();
        $dir = $shraniDir .  basename(str_replace(" ","_",$_FILES["priponka"]["name"]));
        move_uploaded_file($_FILES["priponka"]["tmp_name"], $dir);
        //SHRANI TRENING
-       $sql = "INSERT INTO treningi(naslov,datum,ekipaID,lokacijaID,ustvaril,zacetek,konec,priponka) VALUES ('$naslov','$datum','$ekipa','$lokacija','$id','$zacetek','$konec','$dir')";
+       $sql = "INSERT INTO treningi(naslov,datum,ekipaID,uvod,glavni,zakljucek,porocilo,lokacijaID,ustvaril,zacetek,konec,priponka) VALUES ('$naslov','$datum','$ekipa','$uvod','$glavni','$zakljucni','$porocilo','$lokacija','$id','$zacetek','$konec','$dir')";
        $result = mysqli_query($db,$sql);
     }
     else{
-      $sql = "INSERT INTO treningi(naslov,datum,ekipaID,lokacijaID,ustvaril,zacetek,konec) VALUES ('$naslov','$datum','$ekipa','$lokacija','$id','$zacetek','$konec')";
+      $sql = "INSERT INTO treningi(naslov,datum,ekipaID,uvod,glavni,zakljucek,porocilo,lokacijaID,ustvaril,zacetek,konec) VALUES ('$naslov','$datum','$ekipa','$uvod','$glavni','$zakljucni','$porocilo','$lokacija','$id','$zacetek','$konec')";
       $result = mysqli_query($db,$sql);
     }
 

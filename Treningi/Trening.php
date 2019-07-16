@@ -12,6 +12,10 @@ $get = mysqli_query($db, $sql);
 $row = mysqli_fetch_assoc($get);
 if(empty($row))header("Location: Vsi_treningi.php");
 if ($row['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1) {
+  $uDel = $row['uvod'];
+  $zDel = $row['zakljucek'];
+  $gDel = $row['glavni'];
+  $porocilo = $row['porocilo'];
   $table = "";
   $idEkipe = $row['ekipaID'];
   $sqlIme = "SELECT `imeEkipe` FROM ekipe WHERE `ID` = '$idEkipe'";
@@ -79,9 +83,7 @@ if ($row['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1) {
   }
   $beseda .= '          <button type="reset" class="btn btn-secondary zapri" data-dismiss="modal">Prekliči</button>
              <button type="submit"  class="btn btn-primary zapri">Shrani</button></form></span>';
-  $uDel = $row['uvod'];
-  $zDel = $row['zakljucek'];
-  $gDel = $row['glavni'];
+
   if (!empty($row['priponka'])) $priponka = $row['priponka'];
 
   while ($rowD = mysqli_fetch_assoc($getPrisotni)) {
@@ -217,11 +219,13 @@ if ($row['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1) {
             <div class="col-5 plan vsebina">
               <h4>Poročilo</h4>
               <?php
+              echo "<p>" . $porocilo . "</p>";
               if (!empty($row['priponka']))
                 echo '<a href="/' . $priponka . '"target=_blank>Poročilo treninga</a>';
               ?>
             </div>
           </div>
+          <?php echo "<a href=Urejanje_trening.php?id=".$idTreninga.">Uredi</a>"?>
         </div>
       </div>
     </div>
