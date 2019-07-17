@@ -234,7 +234,12 @@ if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
             <tr><td>Datum rojstva</td><td><?php echo date("d.m.Y", strtotime($igralec[3]));?></td></tr>
             <tr><td>Ulica</td><td><?php echo $igralec[5];?></td></tr>
             <tr><td>Mesto in poštna številka</td><td><?php echo $igralec[6] . " " . $igralec[7];?></td></tr>
-            <tr><td><?php echo "<a href=Uredi_igralca.php?id=".$idIgralec." >Uredi</a>" ;?></td><td>Izbriši</td></tr>
+            <tr><td><?php echo "<a href=Uredi_igralca.php?id=".$idIgralec." >Uredi</a>" ;?></td><td>
+              <form action="Brisi_igralca.php" method=post onsubmit=" return confirm('Ste prepričani, da želite izbrisati željeno vsebino?');">
+                <button class="btn btn-danger">Briši</button>
+                <input type="hidden" name=igralecID value="<?php echo $idIgralec;?>">
+              </form>
+            </td></tr>
             </table>
             </div>
             <div class=col>
