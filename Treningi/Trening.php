@@ -101,7 +101,10 @@ if ($row['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1) {
     }
     $table .= "<tr><td><a href=../Igralec.php?igralec=" . $idIgralca . ">" . $imepriimekText . "</a></td><td>" . $prisotnost . "</td></tr>";
   }
-  $table .= "<tr><td><button type=button class='btn btn-primary priso'  data-toggle=modal  value=" . $idTreninga . " data-target=#vnosPrisotnosti>Urejanje prisotnosti</td><td>Izbriši</td></tr>";
+  $table .= "<tr><td><button type=button class='btn btn-primary priso'  data-toggle=modal  value='" . $idTreninga . "' data-target=#vnosPrisotnosti>Urejanje prisotnosti</td><td><form action=Brisi_trening.php method=post onsubmit=' return confirm(`Ste prepričani, da želite izbrisati željeno vsebino?`);'>
+  <button class='btn btn-danger'>Briši</button>
+  <input type=hidden name=treningID value='".$idTreninga."'>
+</form></td></tr>";
 } else {
   header("Location:Vsi_treningi.php");
 }
@@ -161,6 +164,13 @@ if ($row['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1) {
         <h5>Prisotnost:<?php echo $prisotni . "/" . $stvseh; ?></h5>
         <h5><?php echo $imeEkipe; ?>
       </div>
+      <div class="col-2 colGlava divNovGumb">
+        <form action="IzvoziPDF.php" method=post>
+          <input type="hidden" name=treningID value=<?php echo $idTreninga?>>
+          <button type="submit"  class="btn btn-primary btn-md btn-block gumbNov">Izvozi v PDF</button>
+        </form>
+			
+	</div>
     </div>
     <div class="row kavarna">
       <!--KAVARNA-->
@@ -226,6 +236,7 @@ if ($row['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1) {
             </div>
           </div>
           <?php echo "<a href=Urejanje_trening.php?id=".$idTreninga.">Uredi</a>"?>
+
         </div>
       </div>
     </div>
