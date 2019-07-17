@@ -18,7 +18,7 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
 }
 ?>
 
-<html style="background-color: rgb(60, 68, 77);" lang="sl">
+<html lang="sl">
 
 <head>
   <title>NK Malecnik</title>
@@ -113,7 +113,7 @@ while ($rowL = mysqli_fetch_assoc($getL)) {
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Datum *</span>
               </div>
-              <input type="date" class="form-control" id="datumTrening" name="datumTekme" value=dd.mm.lll>
+              <input type="date" class="form-control" id="datumTrening" name="datumTekme">
             </div>
 
           </div>
