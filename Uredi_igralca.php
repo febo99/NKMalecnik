@@ -192,7 +192,7 @@ while($row = mysqli_fetch_assoc($get)){
                 <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Datum rojstva*</span>
               </div>
-              <input type="date" class="form-control" name="datumRojstva" value=<?php echo $igralec['datumRojstva'];?> required>
+              <input type="date" class="form-control" name="datumRojstva" value="<?php echo $igralec['datumRojstva'];?>" required>
             </div>
             </div>
             <div class="row">
@@ -245,7 +245,7 @@ while($row = mysqli_fetch_assoc($get)){
                   <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Telefon igralec</span>
                 </div>
-                  <input type="tel" class="form-control" name="telefonIgralec" value=<?php echo $igralec['telefonIgralec'];?> pattern="+[0-9]{3}[0-9]{8}">
+                  <input type="tel" class="form-control" name="telefonIgralec" value="<?php echo $igralec['telefonIgralec'];?>" pattern="+[0-9]{3}[0-9]{8}">
                 </div>
                 </div>
 
