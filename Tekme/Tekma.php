@@ -46,13 +46,13 @@
       else if($rowD['prisotnost'] == 2){
         $prisotnost = "⭕";
       }
-      $table .= "<tr><td><a href=../Igralec.php?igralec=".$idIgralca.">".$imepriimekText."</a></td><td>".$prisotnost."</td></tr>";
+      $table .= "<tr><td><a href=../Igralec.php?igralec=".$idIgralca.">".$imepriimekText."</a></td><td>".$prisotnost."</td><td>".$rowD['minute']."</td><td>".$rowD['goli']."</td><td>".$rowD['podaje']."</td><td>".$rowD['kartoni']."</td></tr>";
     }
   }else{
     header("Location:Vse_tekme.php");
   }
 
-    $igralciSQL = "SELECT * FROM igralci WHERE `ekipaID` = '$idEkipe'";
+    $igralciSQL = "SELECT DISTINCT igralci.ID,igralci.priimek,igralci.ime FROM prisotnostTekme INNER JOIN igralci  WHERE prisotnostTekme.tekmaID = '$idTekme' AND prisotnostTekme.igralecID = igralci.ID";
     $getIgralci = mysqli_query($db, $igralciSQL);
     $beseda .= "<span id='" . $idTekme . "' style='display:none;'><form action='prisotnost.php' method='post' ><input type='hidden' name='treningID' value=" . $idTekme . ">";
   
@@ -108,7 +108,17 @@
     <button type="reset" class="btn btn-secondary zapri" data-dismiss="modal">Prekliči</button>
                <button type="submit"  class="btn btn-primary zapri">Shrani</button></form></span>';
 
-    
+               $sqlIgralci = "SELECT * FROM igralci ORDER BY `priimek`";
+               $getIgralci=mysqli_query($db,$sqlIgralci);
+               $options = "";
+               $vloga = $_SESSION['vloga'];
+               while($rowIgralci = mysqli_fetch_assoc($getIgralci)){
+                 $idEkipe = $rowIgralci['ekipaID'];
+                 $sqlIme = "SELECT * FROM ekipe WHERE `ID` = '$idEkipe'";
+                 $getIme = mysqli_query($db,$sqlIme);
+                 $imeEkipe = mysqli_fetch_row($getIme);
+                   $options .= "<option value=" .$rowIgralci['ID'] . ">" . $rowIgralci['ime'] . " " . $rowIgralci['priimek']. "</option>";
+               }
 
 
  ?>
@@ -127,7 +137,8 @@
 <link rel="stylesheet" href="../style.css">
 <script src="../script.js"></script>
 <script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
- 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 </head>
 <body>
 <div class="modal fade" id="vnosPrisotnosti" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -151,9 +162,12 @@
   </div>
   <div id="nav-placeholder">
     <script>
-  $(function(){
-    $("#nav-placeholder").load("../nav.html");
-  });
+    $(function(){
+      $("#nav-placeholder").load("../nav.html");
+    });
+    $(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+    });
   </script>
   </div>
 	<div id="container">
@@ -171,11 +185,7 @@
             <h2>Prisotnost</h2>
             
           </div>
-          <div class="col-1">
-            <form name="exportExcel" action="../Export/excelM.php" method="post">
-              <!--<input type="submit" name="export" class="btn btn-secondary" value="Excel">-->
-            </form>
-          </div>
+
         </div>
         <div class="col-8">
         <div class="table-responsive">
@@ -193,7 +203,7 @@
           </table>
       </div>
     </div>  
-        <div class="col-8">
+        <div class="col">
         <div class="table-responsive">
         <h5>Prisotnost</h5>
         <input type="text" id="iskanje" class="form-control" onkeyup="isciE()" placeholder="Iskanje...">
@@ -202,6 +212,10 @@
                <tr>
                  <th scope="col-3">Igralec</th>
                  <th scope="col-7">Prisotnost</th>
+                 <th scope="col-7">Minute</th>
+                 <th scope="col-7">Goli</th>
+                 <th scope="col-7">Asistence</th>
+                 <th scope="col-7">Kartoni</th>
                </tr>
            </thead>
            <tbody>
@@ -212,10 +226,21 @@
           </table>
           <button type=button class='btn btn-primary priso'  data-toggle=modal  value="<?php if($_SESSION['vloga'] == 1 ||$_SESSION['vloga'] == 2)echo $idTekme?>" data-target=#vnosPrisotnosti>Urejanje prisotnosti
       </div>
+      <div class=col>
+        <br>
+      <h5>Izberi igralce:</h5>
+                    <form name="dodajIgralca" action="Dodaj_igralca.php" method="post">
+                      <input type=hidden name=tekmaID value="<?php echo $idTekme;?>">
+                        <select size=30 class="js-example-basic-multiple" name="igralci[]" multiple="multiple">
+                            <?php echo $options; ?>
+                        </select>
+                        <button type="submit" class="btn btn-primary btnForma">Dodaj</button>
+                    </form>
     </div>
-
     </div>
-	</div>
+    </div>
+  </div>
+  
 </div>
 </body>
 </html>

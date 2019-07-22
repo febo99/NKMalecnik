@@ -90,6 +90,9 @@ function inTable(t,name){
   }
   return false;
 }
+$(document).ready(function() {
+  $('.js-example-basic-multiple').select2();
+});
 function getJson(){
   $("#tabela th").not(".def").remove();
   $("#tabela td").not(".def").remove();
