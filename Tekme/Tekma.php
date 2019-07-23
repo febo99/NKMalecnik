@@ -52,7 +52,7 @@
     header("Location:Vse_tekme.php");
   }
 
-    $igralciSQL = "SELECT DISTINCT igralci.ID,igralci.priimek,igralci.ime FROM prisotnostTekme INNER JOIN igralci  WHERE prisotnostTekme.tekmaID = '$idTekme' AND prisotnostTekme.igralecID = igralci.ID";
+    $igralciSQL = "SELECT DISTINCT igralci.ID,igralci.priimek,igralci.ime,prisotnostTekme.goli,prisotnostTekme.minute,prisotnostTekme.podaje,prisotnostTekme.kartoni FROM prisotnostTekme INNER JOIN igralci  WHERE prisotnostTekme.tekmaID = '$idTekme' AND prisotnostTekme.igralecID = igralci.ID";
     $getIgralci = mysqli_query($db, $igralciSQL);
     $beseda .= "<span id='" . $idTekme . "' style='display:none;'><form action='prisotnost.php' method='post' ><input type='hidden' name='treningID' value=" . $idTekme . ">";
   
@@ -69,7 +69,21 @@
     <div class="custom-control custom-radio custom-control-inline">
       <input type="radio" id="customRadioInlineT" name="prisotnost" class="custom-control-input" value=0>
       <label class="custom-control-label" for="customRadioInlineT">Neopravicen</label>
-    </div>';
+    </div>
+    <div class="input-group stevilkeGroup">
+      <div class="input-group input-group-sm mb-3 stevilke">
+        <input type="number" name=minute value='.$rowC["minute"] .' class="form-control stevilke" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+      </div>
+      <div class="input-group input-group-sm mb-3 stevilke">
+        <input type="number" name=goli value='.$rowC["goli"] .'  class="form-control stevilke" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+      </div>
+      <div class="input-group input-group-sm mb-3 stevilke">
+        <input type="number" name=podaje value='.$rowC["podaje"] .'  class="form-control stevilke" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+      </div>
+      <div class="input-group input-group-sm mb-3 stevilke">
+        <input type="text" name=kartoni id=kartoni value='.$rowC["kartoni"] .'  class="form-control stevilke" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+      </div>
+    </div>Minute Goli Podaje Kartoni';
       $idIgralca = $rowC['ID'];
       $sqlPrisotnost = "SELECT * FROM prisotnostTekme WHERE `igralecID` = '$idIgralca' AND `tekmaID` = '$idTekme'";
       $queryP = mysqli_query($db,$sqlPrisotnost);
@@ -83,6 +97,10 @@
         $forma = str_replace("customRadioInlineI", $dodatnoide, $forma);
         $forma = str_replace("customRadioInlineD", $dodatnoidd, $forma);
         $forma = str_replace("customRadioInlineT", $dodatnoidt, $forma);
+        $forma = str_replace("minute","minute". $rowC['ID'] ."_". $idTekme,$forma);
+        $forma = str_replace("goli","goli". $rowC['ID'] ."_". $idTekme,$forma);
+        $forma = str_replace("podaje","podaje". $rowC['ID'] ."_". $idTekme,$forma);
+        $forma = str_replace("kartoni","kartoni". $rowC['ID'] ."_". $idTekme,$forma);
       }
       else if($prisotnost['prisotnost'] == 2){
         $dodatnoide = 'customRadioInlineI' . $rowC['ID'] ."_". $idTekme;
@@ -92,6 +110,10 @@
         $forma = str_replace("customRadioInlineI", $dodatnoide, $forma);
         $forma = str_replace("customRadioInlineD", $dodatnoidd, $forma);
         $forma = str_replace("customRadioInlineT", $dodatnoidt, $forma);
+        $forma = str_replace("minute","minute". $rowC['ID'] ."_". $idTekme,$forma);
+        $forma = str_replace("goli","goli". $rowC['ID'] ."_". $idTekme,$forma);
+        $forma = str_replace("podaje","podaje". $rowC['ID'] ."_". $idTekme,$forma);
+        $forma = str_replace("kartoni","kartoni". $rowC['ID'] ."_". $idTekme,$forma);
       }
       else if($prisotnost['prisotnost'] == 0){
         $dodatnoide = 'customRadioInlineI' . $rowC['ID'] ."_". $idTekme;
@@ -101,6 +123,10 @@
         $forma = str_replace("customRadioInlineI", $dodatnoide, $forma);
         $forma = str_replace("customRadioInlineD", $dodatnoidd, $forma);
         $forma = str_replace("customRadioInlineT", $dodatnoidt, $forma);
+        $forma = str_replace("minute","minute". $rowC['ID'] ."_". $idTekme,$forma);
+        $forma = str_replace("goli","goli". $rowC['ID'] ."_". $idTekme,$forma);
+        $forma = str_replace("podaje","podaje". $rowC['ID'] ."_". $idTekme,$forma);
+        $forma = str_replace("kartoni","kartoni". $rowC['ID'] ."_". $idTekme,$forma);
       }
       $beseda .= "<h5>" . $rowC['ime'] . " " . $rowC['priimek'] . "</h5>" . $forma . "<br>";
     }

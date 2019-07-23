@@ -171,7 +171,18 @@ input[type=number]::-webkit-outer-spin-button {
   background-color:rgba(255,0,0,0.3);
   font-weight: bold;
 }
-
+.stevilke{
+  width:8vh;
+  text-align: center;
+  margin-left: 0.5vh;
+}
+.stevilkeGroup{
+  margin-left: 30vh;
+}
+.legenda{
+  margin-top: -2vh;
+  margin-bottom: -2vh;
+}
 @media (max-width: 575.98px) {
   .gumbNov{
     width:10vh;
@@ -206,5 +217,13 @@ input[type=number]::-webkit-outer-spin-button {
   }
   .modalNav{
     width: 107.5%;
+  }
+  .stevilke{
+    width:8vh;
+    text-align: center;
+    margin-left: 0.5vh;
+  }
+  .stevilkeGroup{
+    margin-left: 9vh;
   }
 }

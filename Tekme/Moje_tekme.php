@@ -9,6 +9,7 @@ $sql = "SELECT * FROM tekme WHERE `ustvaril` = '$id' ORDER BY `datum`";
 $get = mysqli_query($db, $sql);
 $table = "";
 $beseda = "";
+$counter = 0;
 while ($row = mysqli_fetch_assoc($get)) {
     $idEkipe = $row['ekipaID'];
     $sqlIme = "SELECT `imeEkipe` FROM ekipe WHERE `ID` = '$idEkipe'";
@@ -44,7 +45,21 @@ while ($row = mysqli_fetch_assoc($get)) {
             <div class="custom-control custom-radio custom-control-inline">
               <input type="radio" id="customRadioInlineT" name="prisotnost" class="custom-control-input" checked value=0>
               <label class="custom-control-label" for="customRadioInlineT">Neopravicen</label>
-            </div>';
+            </div>
+            <div class="input-group stevilkeGroup">
+      <div class="input-group input-group-sm mb-3 stevilke">
+        <input type="number" value=0 name=minute placeholder=Minute class="form-control stevilke" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+      </div>
+      <div class="input-group input-group-sm mb-3 stevilke">
+        <input type="number" value=0 name=goli placeholder=Goli class="form-control stevilke" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+      </div>
+      <div class="input-group input-group-sm mb-3 stevilke">
+        <input type="number" value=0 name=podaje placeholder=Podaje class="form-control stevilke" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+      </div>
+      <div class="input-group input-group-sm mb-3 stevilke">
+        <input type="text" value=Brez name=kartoni  placeholder=Kartoni class="form-control stevilke" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+      </div>
+    </div><p class=legenda>Minute Goli Podaje Kartoni</p>';
     while ($row = mysqli_fetch_assoc($getIgralci)) {
         $dodatno = "prisotnost" . $row['ID'] . "_". $idTekma;
         $dodatnoide = "customRadioInlineI" . $row['ID'] . "_". $idTekma;
@@ -54,6 +69,10 @@ while ($row = mysqli_fetch_assoc($get)) {
         $forma = str_replace("customRadioInlineI", $dodatnoide, $forma);
         $forma = str_replace("customRadioInlineD", $dodatnoidd, $forma);
         $forma = str_replace("customRadioInlineT", $dodatnoidt, $forma);
+        $forma = str_replace("minute","minute". $row['ID'] . "_". $idTekma,$forma);
+        $forma = str_replace("goli","goli". $row['ID'] . "_". $idTekma,$forma);
+        $forma = str_replace("podaje","podaje". $row['ID'] . "_". $idTekma,$forma);
+        $forma = str_replace("kartoni","kartoni". $row['ID'] . "_". $idTekma,$forma);
         $beseda .= "<h5>" . $row['ime'] . " " . $row['priimek'] . "</h5>" . $forma . "<br>";
     }
     $beseda .= '          <button type="reset" class="btn btn-secondary zapri" data-dismiss="modal">Prekliči</button>
