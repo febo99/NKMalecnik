@@ -14,7 +14,7 @@
   if($row['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1){
     $sqlIme = "SELECT `imeEkipe` FROM ekipe WHERE `ID` = '$idEkipe'";
     $getIme = mysqli_query($db,$sqlIme);
-    $imeEkipe = mysqli_fetch_row($getIme)[0];
+    $imeEkipe = mysqli_fetch_row($getIme);
     $sqlPrisotni = "SELECT * FROM prisotnostTekme  WHERE `tekmaID` = '$idTekme'";
     $getPrisotni = mysqli_query($db,$sqlPrisotni);
     $stvseh = mysqli_num_rows($getPrisotni);
@@ -199,7 +199,7 @@
 	<div id="container">
     <div class="row glava"><!--GLAVA-->
       <div class="col-9 colGlava">
-       <h3 style="margin-top:2vh;"><?php echo $imeEkipe . "-" . $row['nasprotnik'];?></h3>
+       <h3 style="margin-top:2vh;"><?php echo $imeEkipe[1] . ":" . $row['nasprotnik'];?></h3>
        <h5>Prisotnost:<?php echo $prisotni."/".$stvseh;?></h5>
        <h5><?php echo $row['golDomaci'] . ":" . $row['golGosti'];?>   </h5>
 	  </div>
@@ -218,13 +218,17 @@
             <h5>Splošni podatki</h5>
           <table  class="table table-bordered table-striped">        
            <tbody>
-            <tr><td>Tekma</td><td><?php echo $imeEkipe . "-" . $row['nasprotnik'];?></td></tr>
+            <tr><td>Tekma</td><td><?php echo $imeEkipe[1] . ":" . $row['nasprotnik'];?></td></tr>
             <tr><td>Tip</td><td><?php echo $tipTekme . ", " . $domGost;?></td></tr>
             <tr><td>Datum in čas</td><td><?php echo date("d.m.Y", strtotime($row['datum'])) . " ". $row['uraTekme'];?></td></tr>
             <tr><td>Zbor</td><td><?php echo $row['uraZbora'];?></td></tr>
             <tr><td>Lokacija</td><td><?php echo $row['imeLokacije'];?></td></tr>
             <tr><td>Rezultat</td><td><?php echo "<b>".$row['golDomaci'] . "</b>:" . $row['golGosti'];?></td></tr>
-            <tr><td><?php echo "<a href=Urejanje_tekme.php?id=".$idTekme.">Uredi</a>"?></td><td></td></tr>
+            <tr><td><?php echo "<a href=Urejanje_tekme.php?id=".$idTekme.">Uredi</a>"?></td><td>
+              <form action="Brisi_tekmo.php" method=post onsubmit=" return confirm('Ste prepričani, da želite izbrisati željeno vsebino?');">
+                <button class="btn btn-danger">Briši</button>
+                <input type="hidden" name=tekmaID value="<?php echo $idTekme;?>">
+              </form></td></tr>
             </tbody>
           </table>
       </div>
