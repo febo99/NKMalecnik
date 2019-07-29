@@ -140,9 +140,7 @@
                $vloga = $_SESSION['vloga'];
                while($rowIgralci = mysqli_fetch_assoc($getIgralci)){
                  $idEkipe = $rowIgralci['ekipaID'];
-                 $sqlIme = "SELECT * FROM ekipe WHERE `ID` = '$idEkipe'";
-                 $getIme = mysqli_query($db,$sqlIme);
-                 $imeEkipe = mysqli_fetch_row($getIme);
+
                    $options .= "<option value=" .$rowIgralci['ID'] . ">" . $rowIgralci['ime'] . " " . $rowIgralci['priimek']. "</option>";
                }
 
@@ -199,7 +197,7 @@
 	<div id="container">
     <div class="row glava"><!--GLAVA-->
       <div class="col-9 colGlava">
-       <h3 style="margin-top:2vh;"><?php echo $imeEkipe[1] . ":" . $row['nasprotnik'];?></h3>
+       <h3 style="margin-top:2vh;"><?php echo $imeEkipe[0] . ":" . $row['nasprotnik'];?></h3>
        <h5>Prisotnost:<?php echo $prisotni."/".$stvseh;?></h5>
        <h5><?php echo $row['golDomaci'] . ":" . $row['golGosti'];?>   </h5>
 	  </div>
@@ -218,7 +216,7 @@
             <h5>Splošni podatki</h5>
           <table  class="table table-bordered table-striped">        
            <tbody>
-            <tr><td>Tekma</td><td><?php echo $imeEkipe[1] . ":" . $row['nasprotnik'];?></td></tr>
+            <tr><td>Tekma</td><td><?php echo $imeEkipe[0] . ":" . $row['nasprotnik'];?></td></tr>
             <tr><td>Tip</td><td><?php echo $tipTekme . ", " . $domGost;?></td></tr>
             <tr><td>Datum in čas</td><td><?php echo date("d.m.Y", strtotime($row['datum'])) . " ". $row['uraTekme'];?></td></tr>
             <tr><td>Zbor</td><td><?php echo $row['uraZbora'];?></td></tr>

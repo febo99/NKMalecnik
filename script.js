@@ -1,3 +1,4 @@
+//isci so razlicni, glede na vrstico v kateri iscemo. možnost zapisa v eni funkciji s parametri
 function isci(){
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("iskanje");
@@ -94,9 +95,11 @@ $(document).ready(function() {
   $('.js-example-basic-multiple').select2();
 });
 function getJson(){
+  //izbrišemo vse dosedanje zapise
   $("#tabela th").not(".def").remove();
   $("#tabela td").not(".def").remove();
   $("#tabela tr").not(".stat").remove();
+  //dobimo JSON iz Prisotnost.php
   $.getJSON("./Prisotnost.php", function(data) {
     $("#tabela th").not(".def").remove();
     $("#tabela td").not(".def").remove();
@@ -104,20 +107,19 @@ function getJson(){
     var training = [];
     var tabelaPrisotnost = [];
     var d = document.getElementsByName('datum')[0].value;
-    var e = document.getElementsByName('ekipa')[0].value;
+    var e = document.getElementsByName('ekipa')[0].value;//input na strani
     var counter=0;
     var vpis = false;
     var trening = false;
     var x;
-    for(var i = 0; i < data.length; i++){
-      var listTH = document.getElementsByTagName("th");
+    for(var i = 0; i < data.length; i++){//loop skozi vse json podatke
       for(var j = 0; j < data[i]['treningi'].length;j++){
-        if(data[i]['treningi'][j] != null){
-          if(data[i]['treningi'][j].datum != null && data[i]['ekipaID'] == e){
+        if(data[i]['treningi'][j] != null){//ce trening obstaja
+          if(data[i]['treningi'][j].datum != null && data[i]['ekipaID'] == e){//pogledamo da je prava ekipa
             var s = data[i]['treningi'][j].datum;
             var s1 = data[i].ekipaID;
             if(s.indexOf(d) >= 0 && s1 == e){
-              counter++;
+              counter++; //ce se ujemata mesec in ekipa povečamo števec, ki nam pove celotno število treningov
             }}}}}
     for(var i = 0; i < data.length; i++){
       for(var j = 0; j < data[i]['treningi'].length;j++){
@@ -129,7 +131,7 @@ function getJson(){
               trening = true;
               var tr = document.getElementById('tabela').tHead.children[0],
               th = document.createElement('th');
-              th.innerHTML = s.slice(-2);
+              th.innerHTML = s.slice(-2);//odstranimo zadnja dva elementra v arrayu 
               tr.appendChild(th);//dodajanje datumov
               datum = data[i]['treningi'][j].datum;
               }
@@ -138,7 +140,7 @@ function getJson(){
 
               //dodajanje igralcev
               if(trening){
-              var tableRef = document.getElementById('tabela').getElementsByTagName('tbody')[0];
+              var tableRef = document.getElementById('tabela').getElementsByTagName('tbody')[0];//dobimo tabelo v katero zapisujemo stvari
               var newCell,newRow,newText;
               for(var k = 0; k < data[i]['treningi'][j]['prisotni'].length; k++){
                 if(!$("#tabela td:contains("+data[i]['treningi'][j]['prisotni'][k]+")").length && data[i]['ekipaID'] == e){
@@ -150,7 +152,7 @@ function getJson(){
                   t  = document.createTextNode(counter);
                   newCell  = newRow.insertCell(1);
                   newCell.appendChild(t);
-
+                  //v vsako vrstico dodamo novo celico v katero dodamo nov Textnode, ki vsebuje informacije o prisotnost
                 }
                 if(s.indexOf(d) >= 0 && s1 == e && data[i]['ekipaID'] == e){
                   if(!inTable(tabelaPrisotnost,data[i]['treningi'][j]['prisotni'][k])){ //če je igralec bil prisoten na treningu in še ni zapisan v tabeli, init spremenljivk
@@ -203,11 +205,13 @@ function getJson(){
             if(vpis == true){
               x = table.rows[i].insertCell(-1);
               x.innerHTML = training[Object.keys(training)[(i-1)*2+1]]['prisoten']; //stevilo obiskov na treningu(kolikokrat je igralec bil oz. ni bil na treningu)
+              //i-1*2+1 pomeni, da pogledamo vsaki 3ji element(for zanka začne z 0)
               x.classList.add("zelen");
               x = table.rows[i].insertCell(-1);
               x.innerHTML = training[Object.keys(training)[(i-1)*2+1]]['manjkal'];
               x.classList.add("rdec");
               for(var j = 0; j < training[Object.keys(training)[(i-1)*2+1]]['prisotnostDatum'].length; j++){
+                // glede na prisotnost določimo value vsake celice na primeren text
                 if(training[Object.keys(training)[(i-1)*2+1]]['prisotnostDatum'][j] == "1"){
                   x = table.rows[i].insertCell(-1);
                   x.innerHTML = "✔️";
@@ -219,9 +223,6 @@ function getJson(){
                   x.innerHTML = "⭕";
                 }
               }
-            }
-            if(vpis == true){
-
             }
           }
           training = [];
@@ -254,10 +255,8 @@ function getJson(){
       document.getElementById('gLokacija').style.display = "initial";
     }
   }
-  function displayLokacija(){
-    console.log("t");
+  function displayLokacija(){//nastavitev vnosa lokacije glede na vrednost inlineRadio2 pri vnosu nove tekme
     if(document.getElementById('inlineRadio2').checked){
-      console.log("test");
       document.getElementById('dLokacija').style.display = "none";
       document.getElementById('dLokacija').value = "";
       document.getElementById('gLokacija').style.display = "initial";

@@ -45,7 +45,7 @@ while($row = mysqli_fetch_assoc($get)){
         <h1>Poročilo prisotnosti</h1>
       </div>
     </div>
-    <div class="row kavarna" style="margin-top:0.5vh;margin-left:1vh;"><!--KAVARNA-->
+    <div class="row kavarna" style="margin-top:0.5vh;"><!--KAVARNA-->
       <div class="col colKavarna">
         <div class="col">
             <select id="ekipa" required class="form-control" name="ekipa" placeholder="Izberi ekipo">
@@ -57,7 +57,7 @@ while($row = mysqli_fetch_assoc($get)){
 			  </div>
         </div>
 
-        <div class="table-responsive">
+        <div class="table-responsive" style="margin-left:3vh">
           <table id="tabela" class="table table-bordered prisotnostTabela">
             <thead>
                <tr class="stat">
@@ -68,9 +68,9 @@ while($row = mysqli_fetch_assoc($get)){
                </tr>
            </thead>
            <tbody>
-
             </tbody>
           </table>
+
       </div>
       </div>
       </div>
