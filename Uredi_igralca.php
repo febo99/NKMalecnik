@@ -77,7 +77,7 @@ while($row = mysqli_fetch_assoc($get)){
               <a class="nav-link sub-link" href="Treningi/Vsi_treningi.php">Vsi treningi</a>
             </li>
             <li>
-              <a class="nav-link sub-link" href="#">Predloge treningov</a>
+              <a class="nav-link sub-link" href="Treningi/Predloge_treningov.php">Predloge treningov</a>
             </li>
           </ul>
         </li>
