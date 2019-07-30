@@ -16,6 +16,12 @@ $optionL = "";
 while($rowL = mysqli_fetch_assoc($getL)){
   $optionL .= '<option value = '. $rowL['ID'] .'>'.$rowL['ime'].'</option>';
 }
+$sqlP = "SELECT * FROM predlogeTreningov";
+$queryP = mysqli_query($db,$sqlP);
+$optionP = "";
+while($rowP = mysqli_fetch_assoc($queryP)){
+  $optionP .= '<option data-uvod="'.$rowP['uvod'].'" data-glavni="'.$rowP['glavni'].'" data-zakljucek="'.$rowP['zakljucek'].'" value = '. $rowP['ID'] .'>'.$rowP['naslov'].'</option>';
+}
  ?>
 
 <html>
@@ -113,6 +119,17 @@ while($rowL = mysqli_fetch_assoc($getL)){
           <div class="row">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Predloga*</span>
+            </div>
+              <select class="form-control" id=izbiraPredloge name="predloga" onchange='spremembaPredloge()'>
+                <option value="0" disabled selected>Izberi predlogo!</option>
+                <?php echo $optionP; ?>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Poročilo</span>
               </div>
               <textarea class="form-control" rows="5" name="porocilo" id=porocilo placeholder="Kratko poročilo o treningu"></textarea>
@@ -123,7 +140,7 @@ while($rowL = mysqli_fetch_assoc($getL)){
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Uvodni del</span>
               </div>
-              <textarea class="form-control" rows="5" name="uvod" id=porocilo placeholder="Uvodni del"></textarea>
+              <textarea class="form-control" rows="5" name="uvod" id=uvod placeholder="Uvodni del"></textarea>
             </div>
           </div>
           <div class="row">
@@ -131,7 +148,7 @@ while($rowL = mysqli_fetch_assoc($getL)){
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Glavni del</span>
               </div>
-              <textarea class="form-control" rows="5" name="glavni" id=porocilo placeholder="Glavni del"></textarea>
+              <textarea class="form-control" rows="5" name="glavni" id=glavni placeholder="Glavni del"></textarea>
             </div>
           </div>
           <div class="row">
@@ -139,7 +156,7 @@ while($rowL = mysqli_fetch_assoc($getL)){
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Zaključni del</span>
               </div>
-              <textarea class="form-control" rows="5" name="zakljucni" id=porocilo placeholder="Zaključni del"></textarea>
+              <textarea class="form-control" rows="5" name="zakljucni" id=zakljucek placeholder="Zaključni del"></textarea>
             </div>
           </div>
           <div class="row">

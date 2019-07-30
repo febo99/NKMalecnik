@@ -282,3 +282,14 @@ function getJson(){
     });
     
   }
+function spremembaPredloge(){
+  var izbira = document.getElementById("izbiraPredloge");
+  var izbranaPredloga = izbira.options[izbira.selectedIndex];
+  var uvod = izbranaPredloga.getAttribute('data-uvod');
+  var glavni = izbranaPredloga.getAttribute('data-glavni');
+  var zakljucek = izbranaPredloga.getAttribute('data-zakljucek');
+  document.getElementById("uvod").value = uvod;
+  document.getElementById("glavni").value = glavni;
+  document.getElementById("zakljucek").value = zakljucek;
+  console.log(vrednost);
+}
