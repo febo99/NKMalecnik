@@ -18,6 +18,7 @@ if ($row['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1) {
   $porocilo = $row['porocilo'];
   $table = "";
   $idEkipe = $row['ekipaID'];
+  $priponka = $row['priponka'];
   $sqlIme = "SELECT `imeEkipe` FROM ekipe WHERE `ID` = '$idEkipe'";
   $getIme = mysqli_query($db, $sqlIme);
   $imeEkipe = mysqli_fetch_row($getIme)[0];
@@ -230,8 +231,8 @@ if ($row['ustvaril'] == $_SESSION['id'] || $_SESSION['vloga'] == 1) {
               <h4>Poročilo</h4>
               <?php
               echo "<p>" . $porocilo . "</p>";
-              if (!empty($row['priponka']))
-                echo '<a href="/' . $priponka . '"target=_blank>Poročilo treninga</a>';
+              if ($priponka != "")
+                echo '<a href="./' . $priponka . '"target=_blank>Priponka</a>';
               ?>
             </div>
           </div>
