@@ -139,10 +139,10 @@ while($row = mysqli_fetch_assoc($query)){
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">Skavting</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">Video analiza</a>
                 </li>-->
+			<li class="nav-item">
+                <a class="nav-link"href="Placilna_lista/Placilna_lista.php">Plačilna lista</a>
+            </li>
                 <div class="dropdown-divider"></div>
                 <li class="nav-item">
                     <a class="nav-link" href="Uporabniki/Uporabniki.php">Uporabniki</a>
