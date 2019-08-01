@@ -19,6 +19,16 @@ function isci(){
     }
   }
 }
+function focusT(me){
+  let active = document.getElementById('focus');
+  if(active != null){
+    active.removeAttribute('id');
+    me.setAttribute('id','focus');
+  }else{
+    me.setAttribute('id','focus');
+  }
+
+}
 function isciE(){
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("iskanje");

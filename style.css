@@ -183,6 +183,31 @@ input[type=number]::-webkit-outer-spin-button {
   margin-top: -2vh;
   margin-bottom: -2vh;
 }
+.niVnosa{
+  background-color: blue;
+}
+.opravicen{
+  background-color: red;
+}
+.cakamo{
+  background-color: yellowgreen;
+}
+#focus{
+  border:2px solid purple;
+}
+.btn-link {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  color: black;
+  font-family: inherit;
+  font-size: inherit;
+  display: table-cell;
+  margin:20% 0 -20% 0;
+  font-weight: bold;
+  text-align: center;
+}
 @media (max-width: 575.98px) {
   .gumbNov{
     width:10vh;
