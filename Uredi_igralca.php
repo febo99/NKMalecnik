@@ -119,14 +119,8 @@ while($row = mysqli_fetch_assoc($get)){
           <a class="nav-link" href="Porocilo_prisotnosti/Porocilo_prisotnosti.php">Poročilo prisotnosti</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">Testiranja</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">Skavting</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">Video analiza</a>
-        </li>
+                <a class="nav-link"href="Placilna_lista/Placilna_lista.php">Plačilna lista</a>
+            </li>
         <div class="dropdown-divider"></div>
         <li class="nav-item">
           <a class="nav-link" href="Uporabniki/Uporabniki.php">Uporabniki</a>
