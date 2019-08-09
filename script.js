@@ -94,6 +94,7 @@ $(document).ready(function() {
     console.log("zapri");
 
   });
+
 });
 function inTable(t,name){
   for(var i = 0; i < t.length; i++){
@@ -102,6 +103,7 @@ function inTable(t,name){
   return false;
 }
 $(document).ready(function() {
+ 
   $('.js-example-basic-multiple').select2();
 });
 function getJson(){
@@ -252,6 +254,7 @@ function getJson(){
       $('.elementiIgralec'+target).toggle();
   
   });
+  
   });
   function vnosLokacije(el){
     if(el.id == "inlineRadio1"){
